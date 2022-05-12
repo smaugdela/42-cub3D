@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/11 16:25:02 by smagdela         ###   ########.fr        #
+#    Updated: 2022/05/12 12:39:31 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ LIBS	:=	${LIBFT} ${MLX}
 
 #	Source Files
 
-SRCS	=	
+SRCS	=	main.c
 BONUS 	=	
 
 #	Object Files

@@ -1,0 +1,6 @@
+objects/
+bonus/objects
+*.o
+cub3D
+libft.a
+.vscode

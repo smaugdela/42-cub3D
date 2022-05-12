@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_events_2_bonus.c                                :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 11:57:13 by smagdela          #+#    #+#             */
-/*   Updated: 2021/12/23 13:42:40 by smagdela         ###   ########.fr       */
+/*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
+/*   Updated: 2022/05/12 12:39:47 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol_bonus.h"
+#include "cub3D.h"
 
-int	red_cross_handler(t_image *image)
+int main(int ac, char **av)
 {
-	free_n_destroy(image, image->display);
-	ft_putstr_fd("Closing...\n\033[0;32mThanks for using fract'ol!\033[0m\n", 1);
-	exit(EXIT_SUCCESS);
+	(void)ac;
+	(void)av;
+	ft_putstr_fd("Hello World!\n", 1);
 	return (0);
 }
