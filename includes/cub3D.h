@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/12 12:51:44 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/13 12:27:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <math.h>
 # include <stdbool.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <X11/Xlib.h>
@@ -40,6 +45,13 @@ typedef struct s_img {
 	int		size_line;
 	int		endian;
 }	t_img;
+
+typedef struct s_map
+{
+	int		player_pos_x;
+	int		player_pos_y;
+	char	**cube_map;
+}	t_map;
 
 typedef struct s_data {
 	char	**map;
@@ -64,5 +76,18 @@ typedef struct s_rectangle {
 	int		color;
 	bool	border_only;
 }	t_rectangle;
+
+/* error_message.c */
+
+bool	error_message(int i);
+
+/* open_file.c */
+
+bool	open_fd(char *file);
+
+/* map_init.c */
+
+t_map	init_struct_map(char *file);
+
 
 #endif

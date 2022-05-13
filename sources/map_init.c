@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/13 12:28:09 by ajearuth         ###   ########.fr       */
+/*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
+/*   Updated: 2022/05/13 12:25:04 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	main(int ac, char **av)
+t_map	init_struct_map(char *file)
 {
-	if (ac == 2)
-	{
-		if (open_fd(av[1]) == false)
-			return (-1);
+	t_map	map;
+
+	get_param(&map, file);
+	get_player_pos(&map);
+	if (global_checker(&map) == -1)
+	{	
+		free_mappy(&map);
+		exit(-1);
 	}
-	return (0);
+	check_c(&map);
+	return (map);
 }
