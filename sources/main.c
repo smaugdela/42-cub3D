@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/13 12:28:09 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:33:51 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	main(int ac, char **av)
 {
 	if (ac == 2)
 	{
-		if (open_fd(av[1]) == false)
-			return (-1);
+
 	}
 	return (0);
 }

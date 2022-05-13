@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:59:17 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/13 12:31:27 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:41:27 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ bool	open_fd(char *file)
 	close(fd);
 	return (true);
 }
-

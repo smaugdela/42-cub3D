@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/13 12:27:30 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/13 14:33:33 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@
 # define WIDTH	1280
 # define HEIGHT	720
 
+typedef enum e_weathercock {
+	N,
+	E,
+	S,
+	W
+}	t_weathercock;
+
 /* Data structures */
 
 typedef struct s_win {
@@ -50,6 +57,13 @@ typedef struct s_map
 {
 	int		player_pos_x;
 	int		player_pos_y;
+	char	*textures[7];
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		c_color;
+	int		f_color;
 	char	**cube_map;
 }	t_map;
 
@@ -76,6 +90,11 @@ typedef struct s_rectangle {
 	int		color;
 	bool	border_only;
 }	t_rectangle;
+
+/* textures.c & textures_2.c */
+
+bool	init_textures(int fd, t_map *map);
+bool	init_weathercock(t_map *map, int i, int orientation);
 
 /* error_message.c */
 

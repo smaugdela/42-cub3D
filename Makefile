@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/13 12:06:49 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/05/13 14:33:06 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,11 @@ LIBS	:=	${LIBFT} ${MLX}
 
 #	Source Files
 
-SRCS	=	main.c error_messages.c \
+SRCS	=	main.c			error_messages.c \
 			get_next_line.c get_next_line_utils.c \
-			open_file.c map_init.c \
+			open_file.c 	map_init.c \
+			textures.c		textures_2.c \
+
 BONUS 	=	
 
 #	Object Files
