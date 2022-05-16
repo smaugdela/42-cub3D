@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:54:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 14:45:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:43:42 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ static int	ft_atoc(char *str)
 	int		b;
 
 	tab = ft_split(str, ',');
+	free(str);
 	if (tab == NULL)
 		return (-1);
 	i = 0;
 	while (tab[i])
 	{
-		if (checkint(tab[i]) == false || ft_atoi(tab[i]) > 255
-			|| ft_atoi(tab[i]) < 0)
+		if (checkint(tab[i]) == false || str_is_digit(tab[i]) == false
+			|| ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0)
 			return (-1 * free_split(tab));
 		++i;
 	}
@@ -69,6 +70,9 @@ static int	ft_atoc(char *str)
 
 static bool	textures_checker_aux(t_map *map, int i)
 {
+	char	*tmp;
+
+	tmp = NULL;
 	if (ft_strncmp(map->textures[i], "NO ", 3) == 0)
 	{
 		if (init_weathercock(map, i, N) == false)
@@ -95,12 +99,14 @@ static bool	textures_checker_aux(t_map *map, int i)
 	}
 	else if (ft_strncmp(map->textures[i], "F ", 2) == 0)
 	{
-		map->f_color = ft_atoc(map->textures[i] + 2);
+		if (init_color(map, i, 'F') == false)
+			return (false);
 		return (true);
 	}
 	else if (ft_strncmp(map->textures[i], "C ", 2) == 0)
 	{
-		map->c_color = ft_atoc(map->textures[i] + 2);
+		if (init_color(map, i, 'C') == false)
+			return (false);
 		return (true);
 	}
 	return (false);
@@ -134,7 +140,8 @@ bool	init_textures(int fd, t_map *map)
 	{
 		ret = get_next_line(fd, &line);
 		if (line[0])
-			map->textures[index++] = line;
+			map->textures[index++] = ft_strtrim(line, " ");
+		free(line);
 	}
 	map->textures[index] = NULL;
 	if (ret <= 0 || index < 6)

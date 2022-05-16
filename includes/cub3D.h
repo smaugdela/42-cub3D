@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 13:42:31 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:49:25 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,8 @@ bool	open_fd(char *file);
 
 t_map	init_struct_map(char *file);
 bool	global_checker(char *file, t_map *map);
+
+/* parsing_utils.c */
+bool	str_is_digit(char *str);
 
 #endif

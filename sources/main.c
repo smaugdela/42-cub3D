@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 13:41:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:52:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		map = init_struct_map(av[1]);
+		printf("J'ai fini!\n");
 		print_map(map);
 		free_mappy(&map);
 	}

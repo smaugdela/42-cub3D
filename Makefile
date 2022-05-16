@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/16 13:41:52 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/05/16 15:49:41 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCS	=	main.c			error_messages.c \
 			get_next_line.c get_next_line_utils.c \
 			open_file.c 	map_init.c \
 			textures.c		textures_2.c cube_map.c \
-			free_and_destroy.c \
+			free_and_destroy.c	parsing_utils.c \
 
 BONUS 	=	
 

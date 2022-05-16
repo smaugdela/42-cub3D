@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 14:54:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:25:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ bool	init_cube_map(int fd, t_map *map)
 	while (ret != -1 && line)
 	{
 		ret = get_next_line(fd, &line);
-		if (!line[0])
+		if (line[0])
 			break ;
+		free(line);
 	}
-	while (ret > 0 && line && line[0])
+	while (ret >= 0 && line && line[0])
 	{
 		++index;
 		tmp = map->cube_map;
@@ -91,13 +92,20 @@ bool	init_cube_map(int fd, t_map *map)
 			free_split(tmp);
 			return (false * free_mappy(map));
 		}
-		i = -1;
-		while (tmp && tmp[++i])
+		i = 0;
+		while (tmp && tmp[i])
+		{
 			map->cube_map[i] = ft_strdup(tmp[i]);
+			++i;
+		}
 		map->cube_map[i] = line;
 		map->cube_map[i + 1] = NULL;
 		free_split(tmp);
 		ret = get_next_line(fd, &line);
 	}
+	free(line);
+	i = 0;
+	while (map->cube_map && map->cube_map[i])
+		printf("[%s]\n", map->cube_map[i++]);
 	return (is_map_valid(map));
 }

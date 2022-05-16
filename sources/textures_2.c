@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:17:37 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 14:20:10 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:42:27 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,20 @@ bool	init_weathercock(t_map *map, int i, int orientation)
 		return (texture_file_check(&map->so, map, i));
 	else if (orientation == W && w == 0 && ++w)
 		return (texture_file_check(&map->we, map, i));
+	return (false);
+}
+
+bool	init_color(t_map *map, int i, char color)
+{
+	static bool	f = 0;
+	static bool	c = 0;
+	char		*tmp;
+
+	tmp = ft_substr(map->textures[i], );
+	if (color == 'F' && f == 0 && ++f)
+	{
+	}
+	else if (color == 'C' && c == 0 && ++c)
+		
 	return (false);
 }
