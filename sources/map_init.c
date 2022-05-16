@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 13:28:09 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:41:35 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ bool	global_checker(char *file, t_map *map)
 		return (false);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (error_message(5));
+		return (error_messages(5));
 	if (init_textures(fd, map) == false)
-		return (error_message(2));
+		return (error_messages(2));
 	if (init_cube_map(fd, map) == false)
 		return (false);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:54:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 11:38:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:45:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static bool	checkint(char *nb)
 		while (nb[i])
 		{
 			if (nb[i] > int_extremum[i] || !ft_isdigit(nb[i]))
-				return (true);
+				return (false);
 			++i;
 		}
-		return (false);
+		return (true);
 	}
 	else
-		return (false);
+		return (true);
 }
 
 static int	ft_atoc(char *str)
@@ -70,23 +70,40 @@ static int	ft_atoc(char *str)
 static bool	textures_checker_aux(t_map *map, int i)
 {
 	if (ft_strncmp(map->textures[i], "NO ", 3) == 0)
+	{
 		if (init_weathercock(map, i, N) == false)
 			return (false);
+		return (true);
+	}
 	else if (ft_strncmp(map->textures[i], "SO ", 3) == 0)
+	{
 		if (init_weathercock(map, i, S) == false)
 			return (false);
+		return (true);
+	}
 	else if (ft_strncmp(map->textures[i], "WE ", 3) == 0)
+	{
 		if (init_weathercock(map, i, W) == false)
 			return (false);
+		return (true);
+	}
 	else if (ft_strncmp(map->textures[i], "EA ", 3) == 0)
+	{
 		if (init_weathercock(map, i, E) == false)
 			return (false);
+		return (true);
+	}
 	else if (ft_strncmp(map->textures[i], "F ", 2) == 0)
+	{
 		map->f_color = ft_atoc(map->textures[i] + 2);
+		return (true);
+	}
 	else if (ft_strncmp(map->textures[i], "C ", 2) == 0)
+	{
 		map->c_color = ft_atoc(map->textures[i] + 2);
-	else
-		return (false);
+		return (true);
+	}
+	return (false);
 }
 
 static bool	textures_checker(t_map *map)
@@ -110,14 +127,14 @@ bool	init_textures(int fd, t_map *map)
 	int		ret;
 	int		index;
 
-	*line = "";
+	line = "";
 	index = 0;
-	ret = 0;
-	while (ret != -1 && line && index < 6)
+	ret = 1;
+	while (ret > 0 && line && index < 6)
 	{
 		ret = get_next_line(fd, &line);
-		if (ft_strlen(line) != 0)
-			map->textures[index++];
+		if (line[0])
+			map->textures[index++] = line;
 	}
 	map->textures[index] = NULL;
 	if (ret <= 0 || index < 6)

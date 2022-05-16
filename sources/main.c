@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 13:38:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:41:35 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		error_message(7);
+		error_messages(7);
 		return (-1);
 	}
 	return (0);

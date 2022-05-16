@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 12:02:54 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 13:18:05 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:41:52 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool	error_message(int i)
+bool	error_messages(int i)
 {
 	if (i == 1)
 		ft_putstr_fd("\e[0;31mError\nMap must be surrounded by walls\n", 2);

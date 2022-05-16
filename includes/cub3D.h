@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 13:26:48 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:42:31 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <math.h>
 # include <stdbool.h>
 # include <sys/types.h>
@@ -102,9 +103,9 @@ bool	init_weathercock(t_map *map, int i, int orientation);
 bool	is_map_valid(t_map *map);
 bool	init_cube_map(int fd, t_map *map);
 
-/* error_message.c */
+/* error_messages.c */
 
-bool	error_message(int i);
+bool	error_messages(int i);
 
 /* free_and_destroy.c */
 
@@ -118,6 +119,6 @@ bool	open_fd(char *file);
 /* map_init.c */
 
 t_map	init_struct_map(char *file);
-
+bool	global_checker(char *file, t_map *map);
 
 #endif
