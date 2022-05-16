@@ -1,7 +1,7 @@
-NO ./textures/texture1.xpm
-SO ./textures/texture1.xpm
-WE ./textures/texture1.xpm
-EA ./textures/texture1.xpm
+NO assets/textures/texture1.xpm
+SO assets/textures/texture1.xpm
+WE assets/textures/texture1.xpm
+EA assets/textures/texture1.xpm
 
 F 220,100,0
 C 225,30,0
