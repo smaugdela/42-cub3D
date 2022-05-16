@@ -26,7 +26,7 @@ t_map	init_struct_map(char *file)
 	map.c_color = 0;
 	map.f_color = 0;
 	map.cube_map = NULL;
-	if (global_checker(file, &map) == -1)
+	if (global_checker(file, &map) == false)
 	{	
 		free_mappy(&map);
 		exit(-1);
