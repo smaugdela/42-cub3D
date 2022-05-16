@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 15:49:25 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:27:36 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ typedef struct s_rectangle {
 
 bool	init_textures(int fd, t_map *map);
 bool	init_weathercock(t_map *map, int i, int orientation);
+bool	init_color(t_map *map, int i, char color);
 
 /* cube_map.c */
 
-bool	is_map_valid(t_map *map);
 bool	init_cube_map(int fd, t_map *map);
 
 /* error_messages.c */
@@ -123,5 +123,6 @@ bool	global_checker(char *file, t_map *map);
 
 /* parsing_utils.c */
 bool	str_is_digit(char *str);
+bool	checkint(char *nb);
 
 #endif

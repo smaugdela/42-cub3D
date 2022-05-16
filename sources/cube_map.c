@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 16:25:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:48:48 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	is_zero_sauronded(t_map *map, int i, int j)
 	return (true);
 }
 
-bool	is_map_valid(t_map *map)
+static bool	is_map_valid(t_map *map)
 {
 	int		i;
 	int		j;
@@ -41,11 +41,12 @@ bool	is_map_valid(t_map *map)
 		{
 			if (map->cube_map[i][j] != '1' && map->cube_map[i][j] != '0'
 				&& map->cube_map[i][j] != 'N' && map->cube_map[i][j] != 'E'
-				&& map->cube_map[i][j] != 'S' && map->cube_map[i][j] != 'W')
+				&& map->cube_map[i][j] != 'S' && map->cube_map[i][j] != 'W'
+				&& map->cube_map[i][j] != ' ')
 				return (error_messages(6));
 			else if ((map->cube_map[i][j] == '0' || map->cube_map[i][j] == 'N'
 				|| map->cube_map[i][j] == 'S' || map->cube_map[i][j] == 'W'
-				|| map->cube_map[i][j] == 'E') && is_zero_sauronded(map, i, j))
+				|| map->cube_map[i][j] == 'E') && !is_zero_sauronded(map, i, j))
 				return (error_messages(1));
 			else if (map->cube_map[i][j] == 'N' || map->cube_map[i][j] == 'E'
 				|| map->cube_map[i][j] == 'S' || map->cube_map[i][j] == 'W')
@@ -104,8 +105,5 @@ bool	init_cube_map(int fd, t_map *map)
 		ret = get_next_line(fd, &line);
 	}
 	free(line);
-	i = 0;
-	while (map->cube_map && map->cube_map[i])
-		printf("[%s]\n", map->cube_map[i++]);
 	return (is_map_valid(map));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 15:52:18 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:54:08 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	print_map(t_map map)
 	i = 0;
 	while (map.textures[i])
 		printf("	- %s\n", map.textures[i++]);
-	printf(" Textures files : no = %s, so = %s, we = %s, ea = %s\n",
+	printf(" Textures files : no = %s,\n so = %s,\n we = %s,\n ea = %s.\n",
 		map.no, map.so, map.we, map.ea);
-	printf(" C and F colors : C = %d, F = %d\n", map.c_color, map.f_color);
+	printf(" C and F colors : C = %x, F = %x\n", map.c_color, map.f_color);
 	printf(" Map description : \n");
 	i = 0;
 	while (map.cube_map[i])
@@ -39,7 +39,6 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		map = init_struct_map(av[1]);
-		printf("J'ai fini!\n");
 		print_map(map);
 		free_mappy(&map);
 	}

@@ -6,88 +6,81 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 17:37:32 by smagdela          #+#    #+#             */
-/*   Updated: 2021/06/02 09:52:17 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:38:23 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_countwords(char *str, char sep)
+/* Courtesy of Ma Nana */
+
+static int	ft_sizeofword(const char *str, char c)
 {
-	int	count;
 	int	i;
 
 	i = 0;
-	if (str[i] == '\0')
-		return (0);
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] != sep && (str[i + 1] == '\0' || str[i + 1] == sep))
-			++count;
+	while (str[i] && str[i] != c)
 		++i;
-	}
-	return (count);
+	return (i);
 }
 
-static int	ft_wordlen(const char *str, char sep)
+static int	ft_count_words(const char *str, char c)
 {
-	int	len;
-	int	i;
+	int	words;
+	int	state;
 
-	len = 0;
-	i = 0;
-	while (str[i] != sep && str[i] != '\0')
+	words = 0;
+	state = 1;
+	while (*str)
 	{
-		++len;
-		++i;
+		if (*str == c)
+			state = 1;
+		else if (state == 1)
+		{
+			words++;
+			state = 0;
+		}
+		++str;
 	}
-	return (++len);
+	return (words);
 }
 
-static char	**ft_error(char **tab, int nb)
+static char	**ft_error(char **tab, int i)
 {
-	while (nb >= 0)
+	while (i >= 0)
 	{
-		free(tab[nb]);
-		--nb;
+		free(tab[i]);
+		--i;
 	}
 	free(tab);
 	return (NULL);
 }
 
-static char	*ft_offset_str(char *str, int add, char pass)
+char	**ft_split(const char *str, char c)
 {
-	str += add;
-	while (*str == pass && pass != 0)
-		++str;
-	return (str);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	*str;
 	char	**tab;
+	int		index;
 	int		i;
-	int		words;
-	int		wd_len;
 
-	if (!s)
+	if (str == NULL)
 		return (NULL);
-	str = ft_offset_str((char *)s, 0, c);
-	words = ft_countwords(str, c);
-	tab = (char **)malloc((words + 1) * sizeof(char *));
-	if (!tab)
+	tab = malloc(sizeof(char *) * (ft_count_words(str, c) + 1));
+	if (tab == NULL)
 		return (NULL);
-	i = -1;
-	while (++i < words)
+	index = 0;
+	while (ft_count_words(str, c))
 	{
-		wd_len = ft_wordlen(str, c);
-		tab[i] = (char *)malloc((wd_len) * sizeof(char));
-		if (tab[i] == NULL || ft_strlcpy(tab[i], str, wd_len) != ft_strlen(str))
-			return (ft_error(tab, i));
-		str = ft_offset_str(str, wd_len, c);
+		while (*str && *str == c)
+			++str;
+		tab[index] = malloc(sizeof(char) * ft_sizeofword(str, c) + 1);
+		if (tab[index] == 0)
+			return (ft_error(tab, index));
+		i = 0;
+		while (*str && *str != c)
+			tab[index][i++] = *str++;
+		tab[index][i] = '\0';
+		index++;
 	}
-	tab[words] = NULL;
+	tab[index] = 0;
 	return (tab);
 }

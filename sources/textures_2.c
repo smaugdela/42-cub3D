@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:17:37 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 16:42:27 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:51:10 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+static int	ft_atoc(char *str)
+{
+	char	**tab;
+	int		i;
+	int		r;
+	int		g;
+	int		b;
+
+	tab = ft_split(str, ',');
+	free(str);
+	if (tab == NULL)
+		return (-1);
+	i = 0;
+	while (tab[i])
+	{
+		if (checkint(tab[i]) == false || str_is_digit(tab[i]) == false
+			|| ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0)
+			return (-1 * free_split(tab));
+		++i;
+	}
+	if (i != 3)
+		return (-1 * free_split(tab));
+	r = ft_atoi(tab[0]);
+	g = ft_atoi(tab[1]);
+	b = ft_atoi(tab[2]);
+	free_split(tab);
+	return (r * 0x010000 + g * 0x000100 + b);
+}
 
 static bool	open_texture_fd(char *file)
 {
@@ -68,11 +97,19 @@ bool	init_color(t_map *map, int i, char color)
 	static bool	c = 0;
 	char		*tmp;
 
-	tmp = ft_substr(map->textures[i], );
+	tmp = ft_substr(map->textures[i], 1, ft_strlen(map->textures[i]) - 1);
 	if (color == 'F' && f == 0 && ++f)
 	{
+		map->f_color = ft_atoc(ft_strtrim(tmp, " "));
+		free(tmp);
+		return (true);
 	}
 	else if (color == 'C' && c == 0 && ++c)
-		
+	{
+		map->c_color = ft_atoc(ft_strtrim(tmp, " "));
+		free(tmp);
+		return (true);
+	}
+	free(tmp);
 	return (false);
 }
