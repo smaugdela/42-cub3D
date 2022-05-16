@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
+#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/16 10:34:53 by smagdela         ###   ########.fr        #
+#    Updated: 2022/05/16 13:38:53 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIBS	:=	${LIBFT} ${MLX}
 SRCS	=	main.c			error_messages.c \
 			get_next_line.c get_next_line_utils.c \
 			open_file.c 	map_init.c \
-			textures.c		textures_2.c \
+			textures.c		textures_2.c cube_map.c \
 			free_and_destroy.c \
 
 BONUS 	=	

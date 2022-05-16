@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 11:09:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:26:48 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_map
 {
 	int		player_pos_x;
 	int		player_pos_y;
+	char	player_orient;
 	char	*textures[7];
 	char	*no;
 	char	*so;
@@ -95,6 +96,11 @@ typedef struct s_rectangle {
 
 bool	init_textures(int fd, t_map *map);
 bool	init_weathercock(t_map *map, int i, int orientation);
+
+/* cube_map.c */
+
+bool	is_map_valid(t_map *map);
+bool	init_cube_map(int fd, t_map *map);
 
 /* error_message.c */
 
