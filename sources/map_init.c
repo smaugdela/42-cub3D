@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 11:04:30 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:22:23 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_map	init_struct_map(char *file)
 	map.c_color = 0;
 	map.f_color = 0;
 	map.cube_map = NULL;
-	if (global_checker(file, &map) == -1)
+	if (global_checker(file, &map) == false)
 	{	
 		free_mappy(&map);
 		exit(-1);
@@ -46,5 +46,4 @@ bool	global_checker(char *file, t_map *map)
 		return (error_message(5));
 	if (init_textures(fd, map) == false)
 		return (error_message(2));
-	
 }
