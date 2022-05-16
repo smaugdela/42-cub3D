@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:17:37 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/13 14:32:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 10:58:24 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+static bool	texture_file_check(char **filepath, t_map *map, int i)
+{
+	*filepath = ft_strtrim(map->textures[i] + 2, " ");
+	if (open_fd(*filepath) == false)
+		return (false);
+	return (true);
+}
 
 bool	init_weathercock(t_map *map, int i, int orientation)
 {
@@ -19,40 +27,13 @@ bool	init_weathercock(t_map *map, int i, int orientation)
 	static bool	s = 0;
 	static bool	w = 0;
 
-	if ((orientation == N && n == 1) || (orientation == E && e == 1)
-		|| (orientation == S && s == 1) || (orientation == W && w == 1))
-		return (false);
-	if (orientation == N)
-	{
-		++n;
-		map->no = ft_strtrim(map->textures[i] + 2, " ");
-		if (open_fd(map->no) == false)
-			return (false);
-		return (true);
-	}
-	if (orientation == E)
-	{
-		++e;
-		map->ea = ft_strtrim(map->textures[i] + 2, " ");
-		if (open_fd(map->ea) == false)
-			return (false);
-		return (true);
-	}
-	if (orientation == S)
-	{
-		++s;
-		map->so = ft_strtrim(map->textures[i] + 2, " ");
-		if (open_fd(map->so) == false)
-			return (false);
-		return (true);
-	}
-	if (orientation == W)
-	{
-		++w;
-		map->we = ft_strtrim(map->textures[i] + 2, " ");
-		if (open_fd(map->we) == false)
-			return (false);
-		return (true);
-	}
+	if (orientation == N && n == 0 && ++n)
+		return (texture_file_check(&map->no, map, i));
+	else if (orientation == E && e == 0 && ++e)
+		return (texture_file_check(&map->ea, map, i));
+	else if (orientation == S && s == 0 && ++s)
+		return (texture_file_check(&map->so, map, i));
+	else if (orientation == W && w == 0 && ++w)
+		return (texture_file_check(&map->we, map, i));
 	return (false);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/13 14:33:33 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:09:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ bool	init_weathercock(t_map *map, int i, int orientation);
 /* error_message.c */
 
 bool	error_message(int i);
+
+/* free_and_destroy.c */
+
+int		free_split(char **tab);
+int		free_mappy(t_map *map);
 
 /* open_file.c */
 

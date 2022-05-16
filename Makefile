@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/13 14:33:06 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/05/16 10:34:53 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS	=	main.c			error_messages.c \
 			get_next_line.c get_next_line_utils.c \
 			open_file.c 	map_init.c \
 			textures.c		textures_2.c \
+			free_and_destroy.c \
 
 BONUS 	=	
 
