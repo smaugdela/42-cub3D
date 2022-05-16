@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 11:22:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:52:20 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,44 @@ t_map	init_struct_map(char *file)
 	return (map);
 }
 
+bool	init_cube_map(int fd, t_map *map)
+{
+	char	*line;
+	int		ret;
+	int		index;
+	char	**tmp;
+	int		i;
+
+	*line = "";
+	index = 0;
+	ret = 0;
+	while (ret != -1 && line)
+	{
+		ret = get_next_line(fd, &line);
+		if (!line[0])
+			break ;
+	}
+	while (ret != -1 && line && line[0])
+	{
+		++index;
+		tmp = map->cube_map;
+		map->cube_map = malloc(sizeof(char *) * (index + 1));
+		if (map->cube_map == NULL)
+		{
+			free_split(tmp);
+			return (false * free_mappy(map));
+		}
+		i = 0;
+		while (tmp && tmp[i])
+			map->cube_map[i] = ft_strdup(tmp[i++]);
+		map->cube_map[i] = ft_strdup(line);
+		map->cube_map[i + 1] = NULL;
+		free_split(tmp);
+		ret = get_next_line(fd, &line);
+	}
+	return (is_map_valid(map));
+}
+
 bool	global_checker(char *file, t_map *map)
 {
 	int	fd;
@@ -46,4 +84,6 @@ bool	global_checker(char *file, t_map *map)
 		return (error_message(5));
 	if (init_textures(fd, map) == false)
 		return (error_message(2));
+	if (init_cube_map(fd, map) == false)
+		return (false);
 }
