@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:17:37 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 17:51:10 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:46:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static bool	open_texture_fd(char *file)
 
 static bool	texture_file_check(char **filepath, t_map *map, int i)
 {
-	*filepath = ft_strtrim(map->textures[i] + 2, " ");
+	*filepath = ft_strtrim(map->textures[i] + 2, " ", "\t");
 	if (open_texture_fd(*filepath) == false)
 		return (false);
 	return (true);
@@ -100,13 +100,13 @@ bool	init_color(t_map *map, int i, char color)
 	tmp = ft_substr(map->textures[i], 1, ft_strlen(map->textures[i]) - 1);
 	if (color == 'F' && f == 0 && ++f)
 	{
-		map->f_color = ft_atoc(ft_strtrim(tmp, " "));
+		map->f_color = ft_atoc(ft_strtrim(tmp, " ", "\t"));
 		free(tmp);
 		return (true);
 	}
 	else if (color == 'C' && c == 0 && ++c)
 	{
-		map->c_color = ft_atoc(ft_strtrim(tmp, " "));
+		map->c_color = ft_atoc(ft_strtrim(tmp, " ", "\t"));
 		free(tmp);
 		return (true);
 	}

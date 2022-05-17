@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:54:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/17 11:02:59 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:47:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ bool	init_textures(int fd, t_map *map)
 	{
 		ret = get_next_line(fd, &line);
 		if (line[0])
-			map->textures[index++] = ft_strtrim(line, " ");
+			map->textures[index++] = ft_strtrim(line, " ", "\t");
 		free(line);
 	}
 	map->textures[index] = NULL;
