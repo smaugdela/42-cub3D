@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 11:44:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:29:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	print_map(t_map *map)
 	int	i;
 
 	printf("--- .cub file seems valid! ---\n");
-	printf(" Player spawn : X = %d, Y = %d, Cock = %c\n", map->player_pos_x,
-		map->player_pos_y, map->player_orient);
+	printf(" Player spawn : X = %d, Y = %d, Cock = %c\n", map->player_spawn_x,
+		map->player_spawn_y, map->player_spawn_orient);
 	printf(" Textures : \n");
 	i = 0;
 	while (map->textures[i])
@@ -30,9 +30,11 @@ static void	print_map(t_map *map)
 	i = 0;
 	while (map->cube_map[i])
 		printf("%s\n", map->cube_map[i++]);
+	printf(" Map dimensions : Width (x) = %d, Height (y) = %d\n",
+		map->max_x, map->max_y);
 }
 
-static bool	init_win(char *win_name, t_win *window)
+static bool	init_win(char *win_name, t_win *window, int width, int height)
 {
 	window->mlx_ptr = mlx_init();
 	if (window->mlx_ptr == NULL)
@@ -41,7 +43,7 @@ static bool	init_win(char *win_name, t_win *window)
 		return (false);
 	}
 	window->win_ptr = mlx_new_window(window->mlx_ptr,
-			WIDTH, HEIGHT, win_name);
+			width, height, win_name);
 	if (window->win_ptr == NULL)
 	{
 		mlx_destroy_display(window->mlx_ptr);
@@ -76,10 +78,19 @@ int	main(int ac, char **av)
 		mappy = init_struct_map(av[1]);
 		data.map = &mappy;
 		print_map(data.map);
-		if (init_win("cub3D", &window) == false)
+		/* For cub2D only (minimap) */
+		// if (init_win("cub2D", &window,
+		// 		mappy.max_x * MM_PIXEL, mappy.max_y * MM_PIXEL) == false)
+		// 	return (free_mappy(data.map) * -1);
+		if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
 			return (free_mappy(data.map) * -1);
 		data.win = &window;
 		init_events(&data);
+		data.player_elev = 0;
+		data.player_orient = M_PI_2 - (data.map->player_spawn_orient * M_PI_2);
+		data.player_x = data.map->player_spawn_x * MM_PIXEL + MM_PIXEL / 2;
+		data.player_y = data.map->player_spawn_y * MM_PIXEL + MM_PIXEL / 2;
+		data.render = 1;
 		mlx_loop(data.win->mlx_ptr);
 		free_n_destroy(&data);
 		return (0);
