@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/16 17:27:36 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:40:02 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ typedef struct s_map
 }	t_map;
 
 typedef struct s_data {
-	char	**map;
 	t_win	*win;
+	t_map	*map;
 }	t_data;
 
 /* Geometry structures */
@@ -111,6 +111,7 @@ bool	error_messages(int i);
 
 int		free_split(char **tab);
 int		free_mappy(t_map *map);
+int		free_n_destroy(t_data *data);
 
 /* open_file.c */
 
@@ -122,7 +123,14 @@ t_map	init_struct_map(char *file);
 bool	global_checker(char *file, t_map *map);
 
 /* parsing_utils.c */
+
 bool	str_is_digit(char *str);
 bool	checkint(char *nb);
+
+/* events.c */
+
+int		loop_handler(t_data *data);
+int		red_cross_handler(t_data *data);
+int		keys_handler(int key_sym, t_data *data);
 
 #endif
