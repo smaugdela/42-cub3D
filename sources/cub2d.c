@@ -6,13 +6,13 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:56:24 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 16:48:03 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:24:10 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	raycaster(t_data *data, double angle, int color)
+static double	raydrawer(t_data *data, double angle, int color)
 {
 	double	delta_x;
 	double	delta_y;
@@ -38,8 +38,19 @@ double	raycaster(t_data *data, double angle, int color)
 void	player_render(t_data *data)
 {
 	t_img	*player;
+	double 	alpha;
+	double	delta_alpha;
+	int		i;
 
-	raycaster(data, data->player_orient, 0x0000ff);
+	alpha = data->player_orient - (FOV * M_PI / 360);
+	delta_alpha = (FOV * M_PI / 180) / WIDTH;
+	i = 0;
+	while (i < WIDTH && alpha < data->player_orient + (FOV * M_PI / 360))
+	{
+		raydrawer(data, alpha, 0x0000ff);
+		alpha += delta_alpha;
+		++i;
+	}
 	player = init_image_xpm(data, "assets/textures/perso_minimap.xpm");
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 		player->img_ptr, data->player_x, data->player_y);
@@ -49,6 +60,7 @@ void	player_render(t_data *data)
 void	build_minimap(t_data *data)
 {
 	t_img	*wall;
+	t_img	*floor;
 	int		i;
 	int		j;
 	int		dim;
@@ -56,6 +68,7 @@ void	build_minimap(t_data *data)
 	dim = MM_PIXEL;
 	wall = init_image(data, dim, dim);
 	clear_img(wall, 0xffffff);
+	floor = init_image(data, dim, dim);
 	i = 0;
 	while (i < data->map->max_y && data->map->cube_map[i])
 	{
@@ -67,9 +80,15 @@ void	build_minimap(t_data *data)
 				mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 					wall->img_ptr, j * dim, i * dim);
 			}
+			else
+			{
+				mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
+					floor->img_ptr, j * dim, i * dim);
+			}
 			++j;
 		}
 		++i;
 	}
 	free_img(wall);
+	free_img(floor);
 }

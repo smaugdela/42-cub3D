@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 16:57:03 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 19:12:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,20 @@
 # include <X11/Xlib.h>
 
 /* Default window resolution */
-# define WIDTH	1280
-# define HEIGHT	720
+# define WIDTH	1024
+# define HEIGHT	576
 /* Minimap square dimension in pixels */
 # define MM_PIXEL 50
+/* Texture dimension in pixels */
+# define TEXTURE_DIM 64
+/* Scaling up wall's height (thickness) */
+# define SCALE 555
 /* Movement Speed of the player */
-# define SPEED 5
-/*  */
+# define SPEED 6
+/* Rotation speed of the player */
+# define ROT_SPEED 0.09
+/* Field Of View */
+# define FOV 70
 
 typedef enum e_weathercock {
 	N,
@@ -86,6 +93,7 @@ typedef struct s_data {
 	int		player_y;
 	double	player_orient;
 	int		player_elev;
+	bool	render;
 }	t_data;
 
 /* Geometry structures */
@@ -149,6 +157,12 @@ int		loop_handler(t_data *data);
 int		red_cross_handler(t_data *data);
 int		keys_handler(int key_sym, t_data *data);
 
+/* player_moves.c */
+void	move_forward(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	move_back(t_data *data);
+
 /* draw.c */
 
 void	draw_pixel(t_img *image, int x, int y, int color);
@@ -165,5 +179,10 @@ void	player_render(t_data *data);
 /* rc_utils.c */
 
 bool	is_wall(t_data *data, double x, double y);
+
+/* raycast_engine.c */
+
+double	raycaster(t_data *data, double angle);
+void	raycast_renderer(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 16:59:52 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:29:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ int	main(int ac, char **av)
 		mappy = init_struct_map(av[1]);
 		data.map = &mappy;
 		print_map(data.map);
-		if (init_win("cub3D", &window,
-				mappy.max_x * MM_PIXEL, mappy.max_y * MM_PIXEL) == false)
+		/* For cub2D only (minimap) */
+		// if (init_win("cub2D", &window,
+		// 		mappy.max_x * MM_PIXEL, mappy.max_y * MM_PIXEL) == false)
+		// 	return (free_mappy(data.map) * -1);
+		if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
 			return (free_mappy(data.map) * -1);
 		data.win = &window;
 		init_events(&data);
@@ -87,6 +90,7 @@ int	main(int ac, char **av)
 		data.player_orient = M_PI_2 - (data.map->player_spawn_orient * M_PI_2);
 		data.player_x = data.map->player_spawn_x * MM_PIXEL + MM_PIXEL / 2;
 		data.player_y = data.map->player_spawn_y * MM_PIXEL + MM_PIXEL / 2;
+		data.render = 1;
 		mlx_loop(data.win->mlx_ptr);
 		free_n_destroy(&data);
 		return (0);
