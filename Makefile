@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/17 11:40:32 by smagdela         ###   ########.fr        #
+#    Updated: 2022/05/17 11:58:12 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIBS	:=	${LIBFT} ${MLX}
 SRCS	=	main.c			error_messages.c \
 			get_next_line.c get_next_line_utils.c \
 			open_file.c 	map_init.c \
-			textures.c		textures_2.c cube_map.c \
+			textures.c		textures_2.c cube_map.c cube_map2.c \
 			free_and_destroy.c	parsing_utils.c \
 			events.c \
 
@@ -142,7 +142,7 @@ re:		fclean all
 #	Developpment-helping Rules
 
 norm:
-	norminette ${SRCS} ${BONUS} ${INCD}*.h ${LIBFTD}*.c ${LIBFTD}*.h | grep 'Error' ; true
+	@norminette ${SRCS} ${BONUS} ${INCD}*.h ${LIBFTD}*.c ${LIBFTD}*.h | grep 'Error' ; true
 
 leak:	${NAME}
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 11:40:02 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:59:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ bool	init_textures(int fd, t_map *map);
 bool	init_weathercock(t_map *map, int i, int orientation);
 bool	init_color(t_map *map, int i, char color);
 
-/* cube_map.c */
+/* cube_map.c && cube_map2.c */
 
 bool	init_cube_map(int fd, t_map *map);
+bool	reduce_init_cube_map(t_map *map, int ret, int fd, char *line);
 
 /* error_messages.c */
 

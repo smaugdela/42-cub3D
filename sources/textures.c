@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:54:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/16 17:48:22 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:02:59 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static bool	textures_checker_aux(t_map *map, int i)
+static bool	check_directions(t_map *map, int i)
 {
-	char	*tmp;
-
-	tmp = NULL;
 	if (ft_strncmp(map->textures[i], "NO ", 3) == 0)
 	{
 		if (init_weathercock(map, i, N) == false)
@@ -41,6 +38,16 @@ static bool	textures_checker_aux(t_map *map, int i)
 			return (false);
 		return (true);
 	}
+	return (false);
+}
+
+static bool	textures_checker_aux(t_map *map, int i)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (check_directions(map, i) == true)
+		return (true);
 	else if (ft_strncmp(map->textures[i], "F ", 2) == 0)
 	{
 		if (init_color(map, i, 'F') == false)
