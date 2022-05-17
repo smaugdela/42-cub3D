@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:28:10 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 11:34:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 17:06:24 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int	loop_handler(t_data *data)
 {
-	(void)data;
+	t_img	*refresh;
+
+	refresh = init_image(data, data->map->max_x * MM_PIXEL,
+			data->map->max_y * MM_PIXEL);
+	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
+		refresh->img_ptr, 0, 0);
+	free(refresh);
+	build_minimap(data);
+	player_render(data);
 	return (0);
 }
 
@@ -30,14 +38,22 @@ int	keys_handler(int key_sym, t_data *data)
 {
 	if (key_sym == XK_Escape)
 		red_cross_handler(data);
-	// else if (key_sym == XK_r)
-	// 	reset(image);
-	// else if (key_sym == XK_h)
-	// 	reset_ui(image);
-	// else if (key_sym == XK_w)
-	// 	zoom_in(image);
-	// else if (key_sym == XK_q)
-	// 	zoom_out(image);
+	else if (key_sym == XK_Up
+		&& data->map->cube_map[(data->player_y - SPEED)/ MM_PIXEL][data->player_x / MM_PIXEL] != '1')
+		data->player_y -= SPEED;
+	else if (key_sym == XK_Right
+		&& data->map->cube_map[data->player_y / MM_PIXEL][(data->player_x + SPEED) / MM_PIXEL] != '1')
+		data->player_x += SPEED;
+	else if (key_sym == XK_Left
+		&& data->map->cube_map[data->player_y / MM_PIXEL][(data->player_x - SPEED)/ MM_PIXEL] != '1')
+		data->player_x -= SPEED;
+	else if (key_sym == XK_Down
+		&& data->map->cube_map[(data->player_y + SPEED) / MM_PIXEL][data->player_x / MM_PIXEL] != '1')
+		data->player_y += SPEED;
+	else if (key_sym == XK_a)
+		data->player_orient += SPEED * M_PI / 100;
+	else if (key_sym == XK_d)
+		data->player_orient += SPEED * M_PI / 100;
 	return (0);
 }
 

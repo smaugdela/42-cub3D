@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/17 11:58:12 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/05/17 16:57:22 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRCS	=	main.c			error_messages.c \
 			open_file.c 	map_init.c \
 			textures.c		textures_2.c cube_map.c cube_map2.c \
 			free_and_destroy.c	parsing_utils.c \
-			events.c \
+			events.c 		cub2d.c 	draw.c \
+			rc_utils.c \
 
 BONUS 	=	
 

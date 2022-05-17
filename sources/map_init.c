@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/17 11:39:55 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:59:11 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_map	init_struct_map(char *file)
 {
 	t_map	map;
 
-	map.player_pos_x = 0;
-	map.player_pos_y = 0;
-	map.player_orient = '\0';
+	map.player_spawn_x = 0;
+	map.player_spawn_y = 0;
+	map.player_spawn_orient = '\0';
 	map.textures[0] = NULL;
 	map.no = NULL;
 	map.so = NULL;
@@ -27,6 +27,8 @@ t_map	init_struct_map(char *file)
 	map.c_color = 0;
 	map.f_color = 0;
 	map.cube_map = NULL;
+	map.max_x = 0;
+	map.max_y = 0;
 	if (global_checker(file, &map) == false)
 	{	
 		free_mappy(&map);
