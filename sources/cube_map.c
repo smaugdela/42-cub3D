@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/17 11:59:28 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:26:53 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ bool	init_cube_map(int fd, t_map *map)
 	}
 	if (reduce_init_cube_map(map, ret, fd, line) == false)
 		return (false);
-	free(line);
 	if (map->cube_map == NULL || map->cube_map[0] == NULL)
 		return (false);
 	return (is_map_valid(map));
