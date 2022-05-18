@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:33:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 16:59:07 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:54:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,15 @@ bool	is_wall(t_data *data, double x, double y)
 		&& data->map->cube_map[j][i] && data->map->cube_map[j][i] == '1')
 		return (true);
 	return (false);
+}
+
+double	remainder(double value, double modulus)
+{
+	if (value >= 0.0 && value < modulus)
+		return (value);
+	while (value < 0.0)
+		value += modulus;
+	while (value >= modulus)
+		value -= modulus;
+	return (value);
 }

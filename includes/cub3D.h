@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 19:12:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:00:20 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# define _USE_MATH_DEFINES
 # include <math.h>
 # include <stdbool.h>
 # include <sys/types.h>
@@ -36,7 +37,7 @@
 /* Texture dimension in pixels */
 # define TEXTURE_DIM 64
 /* Scaling up wall's height (thickness) */
-# define SCALE 555
+# define SCALE 500
 /* Movement Speed of the player */
 # define SPEED 6
 /* Rotation speed of the player */
@@ -179,6 +180,7 @@ void	player_render(t_data *data);
 /* rc_utils.c */
 
 bool	is_wall(t_data *data, double x, double y);
+double	remainder(double value, double modulus);
 
 /* raycast_engine.c */
 
