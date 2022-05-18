@@ -6,13 +6,14 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 19:22:45 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:50:35 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	raycaster(t_data *data, double angle)
+/*
+static double	naive_raycaster(t_data *data, double angle)
 {
 	double	delta_x;
 	double	delta_y;
@@ -35,6 +36,7 @@ double	raycaster(t_data *data, double angle)
 	}
 	return (dist);
 }
+*/
 
 static void	draw_pixel_column(t_data *data, int i, int thickness, t_img *pov)
 {
@@ -51,11 +53,13 @@ static void	draw_pixel_column(t_data *data, int i, int thickness, t_img *pov)
 
 void	raycast_renderer(t_data *data)
 {
-	t_img	*pov;
-	double 	alpha;
-	double	delta_alpha;
-	int		i;
-	int		thickness;
+	t_img			*pov;
+	double 			alpha;
+	double			delta_alpha;
+	int				i;
+	int				thickness;
+	t_weathercock	wall_orient;
+	t_point			impact;
 
 	pov = init_image(data, WIDTH, HEIGHT);
 	alpha = data->player_orient - (FOV * M_PI / 360);
@@ -63,11 +67,14 @@ void	raycast_renderer(t_data *data)
 	i = 0;
 	while (i < WIDTH)
 	{
-		thickness = TEXTURE_DIM * SCALE / raycaster(data, alpha);
+		thickness = TEXTURE_DIM * SCALE / next_inter(data, 
+				alpha, &wall_orient, &impact);
+		printf("Thickness = %d\n", thickness);
 		draw_pixel_column(data, i, thickness, pov);
 		alpha += delta_alpha;
 		++i;
 	}
+	printf("STOP\n");
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 		pov->img_ptr, 0, 0);
 	free_img(pov);
