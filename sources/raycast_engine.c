@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 21:45:40 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:50:35 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ void	raycast_renderer(t_data *data)
 	{
 		thickness = TEXTURE_DIM * SCALE / next_inter(data, 
 				alpha, &wall_orient, &impact);
+		printf("Thickness = %d\n", thickness);
 		draw_pixel_column(data, i, thickness, pov);
 		alpha += delta_alpha;
 		++i;
 	}
+	printf("STOP\n");
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 		pov->img_ptr, 0, 0);
 	free_img(pov);
