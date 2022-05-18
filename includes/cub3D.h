@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 15:35:42 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:42:44 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # define _USE_MATH_DEFINES
 # include <math.h>
+# include <float.h>
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -97,24 +98,10 @@ typedef struct s_data {
 	bool	render;
 }	t_data;
 
-/* Geometry structures */
-
-typedef struct s_circle {
-	int		x_c;
-	int		y_c;
-	double	r;
-	int		color;
-	bool	border_only;
-}	t_circle;
-
-typedef struct s_rectangle {
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-	int		color;
-	bool	border_only;
-}	t_rectangle;
+typedef struct s_point {
+	double	x;
+	double	y;
+}	t_point;
 
 /* textures.c & textures_2.c */
 
@@ -181,6 +168,8 @@ void	player_render(t_data *data);
 
 bool	is_wall(t_data *data, double x, double y);
 double	remainder(double value, double modulus);
+double	next_inter(t_data *data, double angle,
+	t_weathercock *wall_orient, t_point *impact);
 
 /* raycast_engine.c */
 
