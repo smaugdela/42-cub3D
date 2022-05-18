@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:33:02 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 12:04:35 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:28:00 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,20 @@ int	free_mappy(t_map *map)
 	return (1);
 }
 
+int	free_img(t_img *img)
+{
+	if (img && img->img_ptr)
+		mlx_destroy_image(img->win->mlx_ptr, img->img_ptr);
+	if (img)
+	{
+		free(img);
+		img = NULL;
+	}
+	return (1);
+}
+
 int	free_n_destroy(t_data *data)
 {
-	// if (image && image->image_ptr)
-	// 	mlx_destroy_image(image->display->mlx_ptr, image->image_ptr);
-	// if (image)
-	// {
-	// 	free(image);
-	// 	image = NULL;
-	// }
 	if (data->win && data->win->win_ptr)
 	{
 		mlx_destroy_window(data->win->mlx_ptr, data->win->win_ptr);

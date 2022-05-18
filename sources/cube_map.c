@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/17 13:26:53 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:08:06 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,29 @@ static bool	conditions_map(int i, int j, t_map *map, int condition)
 
 static void	init_player_pos_n_orient(t_map *map, int i, int j)
 {
-	map->player_pos_x = j;
-	map->player_pos_y = i;
-	map->player_orient = map->cube_map[i][j];
+	size_t	x;
+	int		y;
+
+	map->player_spawn_x = j;
+	map->player_spawn_y = i;
+	if (map->cube_map[i][j] == 'N')
+		map->player_spawn_orient = N;
+	else if (map->cube_map[i][j] == 'E')
+		map->player_spawn_orient = E;
+	else if (map->cube_map[i][j] == 'S')
+		map->player_spawn_orient = S;
+	else if (map->cube_map[i][j] == 'W')
+		map->player_spawn_orient = W;
+	y = 0;
+	x = 0;
+	while (map->cube_map[y])
+	{
+		if (x < ft_strlen(map->cube_map[y]))
+			x = ft_strlen(map->cube_map[y]);
+		++y;
+	}
+	map->max_x = (int)x;
+	map->max_y = y;
 }
 
 static bool	is_map_valid(t_map *map)

@@ -6,15 +6,35 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:28:10 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 11:34:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 19:01:06 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+/*
+cub2D, minimap renderer
+
 int	loop_handler(t_data *data)
 {
-	(void)data;
+	if (data->render)
+	{
+		build_minimap(data);
+		player_render(data);
+		data->render = 0;
+	}
+	return (0);
+}
+*/
+
+/* cub3D, game renderer */
+int	loop_handler(t_data *data)
+{
+	if (data->render)
+	{
+		raycast_renderer(data);
+		data->render = 0;
+	}
 	return (0);
 }
 
@@ -30,14 +50,21 @@ int	keys_handler(int key_sym, t_data *data)
 {
 	if (key_sym == XK_Escape)
 		red_cross_handler(data);
-	// else if (key_sym == XK_r)
-	// 	reset(image);
-	// else if (key_sym == XK_h)
-	// 	reset_ui(image);
-	// else if (key_sym == XK_w)
-	// 	zoom_in(image);
-	// else if (key_sym == XK_q)
-	// 	zoom_out(image);
+	else if (key_sym == XK_Up)
+		move_forward(data);
+	else if (key_sym == XK_Right)
+		move_right(data);
+	else if (key_sym == XK_Left)
+		move_left(data);
+	else if (key_sym == XK_Down)
+		move_back(data);
+	else if (key_sym == XK_a)
+		data->player_orient -= ROT_SPEED;
+	else if (key_sym == XK_d)
+		data->player_orient += ROT_SPEED;
+	else
+		return (0);
+	data->render = 1;
 	return (0);
 }
 

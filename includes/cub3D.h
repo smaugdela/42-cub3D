@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 13:15:52 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/17 19:12:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,21 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
-# define WIDTH	1280
-# define HEIGHT	720
+/* Default window resolution */
+# define WIDTH	1024
+# define HEIGHT	576
+/* Minimap square dimension in pixels */
+# define MM_PIXEL 50
+/* Texture dimension in pixels */
+# define TEXTURE_DIM 64
+/* Scaling up wall's height (thickness) */
+# define SCALE 555
+/* Movement Speed of the player */
+# define SPEED 6
+/* Rotation speed of the player */
+# define ROT_SPEED 0.09
+/* Field Of View */
+# define FOV 70
 
 typedef enum e_weathercock {
 	N,
@@ -52,26 +65,35 @@ typedef struct s_img {
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_map
 {
-	int		player_pos_x;
-	int		player_pos_y;
-	char	player_orient;
-	char	*textures[7];
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		c_color;
-	int		f_color;
-	char	**cube_map;
+	int				player_spawn_x;
+	int				player_spawn_y;
+	t_weathercock	player_spawn_orient;
+	char			*textures[7];
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	int				c_color;
+	int				f_color;
+	char			**cube_map;
+	int				max_x;
+	int				max_y;
 }	t_map;
 
 typedef struct s_data {
 	t_win	*win;
 	t_map	*map;
+	int		player_x;
+	int		player_y;
+	double	player_orient;
+	int		player_elev;
+	bool	render;
 }	t_data;
 
 /* Geometry structures */
@@ -113,6 +135,7 @@ bool	error_messages(int i);
 int		free_split(char **tab);
 int		free_mappy(t_map *map);
 int		free_n_destroy(t_data *data);
+int		free_img(t_img *img);
 
 /* open_file.c */
 
@@ -133,5 +156,33 @@ bool	checkint(char *nb);
 int		loop_handler(t_data *data);
 int		red_cross_handler(t_data *data);
 int		keys_handler(int key_sym, t_data *data);
+
+/* player_moves.c */
+void	move_forward(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	move_back(t_data *data);
+
+/* draw.c */
+
+void	draw_pixel(t_img *image, int x, int y, int color);
+int		clear_img(t_img *image, int color);
+t_img	*init_image(t_data *data, int width, int height);
+int		get_pixel_color(int x, int y, t_img *image);
+t_img	*init_image_xpm(t_data *data, char *filename);
+
+/* cub2d.c */
+
+void	build_minimap(t_data *data);
+void	player_render(t_data *data);
+
+/* rc_utils.c */
+
+bool	is_wall(t_data *data, double x, double y);
+
+/* raycast_engine.c */
+
+double	raycaster(t_data *data, double angle);
+void	raycast_renderer(t_data *data);
 
 #endif
