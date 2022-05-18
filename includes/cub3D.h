@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 13:00:20 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/18 15:35:42 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define MM_PIXEL 50
 /* Texture dimension in pixels */
 # define TEXTURE_DIM 64
-/* Scaling up wall's height (thickness) */
+/* Scaling up wall's height (thickness) (TEXTURE_DIM * SCALE ~= 27000) */
 # define SCALE 500
 /* Movement Speed of the player */
 # define SPEED 6
@@ -184,7 +184,6 @@ double	remainder(double value, double modulus);
 
 /* raycast_engine.c */
 
-double	raycaster(t_data *data, double angle);
 void	raycast_renderer(t_data *data);
 
 #endif
