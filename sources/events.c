@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:28:10 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 12:52:35 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/20 17:40:55 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 cub2D, minimap renderer
-
+*/
 int	loop_handler(t_data *data)
 {
 	if (data->render)
@@ -25,18 +25,17 @@ int	loop_handler(t_data *data)
 	}
 	return (0);
 }
-*/
 
 /* cub3D, game renderer */
-int	loop_handler(t_data *data)
-{
-	if (data->render)
-	{
-		raycast_renderer(data);
-		data->render = 0;
-	}
-	return (0);
-}
+// int	loop_handler(t_data *data)
+// {
+// 	if (data->render)
+// 	{
+// 		raycast_renderer(data);
+// 		data->render = 0;
+// 	}
+// 	return (0);
+// }
 
 int	red_cross_handler(t_data *data)
 {
@@ -59,10 +58,10 @@ int	keys_handler(int key_sym, t_data *data)
 	else if (key_sym == XK_Down)
 		move_back(data);
 	else if (key_sym == XK_a)
-		data->player_orient = remainder(data->player_orient - ROT_SPEED,
+		data->player_orient = remainder(data->player_orient + ROT_SPEED,
 				2 * M_PI);
 	else if (key_sym == XK_d)
-		data->player_orient = remainder(data->player_orient + ROT_SPEED,
+		data->player_orient = remainder(data->player_orient - ROT_SPEED,
 				2 * M_PI);
 	else
 		return (0);

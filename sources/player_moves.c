@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:01:20 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 12:59:21 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:48:02 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	move_left(t_data *data)
 	double	move_x;
 	double	move_y;
 
-	move_x = cos(data->player_orient - M_PI_2) * SPEED;
-	move_y = -1 * SPEED * sin(data->player_orient - M_PI_2);
+	move_x = cos(data->player_orient + M_PI_2) * SPEED;
+	move_y = -1 * SPEED * sin(data->player_orient + M_PI_2);
 	if (!is_wall(data, data->player_x + move_x * 2,
 			data->player_y + move_y * 2))
 	{
@@ -47,8 +47,8 @@ void	move_right(t_data *data)
 	double	move_x;
 	double	move_y;
 
-	move_x = cos(data->player_orient + M_PI_2) * SPEED;
-	move_y = -1 * SPEED * sin(data->player_orient + M_PI_2);
+	move_x = cos(data->player_orient - M_PI_2) * SPEED;
+	move_y = -1 * SPEED * sin(data->player_orient - M_PI_2);
 	if (!is_wall(data, data->player_x + move_x * 2,
 			data->player_y + move_y * 2))
 	{

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 21:42:44 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/20 19:58:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
 # define WIDTH	1024
 # define HEIGHT	576
 /* Minimap square dimension in pixels */
-# define MM_PIXEL 50
+# define MM_PIXEL 64
 /* Texture dimension in pixels */
 # define TEXTURE_DIM 64
 /* Scaling up wall's height (thickness) (TEXTURE_DIM * SCALE ~= 27000) */
-# define SCALE 500
+# define SCALE 600
 /* Movement Speed of the player */
 # define SPEED 6
 /* Rotation speed of the player */
@@ -163,16 +163,24 @@ t_img	*init_image_xpm(t_data *data, char *filename);
 
 void	build_minimap(t_data *data);
 void	player_render(t_data *data);
+void	draw_line(t_data *data, double angle, double dist, int color);
 
 /* rc_utils.c */
 
 bool	is_wall(t_data *data, double x, double y);
 double	remainder(double value, double modulus);
-double	next_inter(t_data *data, double angle,
-	t_weathercock *wall_orient, t_point *impact);
+double	texturer_raycaster(t_data *data, double angle,
+			t_point *intersect, t_weathercock *wall_orient);
+double	naive_raycaster(t_data *data, double angle);
+bool	in_map(t_data *data, double x, double y);
 
 /* raycast_engine.c */
 
 void	raycast_renderer(t_data *data);
+
+/* raycast_engine2.c */
+
+double	opti_rc(t_data *data, double angle,
+		t_point *intersect, t_weathercock *wall_orient);
 
 #endif
