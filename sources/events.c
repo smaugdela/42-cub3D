@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:28:10 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/20 17:40:55 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:09:58 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 /*
 cub2D, minimap renderer
 */
-int	loop_handler(t_data *data)
-{
-	if (data->render)
-	{
-		build_minimap(data);
-		player_render(data);
-		data->render = 0;
-	}
-	return (0);
-}
-
-/* cub3D, game renderer */
 // int	loop_handler(t_data *data)
 // {
 // 	if (data->render)
 // 	{
-// 		raycast_renderer(data);
+// 		build_minimap(data);
+// 		player_render(data);
 // 		data->render = 0;
 // 	}
 // 	return (0);
 // }
+
+/* cub3D, game renderer */
+int	loop_handler(t_data *data)
+{
+	if (data->render)
+	{
+		raycast_renderer(data);
+		data->render = 0;
+	}
+	return (0);
+}
 
 int	red_cross_handler(t_data *data)
 {

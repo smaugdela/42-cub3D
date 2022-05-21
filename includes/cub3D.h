@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/20 19:58:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:26:53 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# define _USE_MATH_DEFINES
+# include <stdbool.h>
+# define __USE_MISC 1
 # include <math.h>
 # include <float.h>
-# include <stdbool.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -34,17 +34,17 @@
 # define WIDTH	1024
 # define HEIGHT	576
 /* Minimap square dimension in pixels */
-# define MM_PIXEL 64
+# define MM_PIXEL 64.0
 /* Texture dimension in pixels */
-# define TEXTURE_DIM 64
+# define TEXTURE_DIM 64.0
 /* Scaling up wall's height (thickness) (TEXTURE_DIM * SCALE ~= 27000) */
-# define SCALE 600
+# define SCALE 790.0
 /* Movement Speed of the player */
-# define SPEED 6
+# define SPEED 6.0
 /* Rotation speed of the player */
 # define ROT_SPEED 0.09
 /* Field Of View */
-# define FOV 70
+# define FOV 70.0
 
 typedef enum e_weathercock {
 	N,

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/20 18:47:32 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:09:30 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	main(int ac, char **av)
 		data.map = &mappy;
 		// print_map(data.map);
 		/* For cub2D only (minimap) */
-		if (init_win("cub2D", &window,
-				mappy.max_x * TEXTURE_DIM, mappy.max_y * TEXTURE_DIM) == false)
-			return (free_mappy(data.map) * -1);
-		// if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
+		// if (init_win("cub2D", &window,
+		// 		mappy.max_x * TEXTURE_DIM, mappy.max_y * TEXTURE_DIM) == false)
 		// 	return (free_mappy(data.map) * -1);
+		if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
+			return (free_mappy(data.map) * -1);
 		data.win = &window;
 		init_events(&data);
 		data.player_elev = 0;

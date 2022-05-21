@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:56:24 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/20 20:13:11 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:04:42 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // 	{
 // 		x += delta_x;
 // 		y += delta_y;
-// 		dist += sqrt(pow(delta_x, 2) + pow(delta_y, 2));
+// 		++dist;
 // 		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, x, y, color);
 // 	}
 // 	return (dist);
@@ -49,7 +49,7 @@ void	draw_line(t_data *data, double angle, double dist, int color)
 		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, a.x, a.y, color);
 		a.x += delta.x;
 		a.y += delta.y;
-		dist -= 1;
+		--dist;
 	}
 }
 
@@ -62,15 +62,15 @@ void	player_render(t_data *data)
 	t_point			impact;
 	t_weathercock	wall_orient;
 
-	// alpha = data->player_orient - (FOV * M_PI / 360);
-	alpha = data->player_orient;
+	alpha = data->player_orient - (FOV * M_PI / 360);
+	// alpha = data->player_orient;
 	delta_alpha = (FOV * M_PI / 180) / WIDTH;
 	i = 0;
-	while (i < WIDTH && alpha < data->player_orient + (FOV * M_PI / 360) && !i)
+	while (i < WIDTH && alpha < data->player_orient + (FOV * M_PI / 360))
 	{
 		// draw_line(data, alpha, naive_raycaster(data, alpha), 0x0000ff);
-		// draw_line(data, alpha, opti_rc(data, alpha, &impact, &wall_orient), 0x0000ff);
-		opti_rc(data, alpha, &impact, &wall_orient);
+		draw_line(data, alpha, opti_rc(data, alpha, &impact, &wall_orient), 0x0000ff);
+		// opti_rc(data, alpha, &impact, &wall_orient);
 		alpha += delta_alpha;
 		++i;
 	}

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/20 17:29:16 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:20:56 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	raycast_renderer(t_data *data)
 	wall_orient = N;
 	while (i < WIDTH)
 	{
-		thickness = TEXTURE_DIM * SCALE / texturer_raycaster(data, 
-				alpha, &impact, &wall_orient);
+		thickness = TEXTURE_DIM * SCALE / (opti_rc(data, 
+				alpha, &impact, &wall_orient) * cos(alpha - data->player_orient));
+		// thickness = TEXTURE_DIM * SCALE / texturer_raycaster(data, 
+		// 		alpha, &impact, &wall_orient);
 		// thickness = TEXTURE_DIM * SCALE / naive_raycaster(data, alpha);
 		if (wall_orient == N)
 			draw_pixel_column(data, i, thickness, pov, 0xeb7d34);

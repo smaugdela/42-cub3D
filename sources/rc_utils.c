@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:33:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/20 19:58:19 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 13:23:11 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ double	remainder(double value, double modulus)
 	return (value);
 }
 
-double	opti_remainder(double value, double modulus)
-{
-	int	div;
+// double	opti_remainder(double value, double modulus)
+// {
+// 	int	div;
 
-	if (value >= 0.0 && value < modulus)
-		return (value);
-	div = value / modulus;
-	return (value - (double)div);
-}
+// 	if (value >= 0.0 && value < modulus)
+// 		return (value);
+// 	div = value / modulus;
+// 	return (value - (double)div);
+// }
 
 double	naive_raycaster(t_data *data, double angle)
 {
