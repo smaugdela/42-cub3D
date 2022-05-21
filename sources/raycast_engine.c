@@ -6,22 +6,34 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/21 14:20:56 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 15:18:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 static void	draw_pixel_column(t_data *data, int i, double thickness,
-	t_img *pov, int color)
+	t_img *pov, t_img *texture, int column)
 {
-	int	y;
+	int		y;
+	int		color;
+	double	row;
+	double	step;
 
 	y = 0;
+	row = 0;
+	if (thickness == 0)
+		step = 0;
+	else
+		step = TEXTURE_DIM / (double)thickness;
 	while (y < (HEIGHT - thickness) / 2 && y < HEIGHT)
 		draw_pixel(pov, i, y++, data->map->c_color);
 	while (y < (HEIGHT + thickness) / 2 && y < HEIGHT)
+	{
+		color = get_pixel_color(column, trunc(row), texture);
+		row += step;
 		draw_pixel(pov, i, y++, color);
+	}
 	while (y < HEIGHT)
 		draw_pixel(pov, i, y++, data->map->f_color);
 }
@@ -29,9 +41,11 @@ static void	draw_pixel_column(t_data *data, int i, double thickness,
 void	raycast_renderer(t_data *data)
 {
 	t_img			*pov;
+	t_img			*wall;
 	double 			alpha;
 	double			delta_alpha;
 	int				i;
+	int				j;
 	double			thickness;
 	t_weathercock	wall_orient;
 	t_point			impact;
@@ -44,18 +58,38 @@ void	raycast_renderer(t_data *data)
 	while (i < WIDTH)
 	{
 		thickness = TEXTURE_DIM * SCALE / (opti_rc(data, 
-				alpha, &impact, &wall_orient) * cos(alpha - data->player_orient));
+					alpha, &impact, &wall_orient) * cos(alpha - data->player_orient));
 		// thickness = TEXTURE_DIM * SCALE / texturer_raycaster(data, 
 		// 		alpha, &impact, &wall_orient);
 		// thickness = TEXTURE_DIM * SCALE / naive_raycaster(data, alpha);
 		if (wall_orient == N)
-			draw_pixel_column(data, i, thickness, pov, 0xeb7d34);
+		{
+			j = TEXTURE_DIM - impact.x;
+			wall = init_image_xpm(data, data->map->no);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
 		if (wall_orient == S)
-			draw_pixel_column(data, i, thickness, pov, 0xeb3483);
+		{
+			j = impact.x;
+			wall = init_image_xpm(data, data->map->so);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
 		if (wall_orient == W)
-			draw_pixel_column(data, i, thickness, pov, 0xa27cd9);
+		{
+			j = impact.y;
+			wall = init_image_xpm(data, data->map->we);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
 		if (wall_orient == E)
-			draw_pixel_column(data, i, thickness, pov, 0x7cd9d6);
+		{
+			j = TEXTURE_DIM - impact.y;
+			wall = init_image_xpm(data, data->map->ea);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
 		alpha = remainder(alpha - delta_alpha, 2 * M_PI);
 		++i;
 	}
