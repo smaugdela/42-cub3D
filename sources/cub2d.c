@@ -6,48 +6,71 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:56:24 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 18:24:10 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:04:42 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static double	raydrawer(t_data *data, double angle, int color)
-{
-	double	delta_x;
-	double	delta_y;
-	double	x;
-	double	y;
-	double	dist;
+// static double	raydrawer(t_data *data, double angle, int color)
+// {
+// 	double	delta_x;
+// 	double	delta_y;
+// 	double	x;
+// 	double	y;
+// 	double	dist;
 
-	delta_x = cos(angle);
-	delta_y = -1 * sin(angle);
-	x = data->player_x;
-	y = data->player_y;
-	dist = 0;
-	while (is_wall(data, x, y) == false)
+// 	delta_x = cos(angle);
+// 	delta_y = -1 * sin(angle);
+// 	x = data->player_x;
+// 	y = data->player_y;
+// 	dist = 0;
+// 	while (is_wall(data, x, y) == false)
+// 	{
+// 		x += delta_x;
+// 		y += delta_y;
+// 		++dist;
+// 		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, x, y, color);
+// 	}
+// 	return (dist);
+// }
+
+void	draw_line(t_data *data, double angle, double dist, int color)
+{
+	t_point	delta;
+	t_point	a;
+
+	a.x = data->player_x;
+	a.y = data->player_y;
+	delta.x = cos(angle);
+	delta.y = -1 * sin(angle);
+	while (dist > 0 && in_map(data, a.x, a.y))
 	{
-		x += delta_x;
-		y += delta_y;
-		dist += sqrt(pow(delta_x, 2) + pow(delta_y, 2));
-		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, x, y, color);
+		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, a.x, a.y, color);
+		a.x += delta.x;
+		a.y += delta.y;
+		--dist;
 	}
-	return (dist);
 }
 
 void	player_render(t_data *data)
 {
-	t_img	*player;
-	double 	alpha;
-	double	delta_alpha;
-	int		i;
+	t_img			*player;
+	double 			alpha;
+	double			delta_alpha;
+	int				i;
+	t_point			impact;
+	t_weathercock	wall_orient;
 
 	alpha = data->player_orient - (FOV * M_PI / 360);
+	// alpha = data->player_orient;
 	delta_alpha = (FOV * M_PI / 180) / WIDTH;
 	i = 0;
 	while (i < WIDTH && alpha < data->player_orient + (FOV * M_PI / 360))
 	{
-		raydrawer(data, alpha, 0x0000ff);
+		// draw_line(data, alpha, naive_raycaster(data, alpha), 0x0000ff);
+		draw_line(data, alpha, opti_rc(data, alpha, &impact, &wall_orient), 0x0000ff);
+		// opti_rc(data, alpha, &impact, &wall_orient);
 		alpha += delta_alpha;
 		++i;
 	}

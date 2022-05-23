@@ -6,12 +6,12 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 18:29:33 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:09:30 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
+/*
 static void	print_map(t_map *map)
 {
 	int	i;
@@ -33,7 +33,7 @@ static void	print_map(t_map *map)
 	printf(" Map dimensions : Width (x) = %d, Height (y) = %d\n",
 		map->max_x, map->max_y);
 }
-
+*/
 static bool	init_win(char *win_name, t_win *window, int width, int height)
 {
 	window->mlx_ptr = mlx_init();
@@ -77,10 +77,10 @@ int	main(int ac, char **av)
 	{
 		mappy = init_struct_map(av[1]);
 		data.map = &mappy;
-		print_map(data.map);
+		// print_map(data.map);
 		/* For cub2D only (minimap) */
 		// if (init_win("cub2D", &window,
-		// 		mappy.max_x * MM_PIXEL, mappy.max_y * MM_PIXEL) == false)
+		// 		mappy.max_x * TEXTURE_DIM, mappy.max_y * TEXTURE_DIM) == false)
 		// 	return (free_mappy(data.map) * -1);
 		if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
 			return (free_mappy(data.map) * -1);
@@ -88,8 +88,9 @@ int	main(int ac, char **av)
 		init_events(&data);
 		data.player_elev = 0;
 		data.player_orient = M_PI_2 - (data.map->player_spawn_orient * M_PI_2);
-		data.player_x = data.map->player_spawn_x * MM_PIXEL + MM_PIXEL / 2;
-		data.player_y = data.map->player_spawn_y * MM_PIXEL + MM_PIXEL / 2;
+		data.player_orient = remainder(data.player_orient, 2 * M_PI);
+		data.player_x = data.map->player_spawn_x * TEXTURE_DIM + TEXTURE_DIM / 2;
+		data.player_y = data.map->player_spawn_y * TEXTURE_DIM + TEXTURE_DIM / 2;
 		data.render = 1;
 		mlx_loop(data.win->mlx_ptr);
 		free_n_destroy(&data);

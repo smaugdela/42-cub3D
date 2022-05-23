@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:01:20 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 12:59:21 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/21 13:38:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	move_forward(t_data *data)
 
 	move_x = cos(data->player_orient) * SPEED;
 	move_y = -1 * SPEED * sin(data->player_orient);
-	if (!is_wall(data, data->player_x + move_x * 2,
-			data->player_y + move_y * 2))
+	if (!is_wall(data, data->player_x + move_x,
+			data->player_y + move_y))
 	{
 		data->player_x += move_x;
 		data->player_y += move_y;
@@ -32,10 +32,10 @@ void	move_left(t_data *data)
 	double	move_x;
 	double	move_y;
 
-	move_x = cos(data->player_orient - M_PI_2) * SPEED;
-	move_y = -1 * SPEED * sin(data->player_orient - M_PI_2);
-	if (!is_wall(data, data->player_x + move_x * 2,
-			data->player_y + move_y * 2))
+	move_x = cos(data->player_orient + M_PI_2) * SPEED;
+	move_y = -1 * SPEED * sin(data->player_orient + M_PI_2);
+	if (!is_wall(data, data->player_x + move_x,
+			data->player_y + move_y))
 	{
 		data->player_x += move_x;
 		data->player_y += move_y;
@@ -47,10 +47,10 @@ void	move_right(t_data *data)
 	double	move_x;
 	double	move_y;
 
-	move_x = cos(data->player_orient + M_PI_2) * SPEED;
-	move_y = -1 * SPEED * sin(data->player_orient + M_PI_2);
-	if (!is_wall(data, data->player_x + move_x * 2,
-			data->player_y + move_y * 2))
+	move_x = cos(data->player_orient - M_PI_2) * SPEED;
+	move_y = -1 * SPEED * sin(data->player_orient - M_PI_2);
+	if (!is_wall(data, data->player_x + move_x,
+			data->player_y + move_y))
 	{
 		data->player_x += move_x;
 		data->player_y += move_y;
@@ -64,8 +64,8 @@ void	move_back(t_data *data)
 
 	move_x = cos(data->player_orient + M_PI) * SPEED;
 	move_y = -1 * SPEED * sin(data->player_orient + M_PI);
-	if (!is_wall(data, data->player_x + move_x * 2,
-			data->player_y + move_y * 2))
+	if (!is_wall(data, data->player_x + move_x,
+			data->player_y + move_y))
 	{
 		data->player_x += move_x;
 		data->player_y += move_y;

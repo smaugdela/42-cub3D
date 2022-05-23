@@ -1,7 +1,7 @@
-NO assets/textures/minimap_wall.xpm
-SO assets/textures/minimap_wall.xpm
-WE assets/textures/minimap_wall.xpm
-EA assets/textures/minimap_wall.xpm
+NO assets/textures/textures_mandatory/wall_sf1.xpm
+SO assets/textures/textures_mandatory/wall_sf2.xpm
+WE assets/textures/textures_mandatory/wall_sf3.xpm
+EA assets/textures/textures_mandatory/wall_sf4.xpm
 
 F 100,100,100
 C 150,150,150

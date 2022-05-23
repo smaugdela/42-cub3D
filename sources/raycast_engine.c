@@ -6,47 +6,34 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/18 21:50:35 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:27:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/*
-static double	naive_raycaster(t_data *data, double angle)
+static void	draw_pixel_column(t_data *data, int i, double thickness,
+	t_img *pov, t_img *texture, int column)
 {
-	double	delta_x;
-	double	delta_y;
-	double	x;
-	double	y;
-	double	delta_dist;
-	double	dist;
-
-	delta_x = cos(angle);
-	delta_y = -1 * sin(angle);
-	x = data->player_x;
-	y = data->player_y;
-	dist = 0;
-	delta_dist = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
-	while (is_wall(data, x, y) == false)
-	{
-		x += delta_x;
-		y += delta_y;
-		dist += delta_dist;
-	}
-	return (dist);
-}
-*/
-
-static void	draw_pixel_column(t_data *data, int i, int thickness, t_img *pov)
-{
-	int	y;
+	int		y;
+	int		color;
+	double	row;
+	double	step;
 
 	y = 0;
+	row = 0;
+	if (thickness == 0)
+		step = 0;
+	else
+		step = TEXTURE_DIM / (double)thickness;
 	while (y < (HEIGHT - thickness) / 2 && y < HEIGHT)
 		draw_pixel(pov, i, y++, data->map->c_color);
 	while (y < (HEIGHT + thickness) / 2 && y < HEIGHT)
-		draw_pixel(pov, i, y++, 0x014506);
+	{
+		color = get_pixel_color(column, trunc(row), texture);
+		row += step;
+		draw_pixel(pov, i, y++, color);
+	}
 	while (y < HEIGHT)
 		draw_pixel(pov, i, y++, data->map->f_color);
 }
@@ -54,27 +41,58 @@ static void	draw_pixel_column(t_data *data, int i, int thickness, t_img *pov)
 void	raycast_renderer(t_data *data)
 {
 	t_img			*pov;
+	t_img			*wall;
 	double 			alpha;
 	double			delta_alpha;
 	int				i;
-	int				thickness;
+	int				j;
+	double			thickness;
 	t_weathercock	wall_orient;
 	t_point			impact;
 
 	pov = init_image(data, WIDTH, HEIGHT);
-	alpha = data->player_orient - (FOV * M_PI / 360);
+	alpha = data->player_orient + (FOV * M_PI / 360);
 	delta_alpha = (FOV * M_PI / 180) / WIDTH;
 	i = 0;
+	wall_orient = N;
 	while (i < WIDTH)
 	{
-		thickness = TEXTURE_DIM * SCALE / next_inter(data, 
-				alpha, &wall_orient, &impact);
-		printf("Thickness = %d\n", thickness);
-		draw_pixel_column(data, i, thickness, pov);
-		alpha += delta_alpha;
+		thickness = TEXTURE_DIM * SCALE / (opti_rc(data, 
+					alpha, &impact, &wall_orient) * cos(alpha - data->player_orient));
+		// thickness = TEXTURE_DIM * SCALE / texturer_raycaster(data, 
+		// 		alpha, &impact, &wall_orient);
+		// thickness = TEXTURE_DIM * SCALE / naive_raycaster(data, alpha);
+		if (wall_orient == N)
+		{
+			j = TEXTURE_DIM - remainder(impact.x, TEXTURE_DIM);
+			wall = init_image_xpm(data, data->map->no);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
+		if (wall_orient == S)
+		{
+			j = remainder(impact.x, TEXTURE_DIM);
+			wall = init_image_xpm(data, data->map->so);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
+		if (wall_orient == W)
+		{
+			j = remainder(impact.y, TEXTURE_DIM);
+			wall = init_image_xpm(data, data->map->we);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
+		if (wall_orient == E)
+		{
+			j = TEXTURE_DIM - remainder(impact.y, TEXTURE_DIM);
+			wall = init_image_xpm(data, data->map->ea);
+			draw_pixel_column(data, i, thickness, pov, wall, j);
+			free_img(wall);
+		}
+		alpha = remainder(alpha - delta_alpha, 2 * M_PI);
 		++i;
 	}
-	printf("STOP\n");
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 		pov->img_ptr, 0, 0);
 	free_img(pov);
