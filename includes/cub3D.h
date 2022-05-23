@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/23 16:24:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 18:30:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 /* Movement Speed of the player (pixel per frame) */
 # define SPEED 7.0
 /* Rotation speed of the player (rad per frame) */
-# define ROT_SPEED 0.08
+# define ROT_SPEED 0.07
 /* Field Of View (degrees) */
 # define FOV 70.0
 

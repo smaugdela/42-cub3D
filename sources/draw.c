@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:44:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/21 15:06:27 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 18:27:30 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ t_img	*init_image_xpm(t_data *data, char *filename)
 		perror("mlx_new_image");
 		return (NULL);
 	}
+	if (img->height != TEXTURE_DIM || img->width != TEXTURE_DIM)
+		printf("\033[0;33mWarning : texture file dimensions different from \
+			Macro TEXTURE_DIM\033[0m\n");
 	return (img);
 }
 

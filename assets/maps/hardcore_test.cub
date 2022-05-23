@@ -1,10 +1,10 @@
-NO assets/textures/texture1.xpm
+NO assets/textures/textures_mandatory/just_a_wall.xpm
 
 F 220,100,0
-	SO assets/textures/texture1.xpm
-EA assets/textures/texture1.xpm
+	SO assets/textures/textures_mandatory/titan_in_the_wall.xpm
+EA assets/textures/textures_mandatory/wall_berthhold.xpm
 
-WE assets/textures/texture1.xpm
+WE assets/textures/textures_mandatory/wall_maria.xpm
 C 225,30,0
 
 1111111111111111111111111
@@ -16,7 +16,7 @@ C 225,30,0
 11110111111111011100000010001
 11110111111111011101010010001
 11000000110101011100000010001
-100000W0000000001100000010001
+100000W0000000000000000010001
 10000000000000001101010010001
 1100000111010101111101111000111
 11110111 1110101 101111010001
