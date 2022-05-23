@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/21 15:18:40 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:27:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,28 @@ void	raycast_renderer(t_data *data)
 		// thickness = TEXTURE_DIM * SCALE / naive_raycaster(data, alpha);
 		if (wall_orient == N)
 		{
-			j = TEXTURE_DIM - impact.x;
+			j = TEXTURE_DIM - remainder(impact.x, TEXTURE_DIM);
 			wall = init_image_xpm(data, data->map->no);
 			draw_pixel_column(data, i, thickness, pov, wall, j);
 			free_img(wall);
 		}
 		if (wall_orient == S)
 		{
-			j = impact.x;
+			j = remainder(impact.x, TEXTURE_DIM);
 			wall = init_image_xpm(data, data->map->so);
 			draw_pixel_column(data, i, thickness, pov, wall, j);
 			free_img(wall);
 		}
 		if (wall_orient == W)
 		{
-			j = impact.y;
+			j = remainder(impact.y, TEXTURE_DIM);
 			wall = init_image_xpm(data, data->map->we);
 			draw_pixel_column(data, i, thickness, pov, wall, j);
 			free_img(wall);
 		}
 		if (wall_orient == E)
 		{
-			j = TEXTURE_DIM - impact.y;
+			j = TEXTURE_DIM - remainder(impact.y, TEXTURE_DIM);
 			wall = init_image_xpm(data, data->map->ea);
 			draw_pixel_column(data, i, thickness, pov, wall, j);
 			free_img(wall);

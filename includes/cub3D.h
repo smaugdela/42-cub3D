@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/21 14:26:53 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:33:31 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 # define WIDTH	1024
 # define HEIGHT	576
 /* Minimap square dimension in pixels */
-# define MM_PIXEL 64.0
+# define MM_PIXEL 100.0
 /* Texture dimension in pixels */
-# define TEXTURE_DIM 64.0
+# define TEXTURE_DIM 100.0
 /* Scaling up wall's height (thickness) (TEXTURE_DIM * SCALE ~= 27000) */
 # define SCALE 790.0
 /* Movement Speed of the player */

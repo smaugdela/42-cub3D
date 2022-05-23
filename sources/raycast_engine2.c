@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/21 14:19:01 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:31:22 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,13 @@ double	opti_rc(t_data *data, double angle,
 	// draw_line(data, angle, dist_y, 0x00ff00);
 	if (dist_x < dist_y)
 	{
-		*intersect = inter_x;
+		intersect->x = inter_x.x;
+		intersect->y = inter_x.y;
 		*wall_orient = orient_x;
 		return (dist_x);
 	}
-	*intersect = inter_y;
+	intersect->x = inter_y.x;
+	intersect->y = inter_y.y;
 	*wall_orient = orient_y;
 	return (dist_y);
 }
