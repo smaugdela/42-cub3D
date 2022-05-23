@@ -6,25 +6,11 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:28:10 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/21 14:09:58 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:21:41 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-/*
-cub2D, minimap renderer
-*/
-// int	loop_handler(t_data *data)
-// {
-// 	if (data->render)
-// 	{
-// 		build_minimap(data);
-// 		player_render(data);
-// 		data->render = 0;
-// 	}
-// 	return (0);
-// }
 
 /* cub3D, game renderer */
 int	loop_handler(t_data *data)
@@ -32,8 +18,11 @@ int	loop_handler(t_data *data)
 	if (data->render)
 	{
 		raycast_renderer(data);
+		mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
+			data->pov->img_ptr, 0, 0);
 		data->render = 0;
 	}
+	move_player(data);
 	return (0);
 }
 
@@ -45,62 +34,38 @@ int	red_cross_handler(t_data *data)
 	return (0);
 }
 
-int	keys_handler(int key_sym, t_data *data)
+int	keys_press(int key_sym, t_data *data)
 {
 	if (key_sym == XK_Escape)
 		red_cross_handler(data);
-	else if (key_sym == XK_Up)
-		move_forward(data);
-	else if (key_sym == XK_Right)
-		move_right(data);
-	else if (key_sym == XK_Left)
-		move_left(data);
-	else if (key_sym == XK_Down)
-		move_back(data);
-	else if (key_sym == XK_a)
-		data->player_orient = remainder(data->player_orient + ROT_SPEED,
-				2 * M_PI);
+	else if (key_sym == XK_w)
+		data->forward = 1;
 	else if (key_sym == XK_d)
-		data->player_orient = remainder(data->player_orient - ROT_SPEED,
-				2 * M_PI);
-	else
-		return (0);
-	data->render = 1;
+		data->right = 1;
+	else if (key_sym == XK_a)
+		data->left = 1;
+	else if (key_sym == XK_s)
+		data->backward = 1;
+	else if (key_sym == XK_Left)
+		data->rot_left = 1;
+	else if (key_sym == XK_Right)
+		data->rot_right = 1;
 	return (0);
 }
 
-/*
-int	pointer_handler(int x, int y, t_image *image)
+int	keys_release(int key_sym, t_data *data)
 {
-	if (image->fractal.draw_ft == &draw_julia
-		&& x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
-	{
-		image->fractal.param.re = x
-			* ((image->fractal.max_re - image->fractal.min_re)
-				/ (WIN_W)) + image->fractal.min_re;
-		image->fractal.param.im = (-1 * y)
-			* ((image->fractal.max_im - image->fractal.min_im)
-				/ (WIN_H)) + image->fractal.max_im;
-		image->fractal.render = TRUE;
-	}
+	if (key_sym == XK_w)
+		data->forward = 0;
+	else if (key_sym == XK_d)
+		data->right = 0;
+	else if (key_sym == XK_a)
+		data->left = 0;
+	else if (key_sym == XK_s)
+		data->backward = 0;
+	else if (key_sym == XK_Left)
+		data->rot_left = 0;
+	else if (key_sym == XK_Right)
+		data->rot_right = 0;
 	return (0);
 }
-
-int	button_handler(int button, int x, int y, t_image *image)
-{
-	(void)x;
-	(void)y;
-	if (button == 5)
-		zoom_out(image);
-	else if (button == 4)
-		zoom_in(image);
-	return (0);
-}
-
-Button value:
-	clic gauche = 1
-	clic droit = 3
-	clic molette = 2
-	molette /\ = 4
-	molette \/ = 5
-*/

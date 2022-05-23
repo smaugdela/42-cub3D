@@ -6,7 +6,7 @@
 #    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/20 17:48:24 by smagdela         ###   ########.fr        #
+#    Updated: 2022/05/23 15:47:43 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,13 @@ LIBS	:=	${LIBFT} ${MLX}
 
 #	Source Files
 
-SRCS	=	main.c			error_messages.c \
-			get_next_line.c get_next_line_utils.c \
-			open_file.c 	map_init.c \
-			textures.c		textures_2.c cube_map.c cube_map2.c \
+SRCS	=	main.c				error_messages.c \
+			get_next_line.c 	get_next_line_utils.c \
+			open_file.c 		map_init.c \
+			textures.c			textures_2.c 		cube_map.c			cube_map2.c \
 			free_and_destroy.c	parsing_utils.c \
-			events.c 		player_moves.c	cub2d.c	draw.c \
-			rc_utils.c		raycast_engine.c	raycast_engine2.c \
+			events.c 			player_moves.c		player_moves2.c		draw.c \
+			rc_utils.c			raycast_engine.c	raycast_engine2.c	texturizer.c \
 
 BONUS 	=	
 

@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/23 09:33:31 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:24:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@
 /* Default window resolution */
 # define WIDTH	1024
 # define HEIGHT	576
+// # define WIDTH	1280
+// # define HEIGHT	720
 /* Minimap square dimension in pixels */
 # define MM_PIXEL 100.0
 /* Texture dimension in pixels */
 # define TEXTURE_DIM 100.0
-/* Scaling up wall's height (thickness) (TEXTURE_DIM * SCALE ~= 27000) */
-# define SCALE 790.0
-/* Movement Speed of the player */
-# define SPEED 6.0
-/* Rotation speed of the player */
-# define ROT_SPEED 0.09
-/* Field Of View */
+/* Movement Speed of the player (pixel per frame) */
+# define SPEED 7.0
+/* Rotation speed of the player (rad per frame) */
+# define ROT_SPEED 0.08
+/* Field Of View (degrees) */
 # define FOV 70.0
 
 typedef enum e_weathercock {
@@ -81,6 +81,10 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
+	t_img			*text_no;
+	t_img			*text_so;
+	t_img			*text_we;
+	t_img			*text_ea;
 	int				c_color;
 	int				f_color;
 	char			**cube_map;
@@ -91,10 +95,16 @@ typedef struct s_map
 typedef struct s_data {
 	t_win	*win;
 	t_map	*map;
+	t_img	*pov;
 	int		player_x;
 	int		player_y;
 	double	player_orient;
-	int		player_elev;
+	bool	forward;
+	bool	backward;
+	bool	left;
+	bool	right;
+	bool	rot_left;
+	bool	rot_right;
 	bool	render;
 }	t_data;
 
@@ -132,6 +142,7 @@ bool	open_fd(char *file);
 /* map_init.c */
 
 t_map	init_struct_map(char *file);
+void	init_data_const(t_data *data);
 bool	global_checker(char *file, t_map *map);
 
 /* parsing_utils.c */
@@ -143,13 +154,18 @@ bool	checkint(char *nb);
 
 int		loop_handler(t_data *data);
 int		red_cross_handler(t_data *data);
-int		keys_handler(int key_sym, t_data *data);
+int		keys_press(int key_sym, t_data *data);
+int		keys_release(int key_sym, t_data *data);
 
-/* player_moves.c */
+/* player_moves.c & player_moves2.c */
+
 void	move_forward(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
 void	move_back(t_data *data);
+void	rot_left(t_data *data);
+void	rot_right(t_data *data);
+void	move_player(t_data *data);
 
 /* draw.c */
 
@@ -159,28 +175,23 @@ t_img	*init_image(t_data *data, int width, int height);
 int		get_pixel_color(int x, int y, t_img *image);
 t_img	*init_image_xpm(t_data *data, char *filename);
 
-/* cub2d.c */
+/* raycast_engine.c & raycast_engine2.c */
 
-void	build_minimap(t_data *data);
-void	player_render(t_data *data);
-void	draw_line(t_data *data, double angle, double dist, int color);
+void	raycast_renderer(t_data *data);
+double	opti_rc(t_data *data, double angle,
+			t_point *intersect, t_weathercock *wall_orient);
+
+/* texturizer.c */
+
+void	texturize_no(t_data *data, int i, int thickness, t_point *impact);
+void	texturize_so(t_data *data, int i, int thickness, t_point *impact);
+void	texturize_we(t_data *data, int i, int thickness, t_point *impact);
+void	texturize_ea(t_data *data, int i, int thickness, t_point *impact);
 
 /* rc_utils.c */
 
 bool	is_wall(t_data *data, double x, double y);
 double	remainder(double value, double modulus);
-double	texturer_raycaster(t_data *data, double angle,
-			t_point *intersect, t_weathercock *wall_orient);
-double	naive_raycaster(t_data *data, double angle);
 bool	in_map(t_data *data, double x, double y);
-
-/* raycast_engine.c */
-
-void	raycast_renderer(t_data *data);
-
-/* raycast_engine2.c */
-
-double	opti_rc(t_data *data, double angle,
-		t_point *intersect, t_weathercock *wall_orient);
 
 #endif

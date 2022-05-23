@@ -6,94 +6,46 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/23 09:27:04 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:19:47 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	draw_pixel_column(t_data *data, int i, double thickness,
-	t_img *pov, t_img *texture, int column)
+static void	cast_a_ray(t_data *data, double alpha, int i)
 {
-	int		y;
-	int		color;
-	double	row;
-	double	step;
+	int				thickness;
+	t_point			impact;
+	t_weathercock	wall_orient;
 
-	y = 0;
-	row = 0;
-	if (thickness == 0)
-		step = 0;
-	else
-		step = TEXTURE_DIM / (double)thickness;
-	while (y < (HEIGHT - thickness) / 2 && y < HEIGHT)
-		draw_pixel(pov, i, y++, data->map->c_color);
-	while (y < (HEIGHT + thickness) / 2 && y < HEIGHT)
-	{
-		color = get_pixel_color(column, trunc(row), texture);
-		row += step;
-		draw_pixel(pov, i, y++, color);
-	}
-	while (y < HEIGHT)
-		draw_pixel(pov, i, y++, data->map->f_color);
+	impact.x = 0;
+	impact.y = 0;
+	wall_orient = N;
+	thickness = floor(TEXTURE_DIM * HEIGHT / (opti_rc(data, alpha, &impact,
+					&wall_orient) * cos(alpha - data->player_orient)));
+	if (wall_orient == N)
+		texturize_no(data, i, thickness, &impact);
+	else if (wall_orient == S)
+		texturize_so(data, i, thickness, &impact);
+	else if (wall_orient == W)
+		texturize_we(data, i, thickness, &impact);
+	else if (wall_orient == E)
+		texturize_ea(data, i, thickness, &impact);
 }
 
 void	raycast_renderer(t_data *data)
 {
-	t_img			*pov;
-	t_img			*wall;
-	double 			alpha;
-	double			delta_alpha;
 	int				i;
-	int				j;
-	double			thickness;
-	t_weathercock	wall_orient;
-	t_point			impact;
+	double			alpha;
+	double			delta_alpha;
 
-	pov = init_image(data, WIDTH, HEIGHT);
+	i = 0;
 	alpha = data->player_orient + (FOV * M_PI / 360);
 	delta_alpha = (FOV * M_PI / 180) / WIDTH;
-	i = 0;
-	wall_orient = N;
 	while (i < WIDTH)
 	{
-		thickness = TEXTURE_DIM * SCALE / (opti_rc(data, 
-					alpha, &impact, &wall_orient) * cos(alpha - data->player_orient));
-		// thickness = TEXTURE_DIM * SCALE / texturer_raycaster(data, 
-		// 		alpha, &impact, &wall_orient);
-		// thickness = TEXTURE_DIM * SCALE / naive_raycaster(data, alpha);
-		if (wall_orient == N)
-		{
-			j = TEXTURE_DIM - remainder(impact.x, TEXTURE_DIM);
-			wall = init_image_xpm(data, data->map->no);
-			draw_pixel_column(data, i, thickness, pov, wall, j);
-			free_img(wall);
-		}
-		if (wall_orient == S)
-		{
-			j = remainder(impact.x, TEXTURE_DIM);
-			wall = init_image_xpm(data, data->map->so);
-			draw_pixel_column(data, i, thickness, pov, wall, j);
-			free_img(wall);
-		}
-		if (wall_orient == W)
-		{
-			j = remainder(impact.y, TEXTURE_DIM);
-			wall = init_image_xpm(data, data->map->we);
-			draw_pixel_column(data, i, thickness, pov, wall, j);
-			free_img(wall);
-		}
-		if (wall_orient == E)
-		{
-			j = TEXTURE_DIM - remainder(impact.y, TEXTURE_DIM);
-			wall = init_image_xpm(data, data->map->ea);
-			draw_pixel_column(data, i, thickness, pov, wall, j);
-			free_img(wall);
-		}
+		cast_a_ray(data, alpha, i);
 		alpha = remainder(alpha - delta_alpha, 2 * M_PI);
 		++i;
 	}
-	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
-		pov->img_ptr, 0, 0);
-	free_img(pov);
 }

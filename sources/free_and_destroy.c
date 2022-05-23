@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:33:02 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/17 14:28:00 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:03:49 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	free_mappy(t_map *map)
 		free(map->ea);
 	if (map->we)
 		free(map->we);
+	free_img(map->text_no);
+	free_img(map->text_so);
+	free_img(map->text_we);
+	free_img(map->text_ea);
 	if (map->cube_map)
 		free_split(map->cube_map);
 	return (1);
@@ -49,7 +53,7 @@ int	free_mappy(t_map *map)
 
 int	free_img(t_img *img)
 {
-	if (img && img->img_ptr)
+	if (img && img->img_ptr && img->win)
 		mlx_destroy_image(img->win->mlx_ptr, img->img_ptr);
 	if (img)
 	{
@@ -61,6 +65,10 @@ int	free_img(t_img *img)
 
 int	free_n_destroy(t_data *data)
 {
+	if (data->pov)
+		free_img(data->pov);
+	if (data->map)
+		free_mappy(data->map);
 	if (data->win && data->win->win_ptr)
 	{
 		mlx_destroy_window(data->win->mlx_ptr, data->win->win_ptr);
@@ -74,7 +82,5 @@ int	free_n_destroy(t_data *data)
 	}
 	if (data->win)
 		data->win = NULL;
-	if (data->map)
-		free_mappy(data->map);
 	return (1);
 }
