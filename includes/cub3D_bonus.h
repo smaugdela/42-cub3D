@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 15:44:37 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:41:45 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,5 @@ bool	in_map(t_data *data, double x, double y);
 
 int		pointer_handler(int x, int y, t_data *data);
 int		button_handler(int button, int x, int y, t_data *data);
-
 
 #endif
