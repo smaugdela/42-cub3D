@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:46:34 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:23:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 /* Rotation speed of the player (rad per frame) */
 # define ROT_SPEED 0.07
 /* Field Of View (degrees) */
-# define FOV 70.0
+# define FOV 180.0
 
 typedef enum e_weathercock {
 	N,
