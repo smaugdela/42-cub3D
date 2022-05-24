@@ -1,4 +1,4 @@
-NO assets/textures/textures_mandatory/just_a_wall.xpm
+NO assets/textures/corrupted.xpm
 SO assets/textures/textures_mandatory/titan_in_the_wall.xpm
 WE assets/textures/textures_mandatory/wall_berthhold.xpm
 EA assets/textures/textures_mandatory/wall_maria.xpm
@@ -11,4 +11,3 @@ F 203,178,117
 100101000W01
 100000100001
 111111111111
-

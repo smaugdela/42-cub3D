@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:44:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/23 18:27:30 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:40:01 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,62 +53,6 @@ int	clear_img(t_img *image, int color)
 	mlx_put_image_to_window(image->win->mlx_ptr,
 		image->win->win_ptr, image->img_ptr, 0, 0);
 	return (0);
-}
-
-t_img	*init_image(t_data *data, int width, int height)
-{
-	t_img	*img;
-
-	img = malloc(sizeof(t_img));
-	if (img == NULL || data->win == NULL)
-	{
-		free_n_destroy(data);
-		perror("init_image");
-		exit(-1);
-	}
-	img->win = data->win;
-	img->img_ptr = mlx_new_image(data->win->mlx_ptr, width, height);
-	img->addr = mlx_get_data_addr(img->img_ptr,
-			&img->bpp, &img->size_line, &img->endian);
-	if (img == NULL || img->img_ptr == NULL || img->addr == NULL)
-	{
-		free_img(img);
-		free_n_destroy(data);
-		perror("mlx_new_image");
-		return (NULL);
-	}
-	img->width = width;
-	img->height = height;
-	return (img);
-}
-
-t_img	*init_image_xpm(t_data *data, char *filename)
-{
-	t_img	*img;
-
-	img = malloc(sizeof(t_img));
-	if (img == NULL || data->win == NULL)
-	{
-		free_n_destroy(data);
-		perror("init_image");
-		exit(-1);
-	}
-	img->win = data->win;
-	img->img_ptr = mlx_xpm_file_to_image(data->win->mlx_ptr, filename,
-			&img->width, &img->height);
-	img->addr = mlx_get_data_addr(img->img_ptr,
-			&img->bpp, &img->size_line, &img->endian);
-	if (img == NULL || img->img_ptr == NULL || img->addr == NULL)
-	{
-		free_img(img);
-		free_n_destroy(data);
-		perror("mlx_new_image");
-		return (NULL);
-	}
-	if (img->height != TEXTURE_DIM || img->width != TEXTURE_DIM)
-		printf("\033[0;33mWarning : texture file dimensions different from \
-			Macro TEXTURE_DIM\033[0m\n");
-	return (img);
 }
 
 int	get_pixel_color(int x, int y, t_img *image)

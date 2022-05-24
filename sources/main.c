@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/23 14:57:58 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:25:06 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	init_win(char *win_name, t_win *window, int width, int height)
 	window->mlx_ptr = mlx_init();
 	if (window->mlx_ptr == NULL)
 	{
-		perror("mlx_init");
+		perror("Error\nmlx_init");
 		return (false);
 	}
 	window->win_ptr = mlx_new_window(window->mlx_ptr,
@@ -27,7 +27,7 @@ static bool	init_win(char *win_name, t_win *window, int width, int height)
 		mlx_destroy_display(window->mlx_ptr);
 		free(window->mlx_ptr);
 		window->mlx_ptr = NULL;
-		perror("mlx_new_window");
+		perror("Error\nmlx_new_window");
 		return (false);
 	}
 	return (true);
