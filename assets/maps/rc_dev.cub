@@ -1,7 +1,7 @@
-NO assets/textures/corrupted.xpm
-SO assets/textures/textures_mandatory/titan_in_the_wall.xpm
-WE assets/textures/textures_mandatory/wall_berthhold.xpm
-EA assets/textures/textures_mandatory/wall_maria.xpm
+NO assets/textures/textures_bonus/just_a_wall.xpm
+SO assets/textures/textures_bonus/titan_in_the_wall.xpm
+WE assets/textures/textures_bonus/house.xpm
+EA assets/textures/textures_bonus/wall_maria.xpm
 
 C 0,188,212
 F 203,178,117 
