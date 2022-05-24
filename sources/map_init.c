@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/23 15:25:45 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:23:41 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ t_map	init_struct_map(char *file)
 
 void	init_data_const(t_data *data)
 {
+	data->pov = init_image(data, WIDTH, HEIGHT);
 	data->map->text_no = init_image_xpm(data, data->map->no);
 	data->map->text_so = init_image_xpm(data, data->map->so);
 	data->map->text_we = init_image_xpm(data, data->map->we);
 	data->map->text_ea = init_image_xpm(data, data->map->ea);
-	data->pov = init_image(data, WIDTH, HEIGHT);
 	data->player_x = data->map->player_spawn_x * TEXTURE_DIM + TEXTURE_DIM / 2;
 	data->player_y = data->map->player_spawn_y * TEXTURE_DIM + TEXTURE_DIM / 2;
 	data->player_orient = M_PI_2 - (data->map->player_spawn_orient * M_PI_2);
