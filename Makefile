@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
+#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/23 15:47:43 by smagdela         ###   ########.fr        #
+#    Updated: 2022/05/24 11:03:00 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,13 @@ SRCS	=	main.c				error_messages.c \
 			events.c 			player_moves.c		player_moves2.c		draw.c \
 			rc_utils.c			raycast_engine.c	raycast_engine2.c	texturizer.c \
 
-BONUS 	=	
+BONUS 	=	main_bonus.c				error_messages_bonus.c \
+			get_next_line_bonus.c 	get_next_line_utils_bonus.c \
+			open_file_bonus.c 		map_init_bonus.c \
+			textures_bonus.c			textures_2_bonus.c 		cube_map_bonus.c			cube_map2_bonus.c \
+			free_and_destroy_bonus.c	parsing_utils_bonus.c \
+			events_bonus.c 			player_moves_bonus.c		player_moves2_bonus.c		draw_bonus.c \
+			rc_utils_bonus.c			raycast_engine_bonus.c	raycast_engine2_bonus.c	texturizer_bonus.c \
 
 #	Object Files
 
