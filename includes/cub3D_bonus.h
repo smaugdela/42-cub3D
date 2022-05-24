@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:58:04 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:11:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_map
 	t_img			*text_so;
 	t_img			*text_we;
 	t_img			*text_ea;
+	t_img			*text_arme1;
+	t_img			*text_arme2;
 	int				c_color;
 	int				f_color;
 	char			**cube_map;

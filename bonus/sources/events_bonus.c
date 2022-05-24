@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:30:47 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:27:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 int	loop_handler(t_data *data)
 {
+	int	anim;
+
+	anim = 1;
 	if (data->render)
 	{
 		raycast_renderer(data);
 		mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 			data->pov->img_ptr, 0, 0);
 		data->render = 0;
+		if (anim == 1)
+		{
+			our_put_image_to_window(data);
+			anim = 2;
+		}
+		if (anim == 2)
+		{
+			our_put_image_to_window(data);
+			anim = 1;
+		}
 	}
 	move_player(data);
 	return (0);
