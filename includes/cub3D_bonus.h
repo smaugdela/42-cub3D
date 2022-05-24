@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:00:13 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:58:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
+# define __USE_MISC 1
+# define _XOPEN_SOURCE 700
 # include "libft.h"
 # include "mlx.h"
 # include "get_next_line.h"
@@ -20,7 +22,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
-# define __USE_MISC 1
 # include <math.h>
 # include <float.h>
 # include <sys/types.h>
@@ -138,6 +139,8 @@ int		free_img(t_img *img);
 /* open_file.c */
 
 bool	open_fd(char *file);
+t_img	*init_image_xpm(t_data *data, char *filename);
+t_img	*init_image(t_data *data, int width, int height);
 
 /* map_init.c */
 
@@ -171,9 +174,7 @@ void	move_player(t_data *data);
 
 void	draw_pixel(t_img *image, int x, int y, int color);
 int		clear_img(t_img *image, int color);
-t_img	*init_image(t_data *data, int width, int height);
 int		get_pixel_color(int x, int y, t_img *image);
-t_img	*init_image_xpm(t_data *data, char *filename);
 
 /* raycast_engine.c & raycast_engine2.c */
 
