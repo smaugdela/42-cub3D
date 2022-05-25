@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 16:41:45 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:00:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,8 @@
 # define ROT_SPEED 0.07
 /* Field Of View (degrees) */
 # define FOV 70.0
-
-typedef enum e_weathercock {
-	N,
-	E,
-	S,
-	W
-}	t_weathercock;
+/* Map Parsing characters */
+# define CHARMAP "01234HDMS"
 
 /* Data structures */
 
@@ -76,18 +71,19 @@ typedef struct s_map
 {
 	int				player_spawn_x;
 	int				player_spawn_y;
-	t_weathercock	player_spawn_orient;
-	char			*textures[7];
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	t_img			*text_no;
-	t_img			*text_so;
-	t_img			*text_we;
-	t_img			*text_ea;
-	t_img			*text_arme1;
-	t_img			*text_arme2;
+	char			*textures[15];
+	t_img			*w1;
+	t_img			*w2;
+	t_img			*w3;
+	t_img			*w4;
+	t_img			*house;
+	t_img			*door;
+	t_img			*mob1;
+	t_img			*mob2;
+	t_img			*arme1;
+	t_img			*arme2;
+	t_img			*attack1;
+	t_img			*attack2;
 	int				c_color;
 	int				f_color;
 	char			**cube_map;
@@ -118,9 +114,10 @@ typedef struct s_point {
 
 /* textures.c & textures_2.c */
 
-bool	init_textures(int fd, t_map *map);
+bool	init_textures(int fd, t_map *map, t_data *data);
 bool	init_weathercock(t_map *map, int i, int orientation);
 bool	init_color(t_map *map, int i, char color);
+bool	texture_file_check(t_img **img, t_map *map, int i, t_data *data);
 
 /* cube_map.c && cube_map2.c */
 
@@ -146,14 +143,14 @@ t_img	*init_image(t_data *data, int width, int height);
 
 /* map_init.c */
 
-t_map	init_struct_map(char *file);
+t_map	init_struct_map(char *file, t_data *data);
 void	init_data_const(t_data *data);
-bool	global_checker(char *file, t_map *map);
 
 /* parsing_utils.c */
 
 bool	str_is_digit(char *str);
 bool	checkint(char *nb);
+bool	is_in_charset(char c, char *charset);
 
 /* events.c */
 
@@ -183,18 +180,16 @@ int		get_pixel_color(int x, int y, t_img *image);
 
 void	raycast_renderer(t_data *data);
 double	opti_rc(t_data *data, double angle,
-			t_point *intersect, t_weathercock *wall_orient);
+			t_point *intersect, char *wall_type);
 
 /* texturizer.c */
 
-void	texturize_no(t_data *data, int i, int thickness, t_point *impact);
-void	texturize_so(t_data *data, int i, int thickness, t_point *impact);
-void	texturize_we(t_data *data, int i, int thickness, t_point *impact);
-void	texturize_ea(t_data *data, int i, int thickness, t_point *impact);
+void	texturizer(t_data *data, int x, int thickness, double tx,
+	t_img *texture);
 
 /* rc_utils.c */
 
-bool	is_wall(t_data *data, double x, double y);
+bool	is_wall(t_data *data, double x, double y, char *wall_type);
 double	remainder(double value, double modulus);
 bool	in_map(t_data *data, double x, double y);
 

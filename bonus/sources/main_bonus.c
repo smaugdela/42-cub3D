@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 15:44:48 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:45:25 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,6 @@ static void	init_events(t_data *data)
 		&button_handler, data);
 }
 
-int	main(int ac, char **av)
-{
-	t_data	data;
-	t_map	mappy;
-	t_win	window;
-
-	if (ac == 2)
-	{
-		mappy = init_struct_map(av[1]);
-		data.map = &mappy;
-		if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
-			return (free_mappy(data.map) * -1);
-		data.win = &window;
-		init_events(&data);
-		init_data_const(&data);
-		mlx_loop(data.win->mlx_ptr);
-		free_n_destroy(&data);
-		return (0);
-	}
-	else
-	{
-		error_messages(7);
-		return (-1);
-	}
-	return (0);
-}
-
 /*
 static void	print_map(t_map *map)
 {
@@ -98,3 +71,34 @@ static void	print_map(t_map *map)
 		map->max_x, map->max_y);
 }
 */
+
+int	main(int ac, char **av)
+{
+	t_data	data;
+	t_map	mappy;
+	t_win	window;
+
+	if (ac == 2)
+	{
+		if (init_win("cub3D", &window, WIDTH, HEIGHT) == false)
+			return (-1);
+		data.win = &window;
+		mappy = init_struct_map(av[1], &data);
+		data.map = &mappy;
+		// print_map(&mappy);
+		init_events(&data);
+		init_data_const(&data);
+		mlx_loop(data.win->mlx_ptr);
+		free_n_destroy(&data);
+		return (0);
+	}
+	else
+	{
+		error_messages(7);
+		return (-1);
+	}
+	return (0);
+}
+
+
+

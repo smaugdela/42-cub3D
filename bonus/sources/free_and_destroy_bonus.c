@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_destroy_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:33:02 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:01:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:20:58 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ int	free_mappy(t_map *map)
 		return (1);
 	while (map->textures[++i])
 		free(map->textures[i]);
-	if (map->no)
-		free(map->no);
-	if (map->so)
-		free(map->so);
-	if (map->ea)
-		free(map->ea);
-	if (map->we)
-		free(map->we);
-	free_img(map->text_no);
-	free_img(map->text_so);
-	free_img(map->text_we);
-	free_img(map->text_ea);
+	free_img(map->w1);
+	free_img(map->w2);
+	free_img(map->w3);
+	free_img(map->w4);
+	free_img(map->house);
+	free_img(map->door);
+	free_img(map->mob1);
+	free_img(map->mob2);
+	free_img(map->arme1);
+	free_img(map->arme2);
+	free_img(map->attack1);
+	free_img(map->attack2);
 	if (map->cube_map)
 		free_split(map->cube_map);
 	return (1);

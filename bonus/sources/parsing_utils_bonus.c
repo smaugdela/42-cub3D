@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:46:35 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/24 11:01:43 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:11:29 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ bool	checkint(char *nb)
 	}
 	else
 		return (true);
+}
+
+bool	is_in_charset(char c, char *charset)
+{
+	int	i;
+
+	if (c == '\0' || charset == NULL)
+		return (false);
+	i = 0;
+	while (charset[i])
+	{
+		if (charset[i] == c)
+			return (true);
+		++i;
+	}
+	return (false);
 }

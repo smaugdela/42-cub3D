@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/24 11:00:52 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:17:54 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,13 @@ static bool	conditions_map(int i, int j, t_map *map, int condition)
 {
 	if (condition == 1)
 	{
-		if (map->cube_map[i][j] != '1' && map->cube_map[i][j] != '0'
-				&& map->cube_map[i][j] != 'N' && map->cube_map[i][j] != 'E'
-				&& map->cube_map[i][j] != 'S' && map->cube_map[i][j] != 'W'
-				&& map->cube_map[i][j] != ' ')
+		if (is_in_charset(map->cube_map[i][j], CHARMAP) == false)
 			return (false);
 	}
 	if (condition == 2)
 	{
-		if ((map->cube_map[i][j] == '0' || map->cube_map[i][j] == 'N'
-				|| map->cube_map[i][j] == 'S' || map->cube_map[i][j] == 'W'
-				|| map->cube_map[i][j] == 'E') && !is_zero_sauronded(map, i, j))
-			return (false);
-	}
-	if (condition == 3)
-	{
-		if (map->cube_map[i][j] == 'N' || map->cube_map[i][j] == 'E'
-				|| map->cube_map[i][j] == 'S' || map->cube_map[i][j] == 'W')
+		if ((map->cube_map[i][j] == '0' || map->cube_map[i][j] == 'S'
+			|| map->cube_map[i][j] == 'M') && !is_zero_sauronded(map, i, j))
 			return (false);
 	}
 	return (true);
@@ -57,14 +47,6 @@ static void	init_player_pos_n_orient(t_map *map, int i, int j)
 
 	map->player_spawn_x = j;
 	map->player_spawn_y = i;
-	if (map->cube_map[i][j] == 'N')
-		map->player_spawn_orient = N;
-	else if (map->cube_map[i][j] == 'E')
-		map->player_spawn_orient = E;
-	else if (map->cube_map[i][j] == 'S')
-		map->player_spawn_orient = S;
-	else if (map->cube_map[i][j] == 'W')
-		map->player_spawn_orient = W;
 	y = 0;
 	x = 0;
 	while (map->cube_map[y])
@@ -94,7 +76,7 @@ static bool	is_map_valid(t_map *map)
 				return (error_messages(6));
 			else if (conditions_map(i, j, map, 2) == false)
 				return (error_messages(1));
-			else if (conditions_map(i, j, map, 3) == false)
+			else if (map->cube_map[i][j] == 'S')
 			{
 				if (spawn != 0)
 					return (error_messages(3));

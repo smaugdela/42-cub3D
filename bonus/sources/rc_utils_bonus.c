@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rc_utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:33:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:01:57 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:32:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ bool	in_map(t_data *data, double x, double y)
 
 	i = trunc(x) / TEXTURE_DIM;
 	j = trunc(y) / TEXTURE_DIM;
-	if (i <= 0 || i >= data->map->max_x - 1
-		|| j <= 0 || j >= data->map->max_y - 1)
+	if (i < 0 || i >= data->map->max_x
+		|| j < 0 || j >= data->map->max_y)
 		return (false);
 	return (true);
 }
 
-bool	is_wall(t_data *data, double x, double y)
+bool	is_wall(t_data *data, double x, double y, char *wall_type)
 {
 	int	i;
 	int	j;
@@ -34,9 +34,11 @@ bool	is_wall(t_data *data, double x, double y)
 	j = trunc(y) / TEXTURE_DIM;
 	if (in_map(data, x, y) == false)
 		return (true);
-	if (data->map->cube_map && data->map->cube_map[j]
-		&& data->map->cube_map[j][i] && data->map->cube_map[j][i] == '1')
+	if (is_in_charset(data->map->cube_map[j][i],"1234HD"))
+	{
+		*wall_type = data->map->cube_map[j][i];
 		return (true);
+	}
 	return (false);
 }
 

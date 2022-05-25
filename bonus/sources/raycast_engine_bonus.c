@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 13:41:29 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:11:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,29 @@ static void	cast_a_ray(t_data *data, double alpha, int i)
 {
 	int				thickness;
 	t_point			impact;
-	t_weathercock	wall_orient;
+	char			wall_type;
+	t_img			*texture;
 
-	impact.x = 0;
-	impact.y = 0;
-	wall_orient = N;
+	impact.x = DBL_MAX;
+	impact.y = DBL_MAX;
+	wall_type = '1';
+	texture = data->map->w1;
 	thickness = floor(TEXTURE_DIM * HEIGHT / (opti_rc(data, alpha, &impact,
-					&wall_orient) * cos(alpha - data->player_orient)));
-	if (wall_orient == N)
-		texturize_no(data, i, thickness, &impact);
-	else if (wall_orient == S)
-		texturize_so(data, i, thickness, &impact);
-	else if (wall_orient == W)
-		texturize_we(data, i, thickness, &impact);
-	else if (wall_orient == E)
-		texturize_ea(data, i, thickness, &impact);
+					&wall_type) * cos(alpha - data->player_orient)));
+	if (wall_type == '2')
+		texture = data->map->w2;
+	else if (wall_type == '3')
+		texture = data->map->w3;
+	else if (wall_type == '4')
+		texture = data->map->w4;
+	else if (wall_type == 'H')
+		texture = data->map->house;
+	else if (wall_type == 'D')
+		texture = data->map->door;
+	if (impact.x != DBL_MAX)
+		texturizer(data, i, thickness, impact.x, texture);
+	else
+		texturizer(data, i, thickness, impact.y, texture);
 }
 
 void	raycast_renderer(t_data *data)
