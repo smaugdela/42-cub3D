@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:01:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:44:48 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static void	init_events(t_data *data)
 	mlx_hook(data->win->win_ptr, KeyPress, KeyPressMask, &keys_press, data);
 	mlx_hook(data->win->win_ptr, KeyRelease, KeyReleaseMask,
 		&keys_release, data);
+	mlx_hook(data->win->win_ptr, MotionNotify, PointerMotionMask,
+		&pointer_handler, data);
+	mlx_mouse_hide(data->win->mlx_ptr, data->win->win_ptr);
+	mlx_hook(data->win->win_ptr, ButtonPress, ButtonPressMask,
+		&button_handler, data);
 }
 
 int	main(int ac, char **av)

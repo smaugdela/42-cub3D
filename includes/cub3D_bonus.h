@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 16:11:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:41:45 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,10 @@ void	move_forward(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
 void	move_back(t_data *data);
-void	rot_left(t_data *data);
-void	rot_right(t_data *data);
+void	rot_left(t_data *data, double rot_speed);
+void	rot_right(t_data *data, double rot_speed);
 void	move_player(t_data *data);
+void	player_attack(t_data *data);
 
 /* draw.c */
 
@@ -196,5 +197,10 @@ void	texturize_ea(t_data *data, int i, int thickness, t_point *impact);
 bool	is_wall(t_data *data, double x, double y);
 double	remainder(double value, double modulus);
 bool	in_map(t_data *data, double x, double y);
+
+/* mouse_events_bonus.c */
+
+int		pointer_handler(int x, int y, t_data *data);
+int		button_handler(int button, int x, int y, t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/24 11:03:00 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/05/24 15:03:29 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,12 @@ BONUS 	=	main_bonus.c				error_messages_bonus.c \
 			free_and_destroy_bonus.c	parsing_utils_bonus.c \
 			events_bonus.c 			player_moves_bonus.c		player_moves2_bonus.c		draw_bonus.c \
 			rc_utils_bonus.c			raycast_engine_bonus.c	raycast_engine2_bonus.c	texturizer_bonus.c \
+			mouse_events_bonus.c \
 
 #	Object Files
 
+DEPS	:=	${addprefix ${OBJD},${SRCS:.c=.d}} ${addprefix ${BONUSOD},${BONUS:.c=.d}}
 OBJS	:=	${addprefix ${OBJD},${SRCS:.c=.o}}
-DEPS	:=	${addprefix ${OBJD},${SRCS:.c=.d}}
 SRCS	:=	${addprefix ${SRCD},${SRCS}}
 BONUSO	:=	${addprefix ${BONUSOD},${BONUS:.c=.o}}
 BONUS	:=	${addprefix ${BONUSSD},${BONUS}}
@@ -134,7 +135,7 @@ ${BONUSOD}%.o:	${BONUSSD}%.c
 	${CC} ${CFLAGS} -c -o $@ -I${INCD} -I${LIBFTD} -I${MLXD} -MMD $<
 
 clean:
-	-rm -rf ${OBJD} ${BONUSOD} ${DEPD}
+	-rm -rf ${OBJD} ${BONUSOD}
 	${LIBSMK} ${LIBFTD} clean
 	${LIBSMK} ${MLXD} clean
 
