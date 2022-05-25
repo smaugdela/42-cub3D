@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/24 11:01:38 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:38:54 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	init_data_const(t_data *data)
 	data->map->text_so = init_image_xpm(data, data->map->so);
 	data->map->text_we = init_image_xpm(data, data->map->we);
 	data->map->text_ea = init_image_xpm(data, data->map->ea);
+	// data->map->text_arme1 = \
+	// 	init_image_xpm(data, "assets/textures/textures_bonus/arme2.xpm");
+	// data->map->text_arme2 = \
+	// 	init_image_xpm(data, "assets/textures/textures_bonus/arme3.xpm");
 	data->pov = init_image(data, WIDTH, HEIGHT);
 	data->player_x = data->map->player_spawn_x * TEXTURE_DIM + TEXTURE_DIM / 2;
 	data->player_y = data->map->player_spawn_y * TEXTURE_DIM + TEXTURE_DIM / 2;

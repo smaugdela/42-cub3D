@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:44:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 11:57:42 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/24 16:27:24 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ int	get_pixel_color(int x, int y, t_img *image)
 		return (-1);
 	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
 	return (*(int *)pixel);
+}
+
+void	our_put_image_to_window(t_data *data)
+{
+	
 }
