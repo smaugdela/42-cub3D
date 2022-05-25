@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 14:00:13 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:20:39 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_data {
 	bool	rot_left;
 	bool	rot_right;
 	bool	render;
+	t_img	*texture;
 }	t_data;
 
 typedef struct s_point {
@@ -169,23 +170,25 @@ void	rot_left(t_data *data, double rot_speed);
 void	rot_right(t_data *data, double rot_speed);
 void	move_player(t_data *data);
 void	player_attack(t_data *data);
+void	player_walk_anim(t_data *data);
 
 /* draw.c */
 
 void	draw_pixel(t_img *image, int x, int y, int color);
 int		clear_img(t_img *image, int color);
 int		get_pixel_color(int x, int y, t_img *image);
+void	our_put_image_on_pov(t_data *data, t_img *texture, int x, int y);
 
 /* raycast_engine.c & raycast_engine2.c */
 
 void	raycast_renderer(t_data *data);
 double	opti_rc(t_data *data, double angle,
 			t_point *intersect, char *wall_type);
+void	opti_rc_init(t_point *inter_x, t_point *inter_y);
 
 /* texturizer.c */
 
-void	texturizer(t_data *data, int x, int thickness, double tx,
-	t_img *texture);
+void	texturizer(t_data *data, int x, int thickness, double tx);
 
 /* rc_utils.c */
 

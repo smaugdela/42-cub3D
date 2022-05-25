@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 18:25:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 16:11:04 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:57:29 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,27 @@ static void	cast_a_ray(t_data *data, double alpha, int i)
 	int				thickness;
 	t_point			impact;
 	char			wall_type;
-	t_img			*texture;
 
 	impact.x = DBL_MAX;
 	impact.y = DBL_MAX;
 	wall_type = '1';
-	texture = data->map->w1;
+	data->texture = data->map->w1;
 	thickness = floor(TEXTURE_DIM * HEIGHT / (opti_rc(data, alpha, &impact,
 					&wall_type) * cos(alpha - data->player_orient)));
 	if (wall_type == '2')
-		texture = data->map->w2;
+		data->texture = data->map->w2;
 	else if (wall_type == '3')
-		texture = data->map->w3;
+		data->texture = data->map->w3;
 	else if (wall_type == '4')
-		texture = data->map->w4;
+		data->texture = data->map->w4;
 	else if (wall_type == 'H')
-		texture = data->map->house;
+		data->texture = data->map->house;
 	else if (wall_type == 'D')
-		texture = data->map->door;
+		data->texture = data->map->door;
 	if (impact.x != DBL_MAX)
-		texturizer(data, i, thickness, impact.x, texture);
+		texturizer(data, i, thickness, impact.x);
 	else
-		texturizer(data, i, thickness, impact.y, texture);
+		texturizer(data, i, thickness, impact.y);
 }
 
 void	raycast_renderer(t_data *data)

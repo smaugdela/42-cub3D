@@ -6,12 +6,11 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:17:37 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/25 13:06:09 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:13:30 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
-
 
 static bool	open_texture_fd(char *file)
 {

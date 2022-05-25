@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 14:45:25 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:11:12 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	main(int ac, char **av)
 		data.win = &window;
 		mappy = init_struct_map(av[1], &data);
 		data.map = &mappy;
-		// print_map(&mappy);
 		init_events(&data);
 		init_data_const(&data);
 		mlx_loop(data.win->mlx_ptr);
@@ -99,6 +98,3 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
-
-
-

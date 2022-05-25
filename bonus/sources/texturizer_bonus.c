@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 15:42:34 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 13:57:36 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:21:04 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 // 		draw_pixel(data->pov, x, y++, data->map->f_color);
 // }
 
-void	texturizer(t_data *data, int x, int thickness, double tx, t_img *texture)
+void	texturizer(t_data *data, int x, int thickness, double tx)
 {
 	int		y;
 	int		color;
@@ -60,7 +60,7 @@ void	texturizer(t_data *data, int x, int thickness, double tx, t_img *texture)
 		draw_pixel(data->pov, x, y++, data->map->c_color);
 	while (y < (HEIGHT + thickness) / 2 && ty < TEXTURE_DIM && y < HEIGHT)
 	{
-		color = get_pixel_color(floor(tx), floor(ty), texture);
+		color = get_pixel_color(floor(tx), floor(ty), data->texture);
 		draw_pixel(data->pov, x, y++, color);
 		ty += ty_step;
 	}

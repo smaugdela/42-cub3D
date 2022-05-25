@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 10:44:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 14:10:30 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:45:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,32 @@ int	get_pixel_color(int x, int y, t_img *image)
 	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
 	return (*(int *)pixel);
 }
-/*
-void	our_put_image_to_window(t_data *data)
+
+void	our_put_image_on_pov(t_data *data, t_img *texture, int x, int y)
 {
-	
+	int		color;
+	double	tx;
+	double	ty;
+	double	step;
+	int		start_y;
+
+	start_y = y;
+	step = (double)texture->height / (HEIGHT / 2);
+	tx = 0;
+	while (x >= 0 && x < WIDTH && tx < texture->width)
+	{
+		y = start_y;
+		ty = 0;
+		while (y >= 0 && y < HEIGHT && ty < texture->height)
+		{
+			color = get_pixel_color(trunc(tx),
+					trunc(ty), texture);
+			if ((color & 0xff000000) == 0)
+				draw_pixel(data->pov, x, y, color);
+			++y;
+			ty += step;
+		}
+		++x;
+		tx += step;
+	}
 }
-*/

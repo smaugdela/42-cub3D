@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 15:28:20 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:30:41 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,7 @@ double	opti_rc(t_data *data, double angle,
 	char	wall_y;
 
 	angle = remainder(angle, 2 * M_PI);
-	inter_x.x = DBL_MAX;
-	inter_x.y = DBL_MAX;
-	inter_y.x = DBL_MAX;
-	inter_y.y = DBL_MAX;
+	opti_rc_init(&inter_x, &inter_y);
 	wall_x = '1';
 	wall_y = '1';
 	dist.x = rc_x(data, angle, &inter_x, &wall_x);

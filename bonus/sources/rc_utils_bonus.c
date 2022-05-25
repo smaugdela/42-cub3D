@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:33:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 15:32:14 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:57:47 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	is_wall(t_data *data, double x, double y, char *wall_type)
 	j = trunc(y) / TEXTURE_DIM;
 	if (in_map(data, x, y) == false)
 		return (true);
-	if (is_in_charset(data->map->cube_map[j][i],"1234HD"))
+	if (is_in_charset(data->map->cube_map[j][i], "1234HD"))
 	{
 		*wall_type = data->map->cube_map[j][i];
 		return (true);
@@ -51,4 +51,12 @@ double	remainder(double value, double modulus)
 	while (value >= modulus)
 		value -= modulus;
 	return (value);
+}
+
+void	opti_rc_init(t_point *inter_x, t_point *inter_y)
+{
+	inter_x->x = DBL_MAX;
+	inter_x->y = DBL_MAX;
+	inter_y->x = DBL_MAX;
+	inter_y->y = DBL_MAX;
 }

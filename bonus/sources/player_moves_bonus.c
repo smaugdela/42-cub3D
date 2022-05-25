@@ -6,13 +6,14 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:01:20 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 14:10:08 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:15:07 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-static bool	check_collisions(t_data *data, int move_x, int move_y, char *wall_type)
+static bool	check_collisions(t_data *data, int move_x, \
+			int move_y, char *wall_type)
 {
 	if (is_wall(data, data->player_x + move_x,
 			data->player_y + move_y, wall_type))
