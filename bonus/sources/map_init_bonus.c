@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/25 18:20:46 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:55:59 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ t_map	init_struct_map(char *file, t_data *data)
 	map.w4 = NULL;
 	map.house = NULL;
 	map.door = NULL;
-	map.mob1 = NULL;
-	map.mob2 = NULL;
 	map.arme1 = NULL;
 	map.arme2 = NULL;
 	map.attack1 = NULL;
@@ -52,9 +50,17 @@ t_map	init_struct_map(char *file, t_data *data)
 	map.cube_map = NULL;
 	map.max_x = 0;
 	map.max_y = 0;
+	map.mob = NULL;
 	if (global_checker(file, &map, data) == false)
 		exit(-1 * free_mappy(&map));
 	return (map);
+}
+
+t_mob	init_mob(t_map *map)
+{
+	t_mob	*mob;
+
+	
 }
 
 void	init_data_const(t_data *data)
@@ -69,6 +75,7 @@ void	init_data_const(t_data *data)
 	data->right = 0;
 	data->rot_left = 0;
 	data->rot_right = 0;
+	data->attack = 0;
 	data->texture = NULL;
 	data->render = 1;
 }

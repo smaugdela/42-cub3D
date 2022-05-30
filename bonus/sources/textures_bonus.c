@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:54:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/25 13:05:41 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:54:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static bool	texture_checker_aux3(t_map *map, int i, t_data *data)
 {
-	if (!ft_strncmp(map->textures[i], "E1 ", 3) && !map->mob1)
-		return (texture_file_check(&map->mob1, map, i, data));
-	else if (!ft_strncmp(map->textures[i], "E2 ", 3) && !map->mob2)
-		return (texture_file_check(&map->mob2, map, i, data));
+	if (!ft_strncmp(map->textures[i], "E1 ", 3) && !map->mob->mob1)
+		return (texture_file_check(&map->mob->mob1, map, i, data));
+	else if (!ft_strncmp(map->textures[i], "E2 ", 3) && !map->mob->mob2)
+		return (texture_file_check(&map->mob->mob2, map, i, data));
+	else if (!ft_strncmp(map->textures[i], "E3 ", 3) && !map->mob->deadmob)
+		return (texture_file_check(&map->mob->deadmob, map, i, data));
 	else if (!ft_strncmp(map->textures[i], "A1 ", 3) && !map->arme1)
 		return (texture_file_check(&map->arme1, map, i, data));
 	else if (!ft_strncmp(map->textures[i], "A2 ", 3) && !map->arme2)

@@ -6,14 +6,15 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 18:20:39 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:59:36 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
-# define __USE_MISC 1
+# define __USE_MISC
+# define _DEFAULT_SOURCE
 # define _XOPEN_SOURCE 700
 # include "libft.h"
 # include "mlx.h"
@@ -67,6 +68,16 @@ typedef struct s_img {
 	int		height;
 }	t_img;
 
+typedef struct s_mob {
+	t_img			*mob1;
+	t_img			*mob2;
+	t_img			*deadmob;
+	int				pos_x;
+	int				pos_y;
+	int				pv;
+	struct s_mob	next;
+}	t_mob;
+
 typedef struct s_map
 {
 	int				player_spawn_x;
@@ -78,8 +89,6 @@ typedef struct s_map
 	t_img			*w4;
 	t_img			*house;
 	t_img			*door;
-	t_img			*mob1;
-	t_img			*mob2;
 	t_img			*arme1;
 	t_img			*arme2;
 	t_img			*attack1;
@@ -89,6 +98,7 @@ typedef struct s_map
 	char			**cube_map;
 	int				max_x;
 	int				max_y;
+	t_mob			*mob;
 }	t_map;
 
 typedef struct s_data {
@@ -104,6 +114,7 @@ typedef struct s_data {
 	bool	right;
 	bool	rot_left;
 	bool	rot_right;
+	bool	attack;
 	bool	render;
 	t_img	*texture;
 }	t_data;

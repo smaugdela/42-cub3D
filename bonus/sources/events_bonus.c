@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 18:20:53 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:32:07 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ int	loop_handler(t_data *data)
 	if (data->render)
 	{
 		raycast_renderer(data);
-		player_walk_anim(data);
+		if (data->attack)
+			player_attack(data);
+		else
+			player_walk_anim(data);
+		mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
+			data->pov->img_ptr, 0, 0);
 		data->render = 0;
 	}
 	move_player(data);
@@ -40,7 +45,7 @@ int	keys_press(int key_sym, t_data *data)
 	if (key_sym == XK_Escape)
 		red_cross_handler(data);
 	else if (key_sym == XK_space)
-		player_attack(data);
+		data->attack = 1;
 	else if (key_sym == XK_w)
 		data->forward = 1;
 	else if (key_sym == XK_d)

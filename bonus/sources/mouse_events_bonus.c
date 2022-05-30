@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:47:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 15:40:44 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:33:02 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	button_handler(int button, int x, int y, t_data *data)
 	(void)x;
 	(void)y;
 	if (button == 1)
-		player_attack(data);
+		data->attack = 1;
 	return (0);
 }
 /*
