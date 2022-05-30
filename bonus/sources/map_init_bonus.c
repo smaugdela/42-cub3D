@@ -6,11 +6,39 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/30 13:55:59 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:18:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+static void	init_mobs(t_map *map)
+{
+	t_mob	*mob;
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < map->max_x)
+	{
+		j = -1;
+		while (++j < map->max_y)
+		{
+			if (map->cube_map[j][i] == 'M')
+			{
+				if (map->mobs == NULL)
+					map->mobs = new_mob(map, i, j);
+				else
+				{
+					mob = map->mobs;
+					while (mob && mob->next)
+						mob = mob->next;
+					mob->next = new_mob(map, i, j);
+				}
+			}
+		}
+	}
+}
 
 static bool	global_checker(char *file, t_map *map, t_data *data)
 {
@@ -25,7 +53,25 @@ static bool	global_checker(char *file, t_map *map, t_data *data)
 		return (error_messages(2));
 	if (init_cube_map(fd, map) == false)
 		return (false);
+	init_mobs(map);
 	return (true);
+}
+
+static void	init_struct_map_aux(t_map *map)
+{
+	map->w1 = NULL;
+	map->w2 = NULL;
+	map->w3 = NULL;
+	map->w4 = NULL;
+	map->house = NULL;
+	map->door = NULL;
+	map->arme1 = NULL;
+	map->arme2 = NULL;
+	map->attack1 = NULL;
+	map->attack2 = NULL;
+	map->mob1 = NULL;
+	map->mob2 = NULL;
+	map->deadmob = NULL;
 }
 
 t_map	init_struct_map(char *file, t_data *data)
@@ -35,32 +81,16 @@ t_map	init_struct_map(char *file, t_data *data)
 	map.player_spawn_x = 0;
 	map.player_spawn_y = 0;
 	map.textures[0] = NULL;
-	map.w1 = NULL;
-	map.w2 = NULL;
-	map.w3 = NULL;
-	map.w4 = NULL;
-	map.house = NULL;
-	map.door = NULL;
-	map.arme1 = NULL;
-	map.arme2 = NULL;
-	map.attack1 = NULL;
-	map.attack2 = NULL;
 	map.c_color = 0;
 	map.f_color = 0;
 	map.cube_map = NULL;
 	map.max_x = 0;
 	map.max_y = 0;
-	map.mob = NULL;
+	map.mobs = NULL;
+	init_struct_map_aux(&map);
 	if (global_checker(file, &map, data) == false)
 		exit(-1 * free_mappy(&map));
 	return (map);
-}
-
-t_mob	init_mob(t_map *map)
-{
-	t_mob	*mob;
-
-	
 }
 
 void	init_data_const(t_data *data)

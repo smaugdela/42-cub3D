@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:33:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 16:57:47 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:59:43 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ bool	is_wall(t_data *data, double x, double y, char *wall_type)
 		return (true);
 	if (is_in_charset(data->map->cube_map[j][i], "1234HD"))
 	{
-		*wall_type = data->map->cube_map[j][i];
+		if (wall_type)
+			*wall_type = data->map->cube_map[j][i];
 		return (true);
 	}
 	return (false);

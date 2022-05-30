@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/30 13:59:36 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:08:02 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ typedef struct s_mob {
 	int				pos_x;
 	int				pos_y;
 	int				pv;
-	struct s_mob	next;
+	struct s_mob	*next;
 }	t_mob;
 
 typedef struct s_map
 {
 	int				player_spawn_x;
 	int				player_spawn_y;
-	char			*textures[15];
+	char			*textures[16];
 	t_img			*w1;
 	t_img			*w2;
 	t_img			*w3;
@@ -93,12 +93,15 @@ typedef struct s_map
 	t_img			*arme2;
 	t_img			*attack1;
 	t_img			*attack2;
+	t_img			*mob1;
+	t_img			*mob2;
+	t_img			*deadmob;
 	int				c_color;
 	int				f_color;
 	char			**cube_map;
 	int				max_x;
 	int				max_y;
-	t_mob			*mob;
+	t_mob			*mobs;
 }	t_map;
 
 typedef struct s_data {
@@ -135,6 +138,7 @@ bool	texture_file_check(t_img **img, t_map *map, int i, t_data *data);
 
 bool	init_cube_map(int fd, t_map *map);
 bool	reduce_init_cube_map(t_map *map, int ret, int fd, char *line);
+t_mob	*new_mob(t_map *map, int x, int y);
 
 /* error_messages.c */
 
@@ -211,5 +215,9 @@ bool	in_map(t_data *data, double x, double y);
 
 int		pointer_handler(int x, int y, t_data *data);
 int		button_handler(int button, int x, int y, t_data *data);
+
+/* bad_guys.c */
+
+void	render_mobs(t_data *data);
 
 #endif

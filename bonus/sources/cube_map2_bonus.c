@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_map2_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:49:25 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/24 11:01:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:14:24 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,24 @@ bool	reduce_init_cube_map(t_map *map, int ret, int fd, char *line)
 	}
 	free(line);
 	return (true);
+}
+
+t_mob	*new_mob(t_map *map, int x, int y)
+{
+	t_mob	*mob;
+
+	mob = malloc(sizeof(t_mob));
+	if (mob == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	mob->mob1 = map->mob1;
+	mob->mob2 = map->mob2;
+	mob->deadmob = map->deadmob;
+	mob->pos_x = x * TEXTURE_DIM + (TEXTURE_DIM / 2);
+	mob->pos_y = y * TEXTURE_DIM + (TEXTURE_DIM / 2);
+	mob->pv = 3;
+	mob->next = NULL;
+	return (mob);
 }

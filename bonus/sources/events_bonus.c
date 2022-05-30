@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/30 13:32:07 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:09:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	loop_handler(t_data *data)
 	if (data->render)
 	{
 		raycast_renderer(data);
+		render_mobs(data);
 		if (data->attack)
 			player_attack(data);
 		else
