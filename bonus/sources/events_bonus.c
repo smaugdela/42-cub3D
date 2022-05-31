@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/31 16:47:30 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:39:38 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	loop_handler(t_data *data)
 {
 	if (data->render)
 	{
+		door_manager(data);
 		raycast_renderer(data);
 		render_mobs(data);
 		if (data->attack)
@@ -35,6 +36,7 @@ int	loop_handler(t_data *data)
 
 int	red_cross_handler(t_data *data)
 {
+	system("killall paplay");
 	free_n_destroy(data);
 	ft_putstr_fd("Closing...\n\033[0;32mThanks for using cub3D!\033[0m\n", 1);
 	exit(EXIT_SUCCESS);
