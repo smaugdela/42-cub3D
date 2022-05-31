@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/30 16:09:13 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:14:37 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ cub3D game loop
 */
 int	loop_handler(t_data *data)
 {
-	if (data->render)
+	if (data->render || data->attack)
 	{
 		raycast_renderer(data);
 		render_mobs(data);
