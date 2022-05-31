@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/30 16:08:02 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/31 12:28:26 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_mob {
 	t_img			*deadmob;
 	int				pos_x;
 	int				pos_y;
+	int				pos_z;
 	int				pv;
 	struct s_mob	*next;
 }	t_mob;
@@ -120,6 +121,7 @@ typedef struct s_data {
 	bool	attack;
 	bool	render;
 	t_img	*texture;
+	double	dist[WIDTH];
 }	t_data;
 
 typedef struct s_point {
