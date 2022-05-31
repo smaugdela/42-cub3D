@@ -1,0 +1,33 @@
+W1 assets/textures/textures_bonus/just_a_wall.xpm
+W2 assets/textures/textures_bonus/titan_in_the_wall.xpm
+W3 assets/textures/textures_bonus/wall_berthhold.xpm
+W4 assets/textures/textures_bonus/wall_maria.xpm
+HO assets/textures/textures_bonus/house.xpm
+DO assets/textures/textures_bonus/door.xpm
+E1 assets/textures/textures_bonus/mob1.xpm
+E2 assets/textures/textures_bonus/mob2.xpm
+E3 assets/textures/textures_bonus/dedmob.xpm
+
+A1 assets/textures/textures_bonus/arme2.xpm
+A2 assets/textures/textures_bonus/arme3.xpm
+A3 assets/textures/textures_bonus/attack1.xpm
+A4 assets/textures/textures_bonus/attack2.xpm
+
+C 0,188,212
+F 203,178,117
+
+11111111111121111111111111111111111111
+1000000000000M0HHH00000HHH00H0HH0000H1
+1000HHHH000HHHH000HHHH000HHH00000H0HH1
+10HHH0000HH000HHH0HHHH000H0H000HH00004
+10000HH0000H0HHHHM0000H00H00000H00H004
+1000000000000000000HH00000000M00000004
+100HHHHHHHHH00HHHH00000HH000000HH00M04
+100H0M00000000000H000HHHH0000H00HH0004
+100H000HHH0000H00H000H0H0H000HH0H00004
+300H000HHH0000000H00H00000HHH0000HHH0D
+100H00000000HH000H0000000H000HH0000004
+1S0H00HHH0000HH00H000000HH0HHHHHHHHHH4
+100HHHHHHHHHHHHHHH00000HHH0000HH000004
+1000000HH00000000000000HHH000000000004
+11111111111111111111211111111111111111

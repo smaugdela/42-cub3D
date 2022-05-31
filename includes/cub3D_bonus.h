@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/30 16:08:02 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:58:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,5 +219,9 @@ int		button_handler(int button, int x, int y, t_data *data);
 /* bad_guys.c */
 
 void	render_mobs(t_data *data);
+
+/* sound */
+
+int		play_sound(char *path, int volume);
 
 #endif
