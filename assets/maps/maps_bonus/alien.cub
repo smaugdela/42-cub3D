@@ -4,25 +4,25 @@ W3 assets/textures/textures_bonus/control.xpm
 W4 assets/textures/textures_bonus/view.xpm
 HO assets/textures/textures_bonus/incubateurs.xpm
 DO assets/textures/textures_bonus/door2.xpm
-E1 assets/textures/textures_bonus/mob1.xpm
-E2 assets/textures/textures_bonus/mob2.xpm
+E1 assets/textures/textures_bonus/xeno.xpm
+E2 assets/textures/textures_bonus/xeno.xpm
 E3 assets/textures/textures_bonus/dedmob.xpm
 
-A1 assets/textures/textures_bonus/arme2.xpm
-A2 assets/textures/textures_bonus/arme3.xpm
-A3 assets/textures/textures_bonus/attack1.xpm
-A4 assets/textures/textures_bonus/attack2.xpm
+A1 assets/textures/textures_bonus/detector1.xpm
+A2 assets/textures/textures_bonus/detector2.xpm
+A3 assets/textures/textures_bonus/zoom_detector.xpm
+A4 assets/textures/textures_bonus/zoom_detector_ping.xpm
 
 C 57,56,59
 F 57,56,59
 
-112111121111112111112111112111111111121111
-1S0000000000000000000000000000001000000001
-11111111111111111111111111101111100HHHH001
+112111121121121121121121121111111111221111
+100000000000000000000000000000001000000001
+1S111111111111111111111111101111100HHHH001
 11111111111111111111111111100000D000000001
 10000000000000000000000000001111100HH0H001
-10000000000111111101111111111111100HH0H001
-11111D111111111111111111111111111111111111
-40000004
-40000004
+100000000001111111M1111111111111100HH0H001
+1111D1111111111111111111111111111111111111
+10000002
+10000002
 44443444
