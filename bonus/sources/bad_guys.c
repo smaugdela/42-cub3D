@@ -6,20 +6,43 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 12:36:42 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:34:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
+static t_mob	*copy_mob(t_mob *mob_orig)
+{
+	t_mob	*mob_copy;
+
+	mob_copy = malloc(sizeof(t_mob));
+	if (mob_copy == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	mob_copy->mob1 = mob_orig->mob1;
+	mob_copy->mob2 = mob_orig->mob2;
+	mob_copy->deadmob = mob_orig->deadmob;
+	mob_copy->pos_x = mob_orig->pos_x;
+	mob_copy->pos_y = mob_orig->pos_y;
+	mob_copy->pv = mob_orig->pv;
+	mob_copy->dist = mob_orig->dist;
+	mob_copy->next = NULL;
+	return (mob_copy);
+}
+
 static void	sort_mobs(t_data *data)
 {
 	t_mob	*mob;
 	t_mob	*mob_far;
+	t_mob	*new_mobs;
 	int		nb;
 
 	nb = 0;
 	mob = data->map->mobs;
+	new_mobs = NULL;
 	while (mob)
 	{
 		mob->dist = pow(data->player_x - mob->pos_x, 2)
@@ -27,6 +50,47 @@ static void	sort_mobs(t_data *data)
 		++nb;
 		mob = mob->next;
 	}
+	while (nb--)
+	{
+		mob = data->map->mobs;
+		mob_far = mob;
+		while (mob)
+		{
+			if (mob->dist > mob_far->dist)
+				mob_far = mob;
+			mob = mob->next;
+		}
+		if (new_mobs == NULL)
+			new_mobs = copy_mob(mob_far);
+		else
+		{
+			mob = new_mobs;
+			while (mob->next)
+				mob = mob->next;
+			mob->next = copy_mob(mob_far);
+		}
+		if (data->map->mobs == mob_far)
+		{
+			mob = data->map->mobs;
+			data->map->mobs = data->map->mobs->next;
+			free(mob);
+		}
+		else
+		{
+			mob = data->map->mobs;
+			while (mob)
+			{
+				if (mob->next == mob_far)
+				{
+					mob->next = mob_far->next;
+					free(mob_far);
+				}
+				mob = mob->next;
+			}
+		}
+	}
+	free_mobs(data->map);
+	data->map->mobs = new_mobs;
 }
 
 static void	put_sprite_to_pov(t_data *data, t_point transform)

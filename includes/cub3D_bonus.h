@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 12:12:54 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:37:42 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 # include <X11/Xlib.h>
 
 /* Default window resolution */
-# define WIDTH	1024
-# define HEIGHT	576
+# define WIDTH	800
+# define HEIGHT	600
+// # define WIDTH	1024
+// # define HEIGHT	576
 // # define WIDTH	1280
 // # define HEIGHT	720
 /* Minimap square dimension in pixels */
@@ -74,7 +76,6 @@ typedef struct s_mob {
 	t_img			*deadmob;
 	int				pos_x;
 	int				pos_y;
-	int				pos_z;
 	int				pv;
 	double			dist;
 	struct s_mob	*next;
@@ -152,6 +153,7 @@ int		free_split(char **tab);
 int		free_mappy(t_map *map);
 int		free_n_destroy(t_data *data);
 int		free_img(t_img *img);
+void	free_mobs(t_map *map);
 
 /* open_file.c */
 
