@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 14:37:42 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:44:21 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@
 # include <X11/Xlib.h>
 
 /* Default window resolution */
-# define WIDTH	800
-# define HEIGHT	600
-// # define WIDTH	1024
-// # define HEIGHT	576
+// # define WIDTH	800
+// # define HEIGHT	600
+# define WIDTH	1024
+# define HEIGHT	576
 // # define WIDTH	1280
 // # define HEIGHT	720
 /* Minimap square dimension in pixels */
@@ -51,6 +51,8 @@
 # define FOV 75.0
 /* Map Parsing characters */
 # define CHARMAP "01234HDMS"
+/* Ennemies PV */
+# define PV 3
 
 /* Data structures */
 

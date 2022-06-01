@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 14:34:40 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:43:53 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,10 @@ static void	put_sprite_to_pov(t_data *data, t_point transform)
 
 void	render_mobs(t_data *data)
 {
-	t_mob	*mob;
-	t_point	transform;
-	t_point	plane;
+	t_mob			*mob;
+	t_point			transform;
+	t_point			plane;
+	static int		anim = 0;
 
 	sort_mobs(data);
 	mob = data->map->mobs;
@@ -173,9 +174,17 @@ void	render_mobs(t_data *data)
 					+ plane.x * (mob->pos_y - data->player_y))
 				/ (plane.x * -sin(data->player_orient)
 					- cos(data->player_orient) * plane.y);
-			data->texture = mob->mob1;
+			if (mob->pv <= 0)
+				data->texture = mob->deadmob;
+			else if (anim < 15 && anim > 5)
+				data->texture = mob->mob1;
+			else
+				data->texture = mob->mob2;
 			put_sprite_to_pov(data, transform);
 		}
 		mob = mob->next;
 	}
+	++anim;
+	if (anim >= 20)
+		anim = 0;
 }
