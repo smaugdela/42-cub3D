@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/30 15:18:14 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:29:15 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	init_mobs(t_map *map)
 		j = -1;
 		while (++j < map->max_y)
 		{
-			if (map->cube_map[j][i] == 'M')
+			if (map->cube_map[j] && i < (int)ft_strlen(map->cube_map[j])
+				&& map->cube_map[j][i] == 'M')
 			{
 				if (map->mobs == NULL)
 					map->mobs = new_mob(map, i, j);
@@ -51,7 +52,7 @@ static bool	global_checker(char *file, t_map *map, t_data *data)
 		return (error_messages(5));
 	if (init_textures(fd, map, data) == false)
 		return (error_messages(2));
-	if (init_cube_map(fd, map) == false)
+	if (!init_cube_map(fd, map) || map->cube_map == NULL)
 		return (false);
 	init_mobs(map);
 	return (true);
@@ -106,6 +107,6 @@ void	init_data_const(t_data *data)
 	data->rot_left = 0;
 	data->rot_right = 0;
 	data->attack = 0;
-	data->texture = NULL;
 	data->render = 1;
+	data->texture = NULL;
 }

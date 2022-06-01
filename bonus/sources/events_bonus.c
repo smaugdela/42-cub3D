@@ -6,11 +6,37 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 09:45:22 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:56:59 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+static void	check_death(t_data *data)
+{
+	t_mob	*mob;
+	int		mx;
+	int		my;
+	int		px;
+	int		py;
+
+	mob = data->map->mobs;
+	px = data->player_x / TEXTURE_DIM;
+	py = data->player_y / TEXTURE_DIM;
+	while (mob)
+	{
+		mx = mob->pos_x / TEXTURE_DIM;
+		my = mob->pos_y / TEXTURE_DIM;
+		if (mx == px && my == py)
+		{
+			printf("\033[1;31mYou Died...\033[0m\n");
+			system("killall paplay");
+			free_n_destroy(data);
+			exit(EXIT_SUCCESS);
+		}
+		mob = mob->next;
+	}
+}
 
 /*
 cub3D game loop
@@ -28,6 +54,7 @@ int	loop_handler(t_data *data)
 			player_walk_anim(data);
 		mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 			data->pov->img_ptr, 0, 0);
+		check_death(data);
 		data->render = 0;
 	}
 	move_player(data);
@@ -39,7 +66,6 @@ int	red_cross_handler(t_data *data)
 	system("killall paplay");
 	free_n_destroy(data);
 	ft_putstr_fd("Closing...\n\033[0;32mThanks for using cub3D!\033[0m\n", 1);
-	exit(EXIT_SUCCESS);
 	return (0);
 }
 
