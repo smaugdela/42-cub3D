@@ -17,7 +17,7 @@ cub3D game loop
 */
 int	loop_handler(t_data *data)
 {
-	if (data->render)
+	if (data->render || data->attack)
 	{
 		door_manager(data);
 		raycast_renderer(data);

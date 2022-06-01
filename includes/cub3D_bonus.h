@@ -74,6 +74,7 @@ typedef struct s_mob {
 	t_img			*deadmob;
 	int				pos_x;
 	int				pos_y;
+	int				pos_z;
 	int				pv;
 	struct s_mob	*next;
 }	t_mob;
@@ -120,6 +121,7 @@ typedef struct s_data {
 	bool	attack;
 	bool	render;
 	t_img	*texture;
+	double	dist[WIDTH];
 }	t_data;
 
 typedef struct s_point {

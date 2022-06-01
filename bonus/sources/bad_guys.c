@@ -6,46 +6,103 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/30 17:10:20 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 09:24:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-static void	put_mob(t_data *data, double angle, int thickness, t_mob *mob)
+void	put_sprite_to_pov(t_data *data, t_point transform)
 {
-	int	x;
+	t_point	start;
+	t_point	stop;
+	t_point	scrn_pix;
+	t_point	tex_pix_start;
+	t_point	tex_pix;
+	double	step;
+	int		sprite_dim;
+	int		color;
 
-	x = WIDTH / 2;
-	angle = remainder(angle - data->player_orient, 2 * M_PI);
-	x -= angle / ((FOV * M_PI / 180) / WIDTH);
-	our_put_image_on_pov(data, mob->mob1,
-		x - (thickness / 2), (HEIGHT - thickness) / 2);
-}
-
-static double	determine_aom(t_data *data, t_mob *mob)
-{
-	if (data->player_x == mob->pos_x)
+	sprite_dim = (int)fabs(HEIGHT * TEXTURE_DIM / transform.y);
+	step = TEXTURE_DIM / sprite_dim;
+	tex_pix_start.x = 0;
+	tex_pix_start.y = 0;
+	start.y = -sprite_dim / 2 + HEIGHT / 2;
+	if (start.y < 0)
 	{
-		if (data->player_y > mob->pos_y)
-			return (-1 * M_PI_2);
-		return (M_PI_2);
+		tex_pix_start.y = fabs(start.y * step);
+		start.y = 0;
 	}
-	return (atan((double)(data->player_y - mob->pos_y)
-		/ (double)(mob->pos_x - data->player_x)));
+	stop.y = sprite_dim / 2 + HEIGHT / 2;
+	if (stop.y >= HEIGHT)
+		stop.y = HEIGHT - 1;
+	start.x = ((WIDTH / 2) * (1 + transform.x / transform.y))
+		- (sprite_dim / 2);
+	if (start.x < 0)
+	{
+		tex_pix_start.x = fabs(start.x * step);
+		start.x = 0;
+	}
+	stop.x = (sprite_dim / 2) + ((WIDTH / 2) * (1 + transform.x / transform.y));
+	if (stop.x >= WIDTH)
+		stop.x = WIDTH - 1;
+	scrn_pix.x = start.x;
+	tex_pix.x = tex_pix_start.x;
+	while (scrn_pix.x < stop.x && scrn_pix.x >= 0 && scrn_pix.x < WIDTH)
+	{
+		tex_pix.y = tex_pix_start.y;
+		scrn_pix.y = start.y;
+		while (scrn_pix.y < stop.y && scrn_pix.y >=0 && scrn_pix.y < HEIGHT
+			&& transform.y > 0 && transform.y < data->dist[(int)scrn_pix.x])
+		{
+			color = get_pixel_color(trunc(tex_pix.x),
+					trunc(tex_pix.y), data->texture);
+			if ((color & 0xff000000) == 0)
+				draw_pixel(data->pov, scrn_pix.x, scrn_pix.y, color);
+			++scrn_pix.y;
+			tex_pix.y += step;
+		}
+		tex_pix.x += step;
+		++scrn_pix.x;
+	}
 }
+
+// void	put_sprite_to_pov(t_data *data, t_point screen, int dim, double trans_y)
+// {
+// 	int		color;
+// 	double	tx;
+// 	double	ty;
+// 	double	step;
+// 	int		start_y;
+
+// 	start_y = screen.y;
+// 	step = (double)data->texture->height / (HEIGHT / 2);
+// 	tx = 0;
+// 	while (screen.x >= 0 && screen.x < WIDTH && tx < data->texture->width)
+// 	{
+// 		screen.y = start_y;
+// 		ty = 0;
+// 		while (trans_y > 0 && trans_y < data->dist[screen.x]
+// 			&& screen.y >= 0 && screen.y < HEIGHT && ty < data->texture->height)
+// 		{
+// 			color = get_pixel_color(trunc(tx),
+// 					trunc(ty), data->texture);
+// 			if ((color & 0xff000000) == 0)
+// 				draw_pixel(data->pov, screen.x, screen.y, color);
+// 			++screen.y;
+// 			ty += step;
+// 		}
+// 		++screen.x;
+// 		tx += step;
+// 	}
+// }
 
 void	render_mobs(t_data *data)
 {
 	t_mob	*mob;
-	double	aom;
-	int		dist;
-	t_point	inter;
-	char	wall_type;
+	t_point	transform;
+	t_point	plane;
 
-	inter.x = 0;
-	inter.y = 0;
-	wall_type = '1';
 	mob = data->map->mobs;
 	while (mob)
 	{
@@ -53,19 +110,21 @@ void	render_mobs(t_data *data)
 			mob = mob->next;
 		else
 		{
-			aom = determine_aom(data, mob);
-			if (aom >= remainder(data->player_orient - (FOV * M_PI / 360),
-					2 * M_PI)
-				&& aom <= remainder(data->player_orient + (FOV * M_PI / 360),
-					2 * M_PI))
-			{
-				dist = sqrt(pow(data->player_x - mob->pos_x, 2)
-						+ pow(data->player_y - mob->pos_y, 2));
-				if (dist > 0 && dist < opti_rc(data, aom, &inter, &wall_type))
-				{
-					put_mob(data, aom, floor(TEXTURE_DIM * HEIGHT / dist), mob);
-				}
-			}
+			plane.x = cos(data->player_orient - M_PI_2)
+				* tan(FOV * M_PI / 360);
+			plane.y = -sin(data->player_orient - M_PI_2)
+				* tan(FOV * M_PI / 360);
+			transform.x = (-sin(data->player_orient)
+					* (mob->pos_x - data->player_x)
+					- cos(data->player_orient) * (mob->pos_y - data->player_y))
+				/ (plane.x * -sin(data->player_orient)
+					- cos(data->player_orient) * plane.y);
+			transform.y = (-plane.y * (mob->pos_x - data->player_x)
+					+ plane.x * (mob->pos_y - data->player_y))
+				/ (plane.x * -sin(data->player_orient)
+					- cos(data->player_orient) * plane.y);
+			data->texture = mob->mob1;
+			put_sprite_to_pov(data, transform);
 			mob = mob->next;
 		}
 	}
