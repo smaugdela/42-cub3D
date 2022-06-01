@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 17:11:12 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:56:07 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ int	main(int ac, char **av)
 		data.map = &mappy;
 		init_events(&data);
 		init_data_const(&data);
+		play_sound("assets/sounds/eren_theme.wav", 100);
 		mlx_loop(data.win->mlx_ptr);
+		system("killall paplay");
 		free_n_destroy(&data);
 		return (0);
 	}
