@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/31 17:02:19 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 09:24:05 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,40 @@ void	put_sprite_to_pov(t_data *data, t_point transform)
 	t_point	start;
 	t_point	stop;
 	t_point	scrn_pix;
+	t_point	tex_pix_start;
 	t_point	tex_pix;
+	double	step;
 	int		sprite_dim;
 	int		color;
 
 	sprite_dim = (int)fabs(HEIGHT * TEXTURE_DIM / transform.y);
+	step = TEXTURE_DIM / sprite_dim;
+	tex_pix_start.x = 0;
+	tex_pix_start.y = 0;
 	start.y = -sprite_dim / 2 + HEIGHT / 2;
 	if (start.y < 0)
+	{
+		tex_pix_start.y = fabs(start.y * step);
 		start.y = 0;
+	}
 	stop.y = sprite_dim / 2 + HEIGHT / 2;
 	if (stop.y >= HEIGHT)
 		stop.y = HEIGHT - 1;
-	start.x = ((WIDTH / 2) * (1 + transform.x / transform.y)) - (sprite_dim / 2);
+	start.x = ((WIDTH / 2) * (1 + transform.x / transform.y))
+		- (sprite_dim / 2);
 	if (start.x < 0)
+	{
+		tex_pix_start.x = fabs(start.x * step);
 		start.x = 0;
+	}
 	stop.x = (sprite_dim / 2) + ((WIDTH / 2) * (1 + transform.x / transform.y));
 	if (stop.x >= WIDTH)
 		stop.x = WIDTH - 1;
-	tex_pix.x = 0;
 	scrn_pix.x = start.x;
+	tex_pix.x = tex_pix_start.x;
 	while (scrn_pix.x < stop.x && scrn_pix.x >= 0 && scrn_pix.x < WIDTH)
 	{
-		tex_pix.y = 0;
+		tex_pix.y = tex_pix_start.y;
 		scrn_pix.y = start.y;
 		while (scrn_pix.y < stop.y && scrn_pix.y >=0 && scrn_pix.y < HEIGHT
 			&& transform.y > 0 && transform.y < data->dist[(int)scrn_pix.x])
@@ -48,9 +60,9 @@ void	put_sprite_to_pov(t_data *data, t_point transform)
 			if ((color & 0xff000000) == 0)
 				draw_pixel(data->pov, scrn_pix.x, scrn_pix.y, color);
 			++scrn_pix.y;
-			tex_pix.y += TEXTURE_DIM / sprite_dim;
+			tex_pix.y += step;
 		}
-		tex_pix.x += TEXTURE_DIM / sprite_dim;
+		tex_pix.x += step;
 		++scrn_pix.x;
 	}
 }
