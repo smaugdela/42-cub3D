@@ -6,13 +6,30 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 09:24:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:36:42 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-void	put_sprite_to_pov(t_data *data, t_point transform)
+static void	sort_mobs(t_data *data)
+{
+	t_mob	*mob;
+	t_mob	*mob_far;
+	int		nb;
+
+	nb = 0;
+	mob = data->map->mobs;
+	while (mob)
+	{
+		mob->dist = pow(data->player_x - mob->pos_x, 2)
+			+ pow(data->player_y - mob->pos_y, 2);
+		++nb;
+		mob = mob->next;
+	}
+}
+
+static void	put_sprite_to_pov(t_data *data, t_point transform)
 {
 	t_point	start;
 	t_point	stop;
@@ -67,48 +84,17 @@ void	put_sprite_to_pov(t_data *data, t_point transform)
 	}
 }
 
-// void	put_sprite_to_pov(t_data *data, t_point screen, int dim, double trans_y)
-// {
-// 	int		color;
-// 	double	tx;
-// 	double	ty;
-// 	double	step;
-// 	int		start_y;
-
-// 	start_y = screen.y;
-// 	step = (double)data->texture->height / (HEIGHT / 2);
-// 	tx = 0;
-// 	while (screen.x >= 0 && screen.x < WIDTH && tx < data->texture->width)
-// 	{
-// 		screen.y = start_y;
-// 		ty = 0;
-// 		while (trans_y > 0 && trans_y < data->dist[screen.x]
-// 			&& screen.y >= 0 && screen.y < HEIGHT && ty < data->texture->height)
-// 		{
-// 			color = get_pixel_color(trunc(tx),
-// 					trunc(ty), data->texture);
-// 			if ((color & 0xff000000) == 0)
-// 				draw_pixel(data->pov, screen.x, screen.y, color);
-// 			++screen.y;
-// 			ty += step;
-// 		}
-// 		++screen.x;
-// 		tx += step;
-// 	}
-// }
-
 void	render_mobs(t_data *data)
 {
 	t_mob	*mob;
 	t_point	transform;
 	t_point	plane;
 
+	sort_mobs(data);
 	mob = data->map->mobs;
 	while (mob)
 	{
-		if (data->player_x == mob->pos_x && data->player_y == mob->pos_y)
-			mob = mob->next;
-		else
+		if (!(data->player_x == mob->pos_x && data->player_y == mob->pos_y))
 		{
 			plane.x = cos(data->player_orient - M_PI_2)
 				* tan(FOV * M_PI / 360);
@@ -125,7 +111,7 @@ void	render_mobs(t_data *data)
 					- cos(data->player_orient) * plane.y);
 			data->texture = mob->mob1;
 			put_sprite_to_pov(data, transform);
-			mob = mob->next;
 		}
+		mob = mob->next;
 	}
 }

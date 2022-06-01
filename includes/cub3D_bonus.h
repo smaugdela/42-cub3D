@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 10:10:14 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:12:54 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_mob {
 	int				pos_y;
 	int				pos_z;
 	int				pv;
+	double			dist;
 	struct s_mob	*next;
 }	t_mob;
 
