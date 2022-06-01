@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/31 19:27:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/01 10:10:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@
 /* Texture dimension in pixels */
 # define TEXTURE_DIM 100.0
 /* Movement Speed of the player (pixel per frame) */
-# define SPEED 7.0
+# define SPEED 8.0
 /* Rotation speed of the player (rad per frame) */
-# define ROT_SPEED 0.07
+# define ROT_SPEED 0.065
 /* Field Of View (degrees) */
-# define FOV 70.0
+# define FOV 75.0
 /* Map Parsing characters */
 # define CHARMAP "01234HDMS"
 
@@ -79,8 +79,7 @@ typedef struct s_mob {
 	struct s_mob	*next;
 }	t_mob;
 
-typedef struct s_map
-{
+typedef struct s_map {
 	int				player_spawn_x;
 	int				player_spawn_y;
 	char			*textures[16];

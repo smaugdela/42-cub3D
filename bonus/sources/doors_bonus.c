@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 19:10:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/31 19:42:54 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/01 10:20:24 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ static void	open_the_door(t_data *data, int i, int j)
 	y = data->player_y / TEXTURE_DIM;
 	if (data->map->cube_map[i][j] == 'D')
 	{
-		// printf("Closed door x = %d, y = %d, i = %d, j = %d\n", x, y, i, j);
-		if (y == i && (x == j - 1 || x == j + 1 || x == j))
+		if (y == i && x >= j - 1 && x <= j + 1)
 		{
 			data->map->cube_map[i][j] = 'O';
 			data->render = 1;
+			play_sound("assets/sounds/door.wav", 100);
 		}
-		if (x == j && (y == i - 1 || y == i + 1 || y == j))
+		if (x == j && y >= i - 1 && y <= i + 1)
 		{
 			data->map->cube_map[i][j] = 'O';
 			data->render = 1;
+			play_sound("assets/sounds/door.wav", 100);
 		}
 	}
 }
@@ -44,15 +45,17 @@ static void	close_the_door(t_data *data, int i, int j)
 	y = data->player_y / TEXTURE_DIM;
 	if (data->map->cube_map[i][j] == 'O')
 	{
-		if (x > i + 1 || x < i - 1)
-		{
-				data->map->cube_map[i][j] = 'D';
-				data->render = 1;
-		}
-		if (y > j + 1 || y < j - 1)
+		if (x > j + 1 || x < j - 1)
 		{
 			data->map->cube_map[i][j] = 'D';
 			data->render = 1;
+			play_sound("assets/sounds/door.wav", 100);
+		}
+		if (y > i + 1 || y < i - 1)
+		{
+			data->map->cube_map[i][j] = 'D';
+			data->render = 1;
+			play_sound("assets/sounds/door.wav", 100);
 		}
 	}
 }

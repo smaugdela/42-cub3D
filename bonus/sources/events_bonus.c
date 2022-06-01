@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/31 19:39:38 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/01 09:45:22 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	keys_press(int key_sym, t_data *data)
 	if (key_sym == XK_Escape)
 		red_cross_handler(data);
 	else if (key_sym == XK_space)
+	{
 		data->attack = 1;
+		play_sound("assets/sounds/attack.wav", 100);
+	}
 	else if (key_sym == XK_w)
 		data->forward = 1;
 	else if (key_sym == XK_d)
