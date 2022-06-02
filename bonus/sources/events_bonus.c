@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 15:56:59 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 08:52:37 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	red_cross_handler(t_data *data)
 	system("killall paplay");
 	free_n_destroy(data);
 	ft_putstr_fd("Closing...\n\033[0;32mThanks for using cub3D!\033[0m\n", 1);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
