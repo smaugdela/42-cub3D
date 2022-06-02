@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 15:01:09 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:58:37 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,25 @@ static void	print_map(t_map *map)
 }
 */
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	char	*tmp_s1;
+	char	*tmp_s2;
+
+	tmp_s1 = (char *)s1;
+	tmp_s2 = (char *)s2;
+	while (ft_strlen(tmp_s1))
+	{
+		if (*tmp_s1 == '\0' && *tmp_s2 == '\0')
+			break ;
+		else if (*tmp_s1 != *tmp_s2)
+			return (*tmp_s1 - *tmp_s2);
+		++tmp_s1;
+		++tmp_s2;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -85,18 +104,19 @@ int	main(int ac, char **av)
 		data.win = &window;
 		mappy = init_struct_map(av[1], &data);
 		data.map = &mappy;
+		data.save_av = av[1];
 		init_events(&data);
 		init_data_const(&data);
-		play_sound("assets/sounds/eren_theme.wav", 100);
+		printf("%s\n", av[1]);
+		if (ft_strcmp(av[1], "assets/maps/maps_bonus/alien.cub") == 0)
+			play_sound("assets/sounds/alien.wav", 100);
+		else
+			play_sound("assets/sounds/eren_theme.wav", 100);
 		mlx_loop(data.win->mlx_ptr);
 		system("killall paplay");
 		free_n_destroy(&data);
 		return (0);
 	}
-	else
-	{
-		error_messages(7);
-		return (-1);
-	}
-	return (0);
+	error_messages(7);
+	return (-1);
 }

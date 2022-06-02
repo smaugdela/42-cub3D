@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 15:44:21 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:03:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_data {
 	t_win	*win;
 	t_map	*map;
 	t_img	*pov;
+	char	*save_av;
 	int		player_x;
 	int		player_y;
 	double	player_orient;
@@ -131,6 +132,8 @@ typedef struct s_point {
 	double	x;
 	double	y;
 }	t_point;
+
+int		ft_strcmp(const char *s1, const char *s2);
 
 /* textures.c & textures_2.c */
 
@@ -229,6 +232,7 @@ void	render_mobs(t_data *data);
 /* doors.c */
 
 void	door_manager(t_data *data);
+void	win_manager(t_data *data);
 
 /* sound */
 
