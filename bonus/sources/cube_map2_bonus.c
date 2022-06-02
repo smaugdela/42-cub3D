@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:49:25 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/01 15:40:54 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:03:01 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_mob	*new_mob(t_map *map, int x, int y)
 	mob->deadmob = map->deadmob;
 	mob->pos_x = x * TEXTURE_DIM + (TEXTURE_DIM / 2);
 	mob->pos_y = y * TEXTURE_DIM + (TEXTURE_DIM / 2);
+	mob->in_front = false;
 	mob->pv = PV;
 	mob->dist = 0;
 	mob->next = NULL;

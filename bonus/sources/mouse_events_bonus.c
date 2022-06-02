@@ -35,12 +35,13 @@ int	pointer_handler(int x, int y, t_data *data)
 	return (0);
 }
 
-int	button_handler(int button, int x, int y, t_data *data)
+int	button_press_handler(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
 	if (button == 1)
 	{
+		data->attackey = 1;
 		data->attack = 1;
 		if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
 			play_sound("assets/sounds/ping.wav", 80);
@@ -49,6 +50,16 @@ int	button_handler(int button, int x, int y, t_data *data)
 	}
 	return (0);
 }
+
+int	button_release_handler(int button, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+		data->attackey = 0;
+	return (0);
+}
+
 /*
 Button value:
 	clic gauche = 1

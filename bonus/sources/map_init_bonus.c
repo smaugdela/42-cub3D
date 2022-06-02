@@ -106,6 +106,7 @@ void	init_data_const(t_data *data)
 	data->right = 0;
 	data->rot_left = 0;
 	data->rot_right = 0;
+	data->attackey = 0;
 	data->attack = 0;
 	data->render = 1;
 	data->texture = NULL;

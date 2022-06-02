@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/24 14:23:17 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 09:41:18 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 # include <X11/Xlib.h>
 
 /* Default window resolution */
-# define WIDTH	1024
-# define HEIGHT	576
+# define WIDTH	800
+# define HEIGHT	600
+// # define WIDTH	1024
+// # define HEIGHT	576
 // # define WIDTH	1280
 // # define HEIGHT	720
 /* Minimap square dimension in pixels */
@@ -45,7 +47,7 @@
 /* Rotation speed of the player (rad per frame) */
 # define ROT_SPEED 0.07
 /* Field Of View (degrees) */
-# define FOV 180.0
+# define FOV 75.0
 
 typedef enum e_weathercock {
 	N,

@@ -45,7 +45,9 @@ static void	init_events(t_data *data)
 		&pointer_handler, data);
 	mlx_mouse_hide(data->win->mlx_ptr, data->win->win_ptr);
 	mlx_hook(data->win->win_ptr, ButtonPress, ButtonPressMask,
-		&button_handler, data);
+		&button_press_handler, data);
+	mlx_hook(data->win->win_ptr, ButtonRelease, ButtonReleaseMask,
+		&button_release_handler, data);
 }
 
 /*

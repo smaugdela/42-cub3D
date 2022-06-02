@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/05/31 19:26:59 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/06/02 15:41:04 by smagdela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ BONUS 	=	main_bonus.c			error_messages_bonus.c \
 			free_and_destroy_bonus.c	parsing_utils_bonus.c \
 			events_bonus.c 			player_moves_bonus.c		player_moves2_bonus.c		draw_bonus.c \
 			rc_utils_bonus.c		raycast_engine_bonus.c		raycast_engine2_bonus.c	texturizer_bonus.c \
-			mouse_events_bonus.c	bad_guys.c sound_bonus.c	doors_bonus.c \
+			mouse_events_bonus.c	bad_guys.c sound_bonus.c	doors_bonus.c			bad_guys2.c \
 
 #	Object Files
 
