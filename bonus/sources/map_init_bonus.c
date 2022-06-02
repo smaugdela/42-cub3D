@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/01 15:29:15 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:50:52 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	init_data_const(t_data *data)
 	data->right = 0;
 	data->rot_left = 0;
 	data->rot_right = 0;
+	data->attackey = 0;
 	data->attack = 0;
 	data->render = 1;
 	data->texture = NULL;

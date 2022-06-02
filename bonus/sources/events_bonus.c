@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 08:52:37 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:46:28 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,11 @@
 static void	check_death(t_data *data)
 {
 	t_mob	*mob;
-	int		mx;
-	int		my;
-	int		px;
-	int		py;
 
 	mob = data->map->mobs;
-	px = data->player_x / TEXTURE_DIM;
-	py = data->player_y / TEXTURE_DIM;
 	while (mob)
 	{
-		mx = mob->pos_x / TEXTURE_DIM;
-		my = mob->pos_y / TEXTURE_DIM;
-		if (mx == px && my == py)
+		if (mob->pv && mob->dist < TEXTURE_DIM / 2)
 		{
 			printf("\033[1;31mYou Died...\033[0m\n");
 			system("killall paplay");
@@ -47,6 +39,7 @@ int	loop_handler(t_data *data)
 	{
 		door_manager(data);
 		raycast_renderer(data);
+		move_mobs(data);
 		render_mobs(data);
 		if (data->attack)
 			player_attack(data);
@@ -76,8 +69,9 @@ int	keys_press(int key_sym, t_data *data)
 		red_cross_handler(data);
 	else if (key_sym == XK_space)
 	{
+		data->attackey = 1;
 		data->attack = 1;
-		play_sound("assets/sounds/attack.wav", 100);
+		// play_sound("assets/sounds/attack.wav", 100);
 	}
 	else if (key_sym == XK_w)
 		data->forward = 1;
@@ -96,7 +90,9 @@ int	keys_press(int key_sym, t_data *data)
 
 int	keys_release(int key_sym, t_data *data)
 {
-	if (key_sym == XK_w)
+	if (key_sym == XK_space)
+		data->attackey = 0;
+	else if (key_sym == XK_w)
 		data->forward = 0;
 	else if (key_sym == XK_d)
 		data->right = 0;

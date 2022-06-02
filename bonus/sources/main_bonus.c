@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 15:01:09 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:52:13 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static void	init_events(t_data *data)
 		&pointer_handler, data);
 	mlx_mouse_hide(data->win->mlx_ptr, data->win->win_ptr);
 	mlx_hook(data->win->win_ptr, ButtonPress, ButtonPressMask,
-		&button_handler, data);
+		&button_press_handler, data);
+	mlx_hook(data->win->win_ptr, ButtonRelease, ButtonReleaseMask,
+		&button_release_handler, data);
 }
 
 /*

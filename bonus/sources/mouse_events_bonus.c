@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:47:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 16:10:27 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:51:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,28 @@ int	pointer_handler(int x, int y, t_data *data)
 	return (0);
 }
 
-int	button_handler(int button, int x, int y, t_data *data)
+int	button_press_handler(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
 	if (button == 1)
 	{
+		data->attackey = 1;
 		data->attack = 1;
-		play_sound("assets/sounds/attack.wav", 100);
+		// play_sound("assets/sounds/attack.wav", 100);
 	}
 	return (0);
 }
+
+int	button_release_handler(int button, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+		data->attackey = 0;
+	return (0);
+}
+
 /*
 Button value:
 	clic gauche = 1

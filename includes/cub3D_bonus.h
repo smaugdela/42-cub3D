@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/01 15:44:21 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:40:54 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 /* Ennemies PV */
 # define PV 3
 
+# define SQRT_2 1.41421356237
+
 /* Data structures */
 
 typedef struct s_win {
@@ -78,6 +80,7 @@ typedef struct s_mob {
 	t_img			*deadmob;
 	int				pos_x;
 	int				pos_y;
+	bool			in_front;
 	int				pv;
 	double			dist;
 	struct s_mob	*next;
@@ -121,6 +124,7 @@ typedef struct s_data {
 	bool	right;
 	bool	rot_left;
 	bool	rot_right;
+	bool	attackey;
 	bool	attack;
 	bool	render;
 	t_img	*texture;
@@ -220,11 +224,13 @@ bool	in_map(t_data *data, double x, double y);
 /* mouse_events_bonus.c */
 
 int		pointer_handler(int x, int y, t_data *data);
-int		button_handler(int button, int x, int y, t_data *data);
+int		button_press_handler(int button, int x, int y, t_data *data);
+int		button_release_handler(int button, int x, int y, t_data *data);
 
-/* bad_guys.c */
+/* bad_guys.c & bad_guys2.c */
 
 void	render_mobs(t_data *data);
+void	move_mobs(t_data *data);
 
 /* doors.c */
 
