@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 19:10:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/02 17:28:52 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:39:29 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	ending_image(t_data *data)
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 		data->pov->img_ptr, 0, 0);
 	mlx_loop(data->win->mlx_ptr);
-	red_cross_handler(data);
 }
 
 void	win_manager(t_data *data)
@@ -41,9 +40,15 @@ void	win_manager(t_data *data)
 			if (data->map->cube_map[i][j] == '3')
 			{
 				if (y == i && x >= j - 1 && x <= j + 1)
+				{
 					ending_image(data);
+					data->dead = true;
+				}
 				if (x == j && y >= i - 1 && y <= i + 1)
+				{
 					ending_image(data);
+					data->dead = true;
+				}
 			}
 			j++;
 		}
