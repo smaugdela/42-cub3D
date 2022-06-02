@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
 /*   Updated: 2022/06/02 17:46:28 by smagdela         ###   ########.fr       */
@@ -38,6 +38,7 @@ int	loop_handler(t_data *data)
 	if (data->render || data->attack)
 	{
 		door_manager(data);
+		win_manager(data);
 		raycast_renderer(data);
 		move_mobs(data);
 		render_mobs(data);
@@ -71,7 +72,10 @@ int	keys_press(int key_sym, t_data *data)
 	{
 		data->attackey = 1;
 		data->attack = 1;
-		// play_sound("assets/sounds/attack.wav", 100);
+		if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
+			play_sound("assets/sounds/ping.wav", 80);
+		else
+			play_sound("assets/sounds/attack.wav", 100);
 	}
 	else if (key_sym == XK_w)
 		data->forward = 1;
