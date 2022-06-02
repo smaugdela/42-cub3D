@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:01:39 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 15:03:48 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:22:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,12 @@ void	player_attack(t_data *data)
 	static int	anim = 0;
 
 	if (anim == 0)
-		play_sound("assets/sounds/attack.wav", 100);
+	{
+		if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
+			play_sound("assets/sounds/ping.wav", 80);
+		else
+			play_sound("assets/sounds/attack.wav", 100);
+	}
 	if (anim == 9)
 		damager(data);
 	if (anim < 9)

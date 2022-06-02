@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_events_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:47:26 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 13:00:44 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:23:01 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ int	button_press_handler(int button, int x, int y, t_data *data)
 	{
 		data->attackey = 1;
 		data->attack = 1;
-		if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
-			play_sound("assets/sounds/ping.wav", 80);
-		else
-			play_sound("assets/sounds/attack.wav", 100);
 	}
 	return (0);
 }

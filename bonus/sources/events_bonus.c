@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 17:46:28 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:37:14 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ static void	check_death(t_data *data)
 	{
 		if (mob->pv && mob->dist < TEXTURE_DIM / 2)
 		{
-			printf("\033[1;31mYou Died...\033[0m\n");
-			system("killall paplay");
-			free_n_destroy(data);
-			exit(EXIT_SUCCESS);
+			data->texture =	init_image_xpm(data, \
+				"assets/textures/textures_bonus/youloose.xpm");
+			our_put_image_on_pov(data, data->texture, 0, 0);
+			mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
+				data->pov->img_ptr, 0, 0);
+			data->render = 0;
+			data->dead = true;
+			break ;
 		}
 		mob = mob->next;
 	}
@@ -35,23 +39,26 @@ cub3D game loop
 */
 int	loop_handler(t_data *data)
 {
-	if (data->render || data->attack)
+	if (data->dead == false)
 	{
-		door_manager(data);
-		win_manager(data);
-		raycast_renderer(data);
-		move_mobs(data);
-		render_mobs(data);
-		if (data->attack)
-			player_attack(data);
-		else
-			player_walk_anim(data);
-		mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
-			data->pov->img_ptr, 0, 0);
-		check_death(data);
-		data->render = 0;
+		if (data->render || data->attack)
+		{
+			door_manager(data);
+			win_manager(data);
+			raycast_renderer(data);
+			move_mobs(data);
+			render_mobs(data);
+			if (data->attack)
+				player_attack(data);
+			else
+				player_walk_anim(data);
+			mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
+				data->pov->img_ptr, 0, 0);
+			check_death(data);
+			data->render = 0;
+		}
+		move_player(data);
 	}
-	move_player(data);
 	return (0);
 }
 
@@ -72,10 +79,6 @@ int	keys_press(int key_sym, t_data *data)
 	{
 		data->attackey = 1;
 		data->attack = 1;
-		if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
-			play_sound("assets/sounds/ping.wav", 80);
-		else
-			play_sound("assets/sounds/attack.wav", 100);
 	}
 	else if (key_sym == XK_w)
 		data->forward = 1;
