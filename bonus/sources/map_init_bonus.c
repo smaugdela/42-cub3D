@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:55:30 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/02 18:32:23 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:34:50 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ t_map	init_struct_map(char *file, t_data *data)
 void	init_data_const(t_data *data)
 {
 	data->pov = init_image(data, WIDTH, HEIGHT);
+	data->minimap = build_minimap(data);
+	data->player = init_image_xpm(data,
+			"assets/textures/textures_bonus/perso_minimap.xpm");
 	data->player_x = data->map->player_spawn_x * TEXTURE_DIM + TEXTURE_DIM / 2;
 	data->player_y = data->map->player_spawn_y * TEXTURE_DIM + TEXTURE_DIM / 2;
 	data->player_orient = M_PI_2;

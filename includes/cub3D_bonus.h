@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 09:56:16 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:33:44 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ typedef struct s_data {
 	t_win	*win;
 	t_map	*map;
 	t_img	*pov;
+	t_img	*minimap;
+	t_img	*player;
 	char	*save_av;
 	int		player_x;
 	int		player_y;
@@ -137,6 +139,11 @@ typedef struct s_point {
 	double	x;
 	double	y;
 }	t_point;
+
+typedef struct s_ipoint {
+	int		x;
+	int		y;
+}	t_ipoint;
 
 int		ft_strcmp(const char *s1, const char *s2);
 
@@ -245,5 +252,15 @@ void	win_manager(t_data *data);
 /* sound */
 
 int		play_sound(char *path, int volume);
+
+/* utils.c */
+
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
+
+/* cub2D.c */
+
+t_img	*build_minimap(t_data *data);
+void	player_render(t_data *data, int x, int y);
 
 #endif

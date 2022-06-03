@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 10:07:19 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:15:15 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	print_man(void)
 	printf("\n\033[0;33mWARNING:\033[0m MiniLibX will end up lagging\n");
 	printf("if you use the mouse to rotate the player\n");
 	printf("(Check top to see Xorg memory/CPU consumption\n");
-	printf("that is not cub3D_bonus-related)\n");
+	printf("that is not cub3D_bonus-related).\n");
 	printf("\n\033[1;32mHave Fun!\033[0m\n\n");
 }
 

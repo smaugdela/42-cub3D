@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 18:37:14 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:32:30 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	loop_handler(t_data *data)
 				player_attack(data);
 			else
 				player_walk_anim(data);
+			our_put_image_on_pov(data, data->minimap, 0, 0);
+			player_render(data, 0, 0);
 			mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 				data->pov->img_ptr, 0, 0);
 			check_death(data);
