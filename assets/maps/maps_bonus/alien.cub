@@ -5,7 +5,7 @@ W4 assets/textures/textures_bonus/view.xpm
 HO assets/textures/textures_bonus/incubateurs.xpm
 DO assets/textures/textures_bonus/door2.xpm
 E1 assets/textures/textures_bonus/xeno.xpm
-E2 assets/textures/textures_bonus/xeno.xpm
+E2 assets/textures/textures_bonus/xeno2.xpm
 E3 assets/textures/textures_bonus/xeno.xpm
 
 A1 assets/textures/textures_bonus/detector1.xpm
@@ -23,6 +23,6 @@ F 57,56,59
 1M111111110000000000000000001111100HH0H001
 10000000000111111111111111111111100HH0H001
 111D11111111111111111111111111111111111111
-10000002
-10000002
-44434444
+1000002
+1000002
+4443444

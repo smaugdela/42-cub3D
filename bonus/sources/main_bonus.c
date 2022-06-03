@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 12:58:37 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 10:07:19 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,19 @@ static void	print_map(t_map *map)
 }
 */
 
-int	ft_strcmp(const char *s1, const char *s2)
+static void	print_man(void)
 {
-	char	*tmp_s1;
-	char	*tmp_s2;
-
-	tmp_s1 = (char *)s1;
-	tmp_s2 = (char *)s2;
-	while (ft_strlen(tmp_s1))
-	{
-		if (*tmp_s1 == '\0' && *tmp_s2 == '\0')
-			break ;
-		else if (*tmp_s1 != *tmp_s2)
-			return (*tmp_s1 - *tmp_s2);
-		++tmp_s1;
-		++tmp_s2;
-	}
-	return (0);
+	printf("\n\033[0;32m  --- cub3D_bonus User's Manual ---\033[0m\n");
+	printf("\n W A S D             -> Player movement\n");
+	printf(" Left & Right Arrows -> Camera rotation\n");
+	printf(" Space               -> Attack\n");
+	printf(" Mouse Left Click    -> Attack\n");
+	printf(" Mouse Over Window   -> Camera rotation\n");
+	printf("\n\033[0;33mWARNING:\033[0m MiniLibX will end up lagging\n");
+	printf("if you use the mouse to rotate the player\n");
+	printf("(Check top to see Xorg memory/CPU consumption\n");
+	printf("that is not cub3D_bonus-related)\n");
+	printf("\n\033[1;32mHave Fun!\033[0m\n\n");
 }
 
 int	main(int ac, char **av)
@@ -114,6 +110,7 @@ int	main(int ac, char **av)
 			play_sound("assets/sounds/alien.wav", 100);
 		else
 			play_sound("assets/sounds/eren_theme.wav", 100);
+		print_man();
 		mlx_loop(data.win->mlx_ptr);
 		system("killall paplay");
 		free_n_destroy(&data);

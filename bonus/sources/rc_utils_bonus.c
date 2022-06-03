@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:33:59 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 08:55:03 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 09:55:56 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,23 @@ void	opti_rc_init(t_point *inter_x, t_point *inter_y)
 	inter_x->y = DBL_MAX;
 	inter_y->x = DBL_MAX;
 	inter_y->y = DBL_MAX;
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	char	*tmp_s1;
+	char	*tmp_s2;
+
+	tmp_s1 = (char *)s1;
+	tmp_s2 = (char *)s2;
+	while (ft_strlen(tmp_s1))
+	{
+		if (*tmp_s1 == '\0' && *tmp_s2 == '\0')
+			break ;
+		else if (*tmp_s1 != *tmp_s2)
+			return (*tmp_s1 - *tmp_s2);
+		++tmp_s1;
+		++tmp_s2;
+	}
+	return (0);
 }

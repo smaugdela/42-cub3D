@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 18:31:56 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 09:56:16 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ void	texturizer(t_data *data, int x, int thickness, double tx);
 bool	is_wall(t_data *data, double x, double y, char *wall_type);
 double	remainder(double value, double modulus);
 bool	in_map(t_data *data, double x, double y);
+int		ft_strcmp(const char *s1, const char *s2);
 
 /* mouse_events_bonus.c */
 
