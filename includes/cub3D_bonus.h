@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 11:39:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:15:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,12 @@ void	move_player(t_data *data);
 void	player_attack(t_data *data);
 void	player_walk_anim(t_data *data);
 
+/* player_mooves_utils */
+
+void	player_walk_anim(t_data *data);
+void	sounds_player_attacks(t_data *data);
+void	is_he_ded(int i, int j, t_data *data);
+
 /* draw.c */
 
 void	draw_pixel(t_img *image, int x, int y, int color);
@@ -242,6 +248,7 @@ void	move_mobs(t_data *data);
 
 void	door_manager(t_data *data);
 void	win_manager(t_data *data);
+void	ending_image(t_data *data);
 
 /* sound */
 

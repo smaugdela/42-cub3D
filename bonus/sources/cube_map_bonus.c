@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/03 11:40:39 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:05:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ static bool	is_map_valid(t_map *map)
 				return (error_messages(6));
 			else if (conditions_map(i, j, map, 2) == false)
 				return (error_messages(1));
-			else if (conditions_map(i, j, map, 3) == false)
+			if (map->cube_map[i][j] == 'S')
 			{
+				init_player_pos_n_orient(map, i, j);
 				if (spawn++ != 0)
 					return (error_messages(3));
-				init_player_pos_n_orient(map, i, j);
 			}
 		}
 	}
