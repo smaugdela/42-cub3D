@@ -6,11 +6,27 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:49:25 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/02 15:03:01 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 10:37:47 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+static bool	check_eof(int ret, int fd, char *line)
+{
+	while (ret > 0)
+	{
+		ret = get_next_line(fd, &line);
+		if (ret >= 0 && line && line[0])
+		{
+			free(line);
+			ft_putstr_fd("\e[0;31mError\nFile not empty after map.\n", 2);
+			return (false);
+		}
+		free(line);
+	}
+	return (true);
+}
 
 bool	reduce_init_cube_map(t_map *map, int ret, int fd, char *line)
 {
@@ -38,7 +54,7 @@ bool	reduce_init_cube_map(t_map *map, int ret, int fd, char *line)
 		ret = get_next_line(fd, &line);
 	}
 	free(line);
-	return (true);
+	return (check_eof(ret, fd, line));
 }
 
 t_mob	*new_mob(t_map *map, int x, int y)
