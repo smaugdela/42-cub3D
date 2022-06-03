@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 11:47:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:02:32 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	init_events(t_data *data)
 		&keys_release, data);
 	mlx_hook(data->win->win_ptr, MotionNotify, PointerMotionMask,
 		&pointer_handler, data);
-	mlx_mouse_hide(data->win->mlx_ptr, data->win->win_ptr);
+	// mlx_mouse_hide(data->win->mlx_ptr, data->win->win_ptr);
 	mlx_hook(data->win->win_ptr, ButtonPress, ButtonPressMask,
 		&button_press_handler, data);
 	mlx_hook(data->win->win_ptr, ButtonRelease, ButtonReleaseMask,
@@ -85,7 +85,7 @@ static void	print_man(void)
 	printf("\n\033[0;33mWARNING:\033[0m MiniLibX will end up lagging\n");
 	printf("if you use the mouse to rotate the player\n");
 	printf("(Check top to see Xorg memory/CPU consumption\n");
-	printf("that is not cub3D_bonus-related)\n");
+	printf("that is not cub3D_bonus-related).\n");
 	printf("\n\033[1;32mHave Fun!\033[0m\n\n");
 }
 

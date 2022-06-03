@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/25 16:30:41 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:06:24 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,19 @@ static double	rc_x(t_data *data, double angle,
 	t_point *inter_x, char *wall_type)
 {
 	double	dist;
+	double	step_dist;
 	t_point	delta;
 
 	if (angle == M_PI_2 || angle == 3 * M_PI_2)
 		return (DBL_MAX);
 	dist = rc_x_init(data, angle, inter_x, &delta);
+	step_dist = sqrt(pow(delta.x, 2) + pow(delta.y, 2));
 	while (!is_wall(data, inter_x->x + 1, inter_x->y, wall_type)
 		&& !is_wall(data, inter_x->x - 1, inter_x->y, wall_type))
 	{
 		inter_x->x += delta.x;
 		inter_x->y += delta.y;
-		dist += sqrt(pow(delta.x, 2) + pow(delta.y, 2));
+		dist += step_dist;
 	}
 	return (dist);
 }
@@ -94,17 +96,19 @@ static double	rc_y(t_data *data, double angle,
 	t_point *inter_y, char *wall_type)
 {
 	double	dist;
+	double	step_dist;
 	t_point	delta;
 
 	if (angle == 0 || angle == M_PI || angle == 2 * M_PI)
 		return (DBL_MAX);
 	dist = rc_y_init(data, angle, inter_y, &delta);
+	step_dist = sqrt(pow(delta.x, 2) + pow(delta.y, 2));
 	while (!is_wall(data, inter_y->x, inter_y->y + 1, wall_type)
 		&& !is_wall(data, inter_y->x, inter_y->y - 1, wall_type))
 	{
 		inter_y->x += delta.x;
 		inter_y->y += delta.y;
-		dist += sqrt(pow(delta.x, 2) + pow(delta.y, 2));
+		dist += step_dist;
 	}
 	return (dist);
 }

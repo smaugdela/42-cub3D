@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 19:10:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/06/03 12:16:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:14:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ending_image(t_data *data)
 	our_put_image_on_pov(data, data->texture, 0, 0);
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 		data->pov->img_ptr, 0, 0);
+	free_img(data->texture);
 	mlx_loop(data->win->mlx_ptr);
 }
 

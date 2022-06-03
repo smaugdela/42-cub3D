@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:56:24 by smagdela          #+#    #+#             */
-/*   Updated: 2022/05/23 14:54:36 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:52:58 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,83 +35,93 @@
 // 	return (dist);
 // }
 
-void	draw_line(t_data *data, double angle, double dist, int color)
+// void	draw_line(t_data *data, double angle, double dist, int color)
+// {
+// 	t_point	delta;
+// 	t_point	a;
+
+// 	a.x = data->player_x;
+// 	a.y = data->player_y;
+// 	delta.x = cos(angle);
+// 	delta.y = -1 * sin(angle);
+// 	while (dist > 0 && in_map(data, a.x, a.y))
+// 	{
+// 		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, a.x, a.y, color);
+// 		a.x += delta.x;
+// 		a.y += delta.y;
+// 		--dist;
+// 	}
+// }
+
+void	put_minimap(t_data *data)
 {
-	t_point	delta;
-	t_point	a;
+	int	x;
+	int	y;
+	int	wall_dim;
 
-	a.x = data->player_x;
-	a.y = data->player_y;
-	delta.x = cos(angle);
-	delta.y = -1 * sin(angle);
-	while (dist > 0 && in_map(data, a.x, a.y))
-	{
-		mlx_pixel_put(data->win->mlx_ptr, data->win->win_ptr, a.x, a.y, color);
-		a.x += delta.x;
-		a.y += delta.y;
-		--dist;
-	}
-}
-
-void	player_render(t_data *data)
-{
-	t_img			*player;
-	double 			alpha;
-	double			delta_alpha;
-	int				i;
-	t_point			impact;
-	t_weathercock	wall_orient;
-
-	alpha = data->player_orient - (FOV * M_PI / 360);
-	// alpha = data->player_orient;
-	delta_alpha = (FOV * M_PI / 180) / WIDTH;
-	i = 0;
-	while (i < WIDTH && alpha < data->player_orient + (FOV * M_PI / 360))
-	{
-		// draw_line(data, alpha, naive_raycaster(data, alpha), 0x0000ff);
-		draw_line(data, alpha, opti_rc(data, alpha, &impact, &wall_orient), 0x0000ff);
-		// opti_rc(data, alpha, &impact, &wall_orient);
-		alpha += delta_alpha;
-		++i;
-	}
-	player = init_image_xpm(data, "assets/textures/perso_minimap.xpm");
+	wall_dim = ft_min((int)WIDTH
+			/ data->map->max_x, (int)HEIGHT / data->map->max_y);
+	x = ((double)data->player_x
+			/ (data->map->max_x * TEXTURE_DIM)) * data->map->max_x * wall_dim;
+	y = ((double)data->player_y
+			/ (data->map->max_y * TEXTURE_DIM)) * data->map->max_y * wall_dim;
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
-		player->img_ptr, data->player_x, data->player_y);
-	free_img(player);
+		data->minimap->img_ptr, 0, 0);
+	mlx_put_image_to_window(data->win->mlx_ptr,
+		data->win->win_ptr, data->player->img_ptr,
+		x - (data->player->width / 2), y - (data->player->height / 2));
 }
 
-void	build_minimap(t_data *data)
+static void	put_wall_to_minimap(t_img *minimap, t_ipoint grid,
+	int color, int wall_dim)
 {
-	t_img	*wall;
-	t_img	*floor;
-	int		i;
-	int		j;
-	int		dim;
+	int	x;
+	int	y;
 
-	dim = MM_PIXEL;
-	wall = init_image(data, dim, dim);
-	clear_img(wall, 0xffffff);
-	floor = init_image(data, dim, dim);
-	i = 0;
-	while (i < data->map->max_y && data->map->cube_map[i])
+	x = grid.x * wall_dim;
+	while (x < (grid.x + 1) * wall_dim)
 	{
-		j = 0;
-		while (j < data->map->max_x && data->map->cube_map[i][j] != '\0')
+		y = grid.y * wall_dim;
+		while (y < (grid.y + 1) * wall_dim)
 		{
-			if (data->map->cube_map[i][j] && data->map->cube_map[i][j] == '1')
-			{
-				mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
-					wall->img_ptr, j * dim, i * dim);
-			}
-			else
-			{
-				mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
-					floor->img_ptr, j * dim, i * dim);
-			}
-			++j;
+			draw_pixel(minimap, x, y, color);
+			++y;
 		}
-		++i;
+		++x;
 	}
-	free_img(wall);
-	free_img(floor);
+}
+
+t_img	*build_minimap(t_data *data)
+{
+	t_img		*minimap;
+	t_ipoint	grd;
+	int			wall_dim;
+	int			color;
+
+	if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
+		color = 0x08c43a;
+	else
+		color = 0x8c7b50;
+	wall_dim = ft_min((int)WIDTH / data->map->max_x, (int)HEIGHT / data->map->max_y);
+	minimap = init_image(data, WIDTH, HEIGHT);
+	if (minimap == NULL)
+		return (NULL);
+	grd.y = -1;
+	while (++grd.y < data->map->max_y && data->map->cube_map[grd.y])
+	{
+		grd.x = -1;
+		while (++grd.x < data->map->max_x
+			&& data->map->cube_map[grd.y][grd.x] != '\0')
+		{
+			if (data->map->cube_map[grd.y][grd.x]
+				&& is_in_charset(data->map->cube_map[grd.y][grd.x], "1234HD "))
+			{
+				if (data->map->cube_map[grd.y][grd.x] == 'D')
+					put_wall_to_minimap(minimap, grd, 0xcc122b, wall_dim);
+				else
+					put_wall_to_minimap(minimap, grd, color, wall_dim);
+			}
+		}
+	}
+	return (minimap);
 }

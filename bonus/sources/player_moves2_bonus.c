@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:01:39 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 11:57:42 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:10:52 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	damager(t_data *data)
 	{
 		if (mob->pv > 0 && mob->in_front && mob->dist > 0
 			&& mob->dist <= 2 * TEXTURE_DIM)
-			--mob->pv;
+			mob->pv = mob->pv - 1;
 		mob = mob->next;
 	}
 }

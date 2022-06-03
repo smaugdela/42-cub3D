@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 12:15:41 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:49:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ typedef struct s_data {
 	t_win	*win;
 	t_map	*map;
 	t_img	*pov;
+	t_img	*minimap;
+	t_img	*player;
 	char	*save_av;
 	int		player_x;
 	int		player_y;
@@ -129,6 +131,7 @@ typedef struct s_data {
 	bool	attack;
 	bool	render;
 	bool	dead;
+	bool	mmap;
 	t_img	*texture;
 	double	dist[WIDTH];
 }	t_data;
@@ -137,6 +140,11 @@ typedef struct s_point {
 	double	x;
 	double	y;
 }	t_point;
+
+typedef struct s_ipoint {
+	int		x;
+	int		y;
+}	t_ipoint;
 
 int		ft_strcmp(const char *s1, const char *s2);
 
@@ -253,5 +261,15 @@ void	ending_image(t_data *data);
 /* sound */
 
 int		play_sound(char *path, int volume);
+
+/* utils.c */
+
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
+
+/* cub2D.c */
+
+t_img	*build_minimap(t_data *data);
+void	put_minimap(t_data *data);
 
 #endif

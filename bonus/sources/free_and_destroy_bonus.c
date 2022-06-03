@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_destroy_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:33:02 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 16:05:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:00 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ int	free_n_destroy(t_data *data)
 	data->render = 0;
 	if (data->pov)
 		free_img(data->pov);
+	if (data->minimap)
+		free_img(data->minimap);
+	if (data->player)
+		free_img(data->player);
 	if (data->map)
 		free_mappy(data->map);
 	if (data->win && data->win->win_ptr)
