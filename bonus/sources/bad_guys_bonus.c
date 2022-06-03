@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bad_guys_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 15:43:25 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:30:58 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-static t_mob	*copy_mob(t_mob *mob_orig)
+t_mob	*copy_mob(t_mob *mob_orig)
 {
 	t_mob	*mob_copy;
 
@@ -34,24 +34,43 @@ static t_mob	*copy_mob(t_mob *mob_orig)
 	return (mob_copy);
 }
 
-static void	sort_mobs(t_data *data)
+static void	print_sprite(t_data *data, t_mob *mob, t_sprite sprite,
+	t_point transform)
+{
+	if (WIDTH / 2 > sprite.start.x && WIDTH / 2 < sprite.stop.x)
+		mob->in_front = true;
+	while (sprite.scrn_pix.x < sprite.stop.x
+		&& sprite.scrn_pix.x >= 0 && sprite.scrn_pix.x < WIDTH)
+	{
+		sprite.tex_pix.y = sprite.tex_pix_start.y;
+		sprite.scrn_pix.y = sprite.start.y;
+		while (sprite.scrn_pix.y < sprite.stop.y
+			&& sprite.scrn_pix.y >= 0 && sprite.scrn_pix.y < HEIGHT
+			&& transform.y < data->dist[(int)sprite.scrn_pix.x])
+		{
+			sprite.color = get_pixel_color(trunc(sprite.tex_pix.x),
+					trunc(sprite.tex_pix.y), data->texture);
+			if ((sprite.color & 0xff000000) == 0)
+				draw_pixel(data->pov, sprite.scrn_pix.x,
+					sprite.scrn_pix.y, sprite.color);
+			++sprite.scrn_pix.y;
+			sprite.tex_pix.y += sprite.step;
+		}
+		sprite.tex_pix.x += sprite.step;
+		++sprite.scrn_pix.x;
+	}
+}
+
+void	sort_mobs(t_data *data)
 {
 	t_mob	*mob;
 	t_mob	*mob_far;
 	t_mob	*new_mobs;
 	int		nb;
 
-	nb = 0;
 	mob = data->map->mobs;
 	new_mobs = NULL;
-	while (mob)
-	{
-		mob->dist = sqrt(pow(data->player_x - mob->pos_x, 2)
-				+ pow(data->player_y - mob->pos_y, 2));
-		++nb;
-		mob->in_front = false;
-		mob = mob->next;
-	}
+	nb = sort_mobs_init(mob, data);
 	while (nb--)
 	{
 		mob = data->map->mobs;
@@ -62,94 +81,40 @@ static void	sort_mobs(t_data *data)
 				mob_far = mob;
 			mob = mob->next;
 		}
-		if (new_mobs == NULL)
-			new_mobs = copy_mob(mob_far);
-		else
-		{
-			mob = new_mobs;
-			while (mob->next)
-				mob = mob->next;
-			mob->next = copy_mob(mob_far);
-		}
-		if (data->map->mobs == mob_far)
-		{
-			mob = data->map->mobs;
-			data->map->mobs = data->map->mobs->next;
-			free(mob);
-		}
-		else
-		{
-			mob = data->map->mobs;
-			while (mob)
-			{
-				if (mob->next == mob_far)
-				{
-					mob->next = mob_far->next;
-					free(mob_far);
-				}
-				mob = mob->next;
-			}
-		}
+		sorter_for_mobs(mob, mob_far, &new_mobs);
+		sorter_for_mobs_2(data, mob, mob_far);
 	}
 	free_mobs(data->map);
 	data->map->mobs = new_mobs;
 }
 
-static void	put_sprite_to_pov(t_data *data, t_point transform, t_mob *mob)
+void	put_sprite_to_pov(t_data *data, t_point transform, t_mob *mob)
 {
-	t_point	start;
-	t_point	stop;
-	t_point	scrn_pix;
-	t_point	tex_pix_start;
-	t_point	tex_pix;
-	double	step;
-	int		sprite_dim;
-	int		color;
+	t_sprite	sprite;
 
-	sprite_dim = (int)fabs(HEIGHT * TEXTURE_DIM / transform.y);
-	step = TEXTURE_DIM / (double)sprite_dim;
-	tex_pix_start.x = 0;
-	tex_pix_start.y = 0;
-	start.y = -sprite_dim / 2 + HEIGHT / 2;
-	if (start.y < 0)
+	put_sprite_init(&sprite, transform);
+	if (sprite.start.y < 0)
 	{
-		tex_pix_start.y = fabs(start.y * step);
-		start.y = 0;
+		sprite.tex_pix_start.y = fabs(sprite.start.y * sprite.step);
+		sprite.start.y = 0;
 	}
-	stop.y = sprite_dim / 2 + HEIGHT / 2;
-	if (stop.y >= HEIGHT)
-		stop.y = HEIGHT - 1;
-	start.x = ((WIDTH / 2) * (1 + transform.x / transform.y))
-		- (sprite_dim / 2);
-	if (start.x < 0)
+	sprite.stop.y = sprite.dim / 2 + HEIGHT / 2;
+	if (sprite.stop.y >= HEIGHT)
+		sprite.stop.y = HEIGHT - 1;
+	sprite.start.x = ((WIDTH / 2) * (1 + transform.x / transform.y))
+		- (sprite.dim / 2);
+	if (sprite.start.x < 0)
 	{
-		tex_pix_start.x = fabs(start.x * step);
-		start.x = 0;
+		sprite.tex_pix_start.x = fabs(sprite.start.x * sprite.step);
+		sprite.start.x = 0;
 	}
-	stop.x = (sprite_dim / 2) + ((WIDTH / 2) * (1 + transform.x / transform.y));
-	if (stop.x >= WIDTH)
-		stop.x = WIDTH - 1;
-	scrn_pix.x = start.x;
-	tex_pix.x = tex_pix_start.x;
-	if (WIDTH / 2 > start.x && WIDTH / 2 < stop.x)
-		mob->in_front = true;
-	while (scrn_pix.x < stop.x && scrn_pix.x >= 0 && scrn_pix.x < WIDTH)
-	{
-		tex_pix.y = tex_pix_start.y;
-		scrn_pix.y = start.y;
-		while (scrn_pix.y < stop.y && scrn_pix.y >=0 && scrn_pix.y < HEIGHT
-			&& transform.y < data->dist[(int)scrn_pix.x])
-		{
-			color = get_pixel_color(trunc(tex_pix.x),
-					trunc(tex_pix.y), data->texture);
-			if ((color & 0xff000000) == 0)
-				draw_pixel(data->pov, scrn_pix.x, scrn_pix.y, color);
-			++scrn_pix.y;
-			tex_pix.y += step;
-		}
-		tex_pix.x += step;
-		++scrn_pix.x;
-	}
+	sprite.stop.x = (sprite.dim / 2) + ((WIDTH / 2)
+			* (1 + transform.x / transform.y));
+	if (sprite.stop.x >= WIDTH)
+		sprite.stop.x = WIDTH - 1;
+	sprite.scrn_pix.x = sprite.start.x;
+	sprite.tex_pix.x = sprite.tex_pix_start.x;
+	print_sprite(data, mob, sprite, transform);
 }
 
 void	render_mobs(t_data *data)
@@ -165,19 +130,7 @@ void	render_mobs(t_data *data)
 	{
 		if (!(data->player_x == mob->pos_x && data->player_y == mob->pos_y))
 		{
-			plane.x = cos(data->player_orient - M_PI_2)
-				* tan(FOV * M_PI / 360);
-			plane.y = -sin(data->player_orient - M_PI_2)
-				* tan(FOV * M_PI / 360);
-			transform.x = (-sin(data->player_orient)
-					* (mob->pos_x - data->player_x)
-					- cos(data->player_orient) * (mob->pos_y - data->player_y))
-				/ (plane.x * -sin(data->player_orient)
-					- cos(data->player_orient) * plane.y);
-			transform.y = (-plane.y * (mob->pos_x - data->player_x)
-					+ plane.x * (mob->pos_y - data->player_y))
-				/ (plane.x * -sin(data->player_orient)
-					- cos(data->player_orient) * plane.y);
+			find_pos_calcul(data, &transform, &plane, mob);
 			if (mob->pv <= 0)
 				data->texture = mob->deadmob;
 			else if (anim < 15 && anim > 5)
@@ -189,7 +142,6 @@ void	render_mobs(t_data *data)
 		}
 		mob = mob->next;
 	}
-	++anim;
-	if (anim >= 20)
+	if (++anim >= 20)
 		anim = 0;
 }

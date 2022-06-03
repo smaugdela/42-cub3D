@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub2d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:56:24 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 14:52:58 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:58:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,17 @@ static void	put_wall_to_minimap(t_img *minimap, t_ipoint grid,
 	}
 }
 
+static t_img	*init_build_minimap(int *color, t_data *data, int *wall_dim)
+{
+	if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
+		*color = 0x08c43a;
+	else
+		*color = 0x8c7b50;
+	*wall_dim = ft_min((int)WIDTH / data->map->max_x, \
+		(int)HEIGHT / data->map->max_y);
+	return (init_image(data, WIDTH, HEIGHT));
+}
+
 t_img	*build_minimap(t_data *data)
 {
 	t_img		*minimap;
@@ -98,14 +109,7 @@ t_img	*build_minimap(t_data *data)
 	int			wall_dim;
 	int			color;
 
-	if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
-		color = 0x08c43a;
-	else
-		color = 0x8c7b50;
-	wall_dim = ft_min((int)WIDTH / data->map->max_x, (int)HEIGHT / data->map->max_y);
-	minimap = init_image(data, WIDTH, HEIGHT);
-	if (minimap == NULL)
-		return (NULL);
+	minimap = init_build_minimap(&color, data, &wall_dim);
 	grd.y = -1;
 	while (++grd.y < data->map->max_y && data->map->cube_map[grd.y])
 	{

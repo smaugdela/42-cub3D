@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 15:43:07 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:31:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,18 @@ typedef struct s_ipoint {
 	int		y;
 }	t_ipoint;
 
+typedef struct s_sprite
+{
+	t_point	start;
+	t_point	stop;
+	t_point	tex_pix_start;
+	double	step;
+	int		dim;
+	t_point	scrn_pix;
+	t_point	tex_pix;
+	int		color;
+}	t_sprite;
+
 int		ft_strcmp(const char *s1, const char *s2);
 
 /* textures.c & textures_2.c */
@@ -251,6 +263,18 @@ int		button_release_handler(int button, int x, int y, t_data *data);
 
 void	render_mobs(t_data *data);
 void	move_mobs(t_data *data);
+void	put_sprite_to_pov(t_data *data, t_point transform, t_mob *mob);
+void	sort_mobs(t_data *data);
+t_mob	*copy_mob(t_mob *mob_orig);
+
+/* bad_guys_norm_bonus.c */
+
+void	find_pos_calcul(t_data *data, t_point *transform, t_point *plane, \
+			t_mob *mob);
+void	sorter_for_mobs(t_mob *mob, t_mob *mob_far, t_mob **new_mobs);
+void	sorter_for_mobs_2(t_data *data, t_mob *mob, t_mob *mob_far);
+int		sort_mobs_init(t_mob *mob, t_data *data);
+void	put_sprite_init(t_sprite *sprite, t_point transform);
 
 /* doors.c */
 

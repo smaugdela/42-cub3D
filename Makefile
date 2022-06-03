@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 15:00:41 by smagdela          #+#    #+#              #
-#    Updated: 2022/06/03 12:34:14 by smagdela         ###   ########.fr        #
+#    Updated: 2022/06/03 16:05:07 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ BONUS 	=	main_bonus.c			error_messages_bonus.c \
 			rc_utils_bonus.c		raycast_engine_bonus.c		raycast_engine2_bonus.c	texturizer_bonus.c \
 			cub2d_bonus.c			utils_bonus.c \
 			mouse_events_bonus.c	bad_guys_bonus.c sound_bonus.c	doors_bonus.c	\
-			bad_guys2_bonus.c 	player_mooves_utils_bonus.c	\
+			bad_guys2_bonus.c 	player_mooves_utils_bonus.c	bad_guys_norm_bonus.c \
 
 #	Object Files
 
