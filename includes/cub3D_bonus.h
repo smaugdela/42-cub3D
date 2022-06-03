@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
 /*   Updated: 2022/06/03 13:49:33 by smagdela         ###   ########.fr       */
@@ -189,6 +189,7 @@ void	init_data_const(t_data *data);
 bool	str_is_digit(char *str);
 bool	checkint(char *nb);
 bool	is_in_charset(char c, char *charset);
+bool	tired_of_norm(int spawn);
 
 /* events.c */
 
@@ -208,6 +209,12 @@ void	rot_right(t_data *data, double rot_speed);
 void	move_player(t_data *data);
 void	player_attack(t_data *data);
 void	player_walk_anim(t_data *data);
+
+/* player_mooves_utils */
+
+void	player_walk_anim(t_data *data);
+void	sounds_player_attacks(t_data *data);
+void	is_he_ded(int i, int j, t_data *data);
 
 /* draw.c */
 
@@ -249,6 +256,7 @@ void	move_mobs(t_data *data);
 
 void	door_manager(t_data *data);
 void	win_manager(t_data *data);
+void	ending_image(t_data *data);
 
 /* sound */
 

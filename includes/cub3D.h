@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:33:15 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 09:41:18 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:39:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ bool	global_checker(char *file, t_map *map);
 
 bool	str_is_digit(char *str);
 bool	checkint(char *nb);
+bool	tired_of_norm(int spawn);
 
 /* events.c */
 

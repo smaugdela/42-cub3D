@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
 /*   Updated: 2022/06/03 15:02:32 by smagdela         ###   ########.fr       */
@@ -105,7 +105,6 @@ int	main(int ac, char **av)
 		data.save_av = av[1];
 		init_events(&data);
 		init_data_const(&data);
-		printf("%s\n", av[1]);
 		if (ft_strcmp(av[1], "assets/maps/maps_bonus/alien.cub") == 0)
 			play_sound("assets/sounds/alien.wav", 100);
 		else
@@ -116,6 +115,5 @@ int	main(int ac, char **av)
 		free_n_destroy(&data);
 		return (0);
 	}
-	error_messages(7);
-	return (-1);
+	return (error_messages(7));
 }

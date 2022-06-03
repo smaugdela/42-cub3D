@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
 /*   Updated: 2022/06/03 15:13:37 by smagdela         ###   ########.fr       */
@@ -21,7 +21,7 @@ static void	check_death(t_data *data)
 	{
 		if (mob->pv && mob->dist < TEXTURE_DIM / 2)
 		{
-			data->texture =	init_image_xpm(data, \
+			data->texture = init_image_xpm(data, \
 				"assets/textures/textures_bonus/youloose.xpm");
 			our_put_image_on_pov(data, data->texture, 0, 0);
 			mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   doors_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 19:10:13 by ajearuth          #+#    #+#             */
 /*   Updated: 2022/06/03 15:14:17 by smagdela         ###   ########.fr       */
@@ -12,7 +12,7 @@
 
 #include "cub3D_bonus.h"
 
-static void	ending_image(t_data *data)
+void	ending_image(t_data *data)
 {
 	data->texture = init_image_xpm(data, \
 		"assets/textures/textures_bonus/youwin.xpm");
@@ -25,32 +25,17 @@ static void	ending_image(t_data *data)
 
 void	win_manager(t_data *data)
 {
-	int	x;
-	int	y;
 	int	i;
 	int	j;
 
 	i = 0;
-	x = data->player_x / TEXTURE_DIM;
-	y = data->player_y / TEXTURE_DIM;
 	while (data->map->cube_map[i])
 	{
 		j = 0;
 		while (data->map->cube_map[i][j])
 		{
 			if (data->map->cube_map[i][j] == '3')
-			{
-				if (y == i && x >= j - 1 && x <= j + 1)
-				{
-					ending_image(data);
-					data->dead = true;
-				}
-				if (x == j && y >= i - 1 && y <= i + 1)
-				{
-					ending_image(data);
-					data->dead = true;
-				}
-			}
+				is_he_ded(i, j, data);
 			j++;
 		}
 		i++;
