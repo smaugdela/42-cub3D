@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 12:33:44 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:49:33 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_data {
 	bool	attack;
 	bool	render;
 	bool	dead;
+	bool	mmap;
 	t_img	*texture;
 	double	dist[WIDTH];
 }	t_data;
@@ -261,6 +262,6 @@ int		ft_max(int a, int b);
 /* cub2D.c */
 
 t_img	*build_minimap(t_data *data);
-void	player_render(t_data *data, int x, int y);
+void	put_minimap(t_data *data);
 
 #endif

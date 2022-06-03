@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 12:32:30 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:13:37 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	check_death(t_data *data)
 			our_put_image_on_pov(data, data->texture, 0, 0);
 			mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 				data->pov->img_ptr, 0, 0);
+			free_img(data->texture);
 			data->render = 0;
 			data->dead = true;
 			break ;
@@ -39,7 +40,9 @@ cub3D game loop
 */
 int	loop_handler(t_data *data)
 {
-	if (data->dead == false)
+	if (data->mmap && data->minimap && data->player)
+		put_minimap(data);
+	else if (data->dead == false)
 	{
 		if (data->render || data->attack)
 		{
@@ -52,8 +55,6 @@ int	loop_handler(t_data *data)
 				player_attack(data);
 			else
 				player_walk_anim(data);
-			our_put_image_on_pov(data, data->minimap, 0, 0);
-			player_render(data, 0, 0);
 			mlx_put_image_to_window(data->win->mlx_ptr, data->win->win_ptr,
 				data->pov->img_ptr, 0, 0);
 			check_death(data);
@@ -82,6 +83,11 @@ int	keys_press(int key_sym, t_data *data)
 		data->attackey = 1;
 		data->attack = 1;
 	}
+	else if (key_sym == XK_m)
+	{
+		data->mmap = true;
+		data->render = 1;
+	}
 	else if (key_sym == XK_w)
 		data->forward = 1;
 	else if (key_sym == XK_d)
@@ -101,6 +107,11 @@ int	keys_release(int key_sym, t_data *data)
 {
 	if (key_sym == XK_space)
 		data->attackey = 0;
+	else if (key_sym == XK_m)
+	{
+		data->mmap = false;
+		data->render = 1;
+	}
 	else if (key_sym == XK_w)
 		data->forward = 0;
 	else if (key_sym == XK_d)

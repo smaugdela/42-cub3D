@@ -6,7 +6,7 @@
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:33:02 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 12:11:56 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:00 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	free_n_destroy(t_data *data)
 		free_img(data->pov);
 	if (data->minimap)
 		free_img(data->minimap);
+	if (data->player)
+		free_img(data->player);
 	if (data->map)
 		free_mappy(data->map);
 	if (data->win && data->win->win_ptr)
