@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:46:35 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/25 13:11:29 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:39:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+bool	tired_of_norm(int spawn)
+{
+	if (spawn != 1)
+		return (error_messages(3));
+	return (true);
+}
 
 bool	str_is_digit(char *str)
 {

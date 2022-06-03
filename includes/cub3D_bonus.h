@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 09:56:16 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:39:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ void	init_data_const(t_data *data);
 bool	str_is_digit(char *str);
 bool	checkint(char *nb);
 bool	is_in_charset(char c, char *charset);
+bool	tired_of_norm(int spawn);
 
 /* events.c */
 

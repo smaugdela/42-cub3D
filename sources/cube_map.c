@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:51:01 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/17 15:08:06 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:38:40 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static bool	is_map_valid(t_map *map)
 {
 	int		i;
 	int		j;
-	bool	spawn;
+	int		spawn;
 
 	spawn = 0;
 	i = -1;
@@ -96,14 +96,13 @@ static bool	is_map_valid(t_map *map)
 				return (error_messages(1));
 			else if (conditions_map(i, j, map, 3) == false)
 			{
-				if (spawn != 0)
+				if (spawn++ != 0)
 					return (error_messages(3));
-				++spawn;
 				init_player_pos_n_orient(map, i, j);
 			}
 		}
 	}
-	return (true);
+	return (tired_of_norm(spawn));
 }
 
 bool	init_cube_map(int fd, t_map *map)

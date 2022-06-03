@@ -1,12 +1,13 @@
 NO assets/textures/textures_mandatory/just_a_wall.xpm
 
-F 220,100,0
+F 203,178,117
 	SO assets/textures/textures_mandatory/titan_in_the_wall.xpm
 EA assets/textures/textures_mandatory/wall_berthhold.xpm
 
 WE assets/textures/textures_mandatory/wall_maria.xpm
-C 225,30,0
+C 0,188,212
 
+ 
 1111111111111111111111111
 10000000001100000000000011111
 10110000011100000000111110001
