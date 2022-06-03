@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bad_guys.c                                         :+:      :+:    :+:   */
+/*   bad_guys_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 15:25:09 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/02 17:54:01 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:43:25 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_mob	*copy_mob(t_mob *mob_orig)
 	mob_copy->deadmob = mob_orig->deadmob;
 	mob_copy->pos_x = mob_orig->pos_x;
 	mob_copy->pos_y = mob_orig->pos_y;
+	mob_copy->in_front = mob_orig->in_front;
 	mob_copy->pv = mob_orig->pv;
 	mob_copy->dist = mob_orig->dist;
 	mob_copy->next = NULL;

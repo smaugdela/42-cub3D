@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:51:40 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 15:13:37 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:44:17 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	loop_handler(t_data *data)
 	{
 		if (data->render || data->attack)
 		{
-			door_manager(data);
 			win_manager(data);
-			raycast_renderer(data);
+			door_manager(data);
 			move_mobs(data);
+			raycast_renderer(data);
 			render_mobs(data);
 			if (data->attack)
 				player_attack(data);
@@ -126,17 +126,3 @@ int	keys_release(int key_sym, t_data *data)
 		data->rot_right = 0;
 	return (0);
 }
-
-/*
-cub2D, minimap renderer
-*/
-// int	loop_handler(t_data *data)
-// {
-// 	if (data->render)
-// 	{
-// 		build_minimap(data);
-// 		player_render(data);
-// 		data->render = 0;
-// 	}
-// 	return (0);
-// }
