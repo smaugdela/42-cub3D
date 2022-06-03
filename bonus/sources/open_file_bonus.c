@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:59:17 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/24 11:57:05 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:44:11 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static t_img	*init_image_xpm_aux(t_data *data, t_img *img)
 		ft_putstr_fd("\e[0;31mError\nmlx_get_data_addr failed\033[0m\n", 2);
 		exit(-1 * free_n_destroy(data));
 	}
-	if (img->height != TEXTURE_DIM || img->width != TEXTURE_DIM)
-		printf("\033[0;33mWarning : TEXTURE_DIM ≠ dimensions .xpm\033[0m\n");
 	return (img);
 }
 

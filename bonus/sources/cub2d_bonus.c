@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:56:24 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 16:58:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:41:42 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	put_wall_to_minimap(t_img *minimap, t_ipoint grid,
 static t_img	*init_build_minimap(int *color, t_data *data, int *wall_dim)
 {
 	if (ft_strcmp(data->save_av, "assets/maps/maps_bonus/alien.cub") == 0)
-		*color = 0x08c43a;
+		*color = 0xaaaaaa;
 	else
 		*color = 0x8c7b50;
 	*wall_dim = ft_min((int)WIDTH / data->map->max_x, \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:35:44 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 15:47:57 by smagdela         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:43:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static void	print_man(void)
 	printf("\n W A S D             -> Player movement\n");
 	printf(" Left & Right Arrows -> Camera rotation\n");
 	printf(" Space               -> Attack\n");
+	printf(" M                   -> Open Minimap\n");
 	printf(" Mouse Left Click    -> Attack\n");
 	printf(" Mouse Over Window   -> Camera rotation\n");
 	printf("\n\033[0;33mWARNING:\033[0m MiniLibX will end up lagging\n");
