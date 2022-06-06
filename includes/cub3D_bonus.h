@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:18:13 by smagdela          #+#    #+#             */
-/*   Updated: 2022/06/03 18:31:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:02:50 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 /* Map Parsing characters */
 # define CHARMAP "01234HDMS"
 /* Ennemies PV */
-# define PV 3
+# define PV 1
 
 # define SQRT_2 1.41421356237
 
