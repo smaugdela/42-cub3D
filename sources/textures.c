@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagdela <smagdela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:54:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/05/17 18:47:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:30:40 by smagdela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static bool	check_directions(t_map *map, int i)
+static bool check_directions(t_map *map, int i)
 {
 	if (ft_strncmp(map->textures[i], "NO ", 3) == 0)
 	{
@@ -41,11 +41,8 @@ static bool	check_directions(t_map *map, int i)
 	return (false);
 }
 
-static bool	textures_checker_aux(t_map *map, int i)
+static bool textures_checker_aux(t_map *map, int i)
 {
-	char	*tmp;
-
-	tmp = NULL;
 	if (check_directions(map, i) == true)
 		return (true);
 	else if (ft_strncmp(map->textures[i], "F ", 2) == 0)
@@ -63,9 +60,9 @@ static bool	textures_checker_aux(t_map *map, int i)
 	return (false);
 }
 
-static bool	textures_checker(t_map *map)
+static bool textures_checker(t_map *map)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (map->textures[++i])
@@ -78,11 +75,11 @@ static bool	textures_checker(t_map *map)
 	return (true);
 }
 
-bool	init_textures(int fd, t_map *map)
+bool init_textures(int fd, t_map *map)
 {
-	char	*line;
-	int		ret;
-	int		index;
+	char *line;
+	int ret;
+	int index;
 
 	line = "";
 	index = 0;
