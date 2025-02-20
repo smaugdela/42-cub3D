@@ -55,6 +55,8 @@ and
 
 ## Pictures
 
-
+![cub3d_door](https://github.com/user-attachments/assets/2104c3d6-e18e-4110-b3bd-e5cc46068c6a)
+![cub3d_babies](https://github.com/user-attachments/assets/3a12099b-dad7-4c98-b594-a453f6a9e461)
+![cub3d_xenomorph](https://github.com/user-attachments/assets/591a61a9-1b80-481d-b33d-6f41b0c90076)
 
 Enjoy!
