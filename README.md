@@ -53,4 +53,8 @@ and
 ./cub3D_bonus assets/maps/maps_bonus/alien.cub  
 ```
 
+## Pictures
+
+
+
 Enjoy!
